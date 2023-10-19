@@ -1,17 +1,20 @@
 import { Container } from './styles'
 import { BsHeart } from 'react-icons/bs'
-import { AiOutlinePlus } from 'react-icons/ai'
+import { AiOutlinePlus, AiFillHeart } from 'react-icons/ai'
 import { IoMdRemove } from 'react-icons/io'
 
-export function DishCard() {
+export function DishCard({ img, name, price, isFavourite}) {
     return(
         <Container>
             <button className="favourite">
-                <BsHeart />
+                {isFavourite ? <AiFillHeart /> : <BsHeart />}
             </button>
-            <img src="/src/assets/dish.png" alt="Dish name" />
-            <h3>Salada Ravanello</h3>
-            <span className="price">R$ 49,97</span>
+            <figure>
+                <img src={img} alt="Dish name" />
+
+            </figure>
+            <h3>{name}</h3>
+            <span className="price">{price}</span>
             <div className="increments">
                 <button>
                     <IoMdRemove />

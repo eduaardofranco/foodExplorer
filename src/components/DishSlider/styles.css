@@ -1,0 +1,7 @@
+.slick-slide {
+    width: 21rem!important;
+}
+.slick-slide + .slick-slide {
+    margin-left: 16px;
+
+}

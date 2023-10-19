@@ -1,9 +1,67 @@
 import { Header } from '../components/Header'
 import { Container } from './styles'
 import { Footer } from '../components/Footer'
-import { DishCard } from '../components/DishCard'
+import { DishSlider } from '../components/DishSlider'
 
 export function Home() {
+  const categories = [
+    {
+      category: 'Meals',
+      dishes: [
+        {
+          img: '/src/assets/dish.png',
+          name: 'Salada Ravanello 1',
+          price: 'R$ 59,99',
+          isFavourite: false,
+        },
+        {
+          img: '/src/assets/dish.png',
+          name: 'Salada Ravanello 2',
+          price: 'R$ 59,99',
+          isFavourite: false,
+        },
+        {
+          img: '/src/assets/dish.png',
+          name: 'Salada Ravanello 3',
+          price: 'R$ 59,99',
+          isFavourite: false,
+        },
+        {
+          img: '/src/assets/dish.png',
+          name: 'Salada Ravanello 4',
+          price: 'R$ 59,99',
+          isFavourite: false,
+        }
+        // Add more dishes for this category
+      ],
+    },
+    {
+      category: 'Main Dishes',
+      dishes: [
+        {
+          img: '/src/assets/spagueti.png',
+          name: 'Spaguetti Gambe 1',
+          price: 'R$ 49,99',
+          isFavourite: true,
+        },
+        {
+          img: '/src/assets/spagueti.png',
+          name: 'Spaguetti Gambe 2',
+          price: 'R$ 49,99',
+          isFavourite: true,
+        },
+        {
+          img: '/src/assets/spagueti.png',
+          name: 'Spaguetti Gambe 3',
+          price: 'R$ 49,99',
+          isFavourite: true,
+        }
+
+      ],
+    },
+    // Add more categories with their respective dishes
+  ];
+
   return(
     <Container>
       <Header />
@@ -12,8 +70,12 @@ export function Home() {
           <div className="banner">
             <img src="https://placehold.co/476x120" alt="Banner" />
           </div>
-          <h2>Dishes</h2>
-          <DishCard />
+          {categories.map((category, index) => (
+             <div key={index}>
+                <h2>{category.category}</h2>
+                <DishSlider dishes={category.dishes} />
+            </div>
+      ))}
         </div>
         </main>
       <Footer />

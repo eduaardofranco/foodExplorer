@@ -9,6 +9,7 @@ h2 {
     color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};
     font-size: 1.8rem;
     font-weight: 500;
+    margin: 2.4rem 0;
 }
 
 
