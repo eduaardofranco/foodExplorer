@@ -8,6 +8,7 @@ import { PiReceipt } from 'react-icons/pi'
 import { Footer } from '../../components/Footer'
  
 export function Detail() {
+    const user = "admin"
     return(
         <Container>
             <Header />
@@ -31,8 +32,8 @@ export function Detail() {
                         <Ingredient name="tomate" />
                     </div>
                     <div className="finalize">
-                        <Quantity isbig={true} />
-                        <Button className="add" title="Add" icon={PiReceipt} />
+                        {user == "admin" ? '' : <Quantity isbig={true} />}
+                        {user == "admin" ? <Button className="add" title="Edit" /> : <Button className="add" title="Add" icon={PiReceipt} />}
                     </div>
                 </div>
             </main>

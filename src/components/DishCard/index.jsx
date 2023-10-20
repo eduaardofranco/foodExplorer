@@ -18,8 +18,8 @@ export function DishCard({ img, name, price, isFavourite, isAdmin}) {
             </figure>
             <h3>{name}</h3>
             <span className="price">{price}</span>
-            <Quantity />
-            <Button title="add" />
+            {isAdmin ? '' : <Quantity />}
+            {isAdmin ? '' : <Button title="add" />}
         </Container>
     )
 }
