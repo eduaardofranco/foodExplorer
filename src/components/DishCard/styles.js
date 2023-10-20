@@ -40,7 +40,6 @@ export const Container = styled.div`
         }
     }
     button {
-        background-color: transparent;
         border: 0;
         cursor: pointer;
     }
@@ -49,21 +48,9 @@ export const Container = styled.div`
         font-family: ${({ theme}) => theme.FONTS.ROBOTO};
         font-size: 1.6rem;
     }
-    .increments {
-        margin: 1.2rem 0 1.6rem 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        button {
-            cursor: pointer;
-            font-size: 2rem;    
-        }
-        span {
-            font-size: 1.6rem;
-            margin: 0 1.4rem
-        }
-    }
+    
     .favourite {
+        background-color: transparent;
         cursor: pointer;
         position: absolute;
         right: 1rem;

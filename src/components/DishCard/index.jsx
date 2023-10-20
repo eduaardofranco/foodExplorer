@@ -1,7 +1,8 @@
 import { Container } from './styles'
 import { BsHeart } from 'react-icons/bs'
-import { AiOutlinePlus, AiFillHeart } from 'react-icons/ai'
-import { IoMdRemove } from 'react-icons/io'
+import { AiFillHeart } from 'react-icons/ai'
+import { Quantity } from '../Quantity'
+import { Button } from '../Button'
 
 export function DishCard({ img, name, price, isFavourite}) {
     return(
@@ -15,16 +16,8 @@ export function DishCard({ img, name, price, isFavourite}) {
             </figure>
             <h3>{name}</h3>
             <span className="price">{price}</span>
-            <div className="increments">
-                <button>
-                    <IoMdRemove />
-                </button>
-                    <span>01</span>
-                <button>
-                    <AiOutlinePlus />
-                </button>
-            </div>
-            <button className='add'>Add</button>
+            <Quantity />
+            <Button title="add" />
         </Container>
     )
 }

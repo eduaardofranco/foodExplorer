@@ -40,6 +40,7 @@ export function DishSlider({ sectionName, dishes }) {
       },
     ],
   };
+  // const { dishes } = category
 
   return (
     <div>

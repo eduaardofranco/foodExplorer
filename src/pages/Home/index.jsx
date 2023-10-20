@@ -1,7 +1,7 @@
-import { Header } from '../components/Header'
+import { Header } from '../../components/Header'
 import { Container } from './styles'
-import { Footer } from '../components/Footer'
-import { DishSlider } from '../components/DishSlider'
+import { Footer } from '../../components/Footer'
+import { DishSlider } from '../../components/DishSlider'
 
 export function Home() {
   const categories = [
@@ -72,8 +72,7 @@ export function Home() {
           </div>
           {categories.map((category, index) => (
              <div key={index}>
-                <h2>{category.category}</h2>
-                <DishSlider dishes={category.dishes} />
+                <DishSlider dishes={category.dishes} sectionName={category.category} />
             </div>
       ))}
         </div>
