@@ -11,7 +11,7 @@ export function Detail() {
     const user = "admin"
     return(
         <Container>
-            <Header />
+            <Header isAdmin />
             <main>
                 <div className="content">
                 <ButtonText title="Back" isbig />

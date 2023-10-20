@@ -2,7 +2,7 @@ import { Container } from './styles'
 import { GrMenu } from 'react-icons/gr'
 import { PiReceipt } from 'react-icons/pi'
 
-export function Header() {
+export function Header({ isAdmin }) {
     return(
         <Container>
             <button>
@@ -13,7 +13,7 @@ export function Header() {
                     <path d="M11.2304 0L21.8881 6.15327V18.4598L11.2304 24.6131L0.572592 18.4598V6.15327L11.2304 0Z" fill="#065E7C"/>
                 </svg>
                 food explorer
-                <span>admin</span>
+                {isAdmin ? <span>admin</span> : ''}
                 </h1>
             <button>
                 <span>0</span>
