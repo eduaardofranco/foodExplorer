@@ -62,6 +62,9 @@ export const Container = styled.div`
         }
         svg {
             font-size: 2.4rem;
+            path {
+                stroke: white;
+            }
         }
     }
     .add {

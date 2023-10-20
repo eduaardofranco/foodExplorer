@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { DishCard } from '../DishCard';
 import './styles.css'
 
-export function DishSlider({ sectionName, dishes }) {
+export function DishSlider({ sectionName, dishes, isAdmin }) {
   const settings = {
     dots: false,
     infinite: false,
@@ -53,6 +53,7 @@ export function DishSlider({ sectionName, dishes }) {
             name={dish.name}
             price={dish.price}
             isFavourite={dish.isFavourite}
+            isAdmin={isAdmin}
           />
         ))}
       </Slider>

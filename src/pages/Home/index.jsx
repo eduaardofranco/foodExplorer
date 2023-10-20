@@ -13,6 +13,7 @@ export function Home() {
           name: 'Salada Ravanello 1',
           price: 'R$ 59,99',
           isFavourite: false,
+          user: "admin"
         },
         {
           img: '/src/assets/dish.png',
@@ -25,6 +26,7 @@ export function Home() {
           name: 'Salada Ravanello 3',
           price: 'R$ 59,99',
           isFavourite: false,
+          user: "admin"
         },
         {
           img: '/src/assets/dish.png',
