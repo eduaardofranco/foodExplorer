@@ -3,35 +3,40 @@ import { Header } from '../../components/Header'
 import { ButtonText } from '../../components/ButtonText'
 import { Quantity } from '../../components/Quantity'
 import { Button } from '../../components/Button'
-
+import { Ingredient } from '../../components/Ingredient'
+import { PiReceipt } from 'react-icons/pi'
+import { Footer } from '../../components/Footer'
+ 
 export function Detail() {
     return(
         <Container>
             <Header />
             <main>
-                <ButtonText title="Back" isbig="true" />
                 <div className="content">
+                <ButtonText title="Back" isbig />
                     <figure>
                         <img src="src/assets/grande.png" alt="Prato" />
                     </figure>
                     <h1>Salada Ravanello</h1>
+                    <h3>€15</h3>
                     <p className="description">
                     Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.
                     </p>
                     <div className="ingredients">
-                        <span>Alface</span>
-                        <span>cebola</span>
-                        <span>pepino</span>
-                        <span>pão naan</span>
-                        <span>rabanete</span>
-                        <span>tomate</span>
+                        <Ingredient name="Alface" />
+                        <Ingredient name="cebola" />
+                        <Ingredient name="pepino" />
+                        <Ingredient name="pão naan" />
+                        <Ingredient name="rabanete" />
+                        <Ingredient name="tomate" />
                     </div>
                     <div className="finalize">
                         <Quantity isbig={true} />
-                        <Button title="Add" />
+                        <Button className="add" title="Add" icon={PiReceipt} />
                     </div>
                 </div>
             </main>
+            <Footer />
         </Container>
     )
 }

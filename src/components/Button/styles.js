@@ -5,7 +5,9 @@ export const Container = styled.button`
     border-radius: .5rem;
     border: none;
     color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 1.4rem;
     padding: 1.2rem;
     text-transform: uppercase;

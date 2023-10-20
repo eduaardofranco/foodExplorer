@@ -20,4 +20,10 @@ export default createGlobalStyle`
     main {
         padding: 3.7rem 0 2.4rem 0;
     }
+    .ingredients {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.4rem;
+    }
 `
