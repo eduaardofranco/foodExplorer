@@ -14,11 +14,11 @@ export function Header({ isAdmin }) {
                 </svg>
                 food explorer
                 {isAdmin ? <span>admin</span> : ''}
-                </h1>
+            </h1>
             <button>
-                <span>0</span>
-                <PiReceipt />
+                {isAdmin ? '' : <><span>0</span><PiReceipt /></>}
             </button>
+            
         </Container>
     )
 }
