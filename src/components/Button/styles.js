@@ -5,6 +5,7 @@ export const Container = styled.button`
     border-radius: .5rem;
     border: none;
     color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,4 +13,8 @@ export const Container = styled.button`
     padding: 1.2rem;
     text-transform: uppercase;
     width: 100%;
+    &:disabled {
+        background-color: ${({ theme }) => theme.COLORS.BG_RED_400};
+        cursor: auto;
+    }
 `;

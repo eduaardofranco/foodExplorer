@@ -14,7 +14,7 @@ export function Detail() {
             <Header isAdmin />
             <main>
                 <div className="content">
-                <ButtonText title="Back" isbig />
+                <ButtonText title="Back" isBig />
                     <figure>
                         <img src="src/assets/grande.png" alt="Prato" />
                     </figure>

@@ -1,10 +1,10 @@
 import { Container } from './styles.js'
 import { IoIosArrowBack } from 'react-icons/io'
 
-export function ButtonText({ title, isbig, ...rest }) {
+export function ButtonText({ title, isBig, ...rest }) {
     return(
         <Container
-        isbig={isbig}
+        isbig={isBig.toString()}
         {...rest}
         >
             <IoIosArrowBack />
