@@ -22,7 +22,9 @@ export function New() {
                 <ButtonText title="Back" />
                 <Title title="New Dish" />
                 <form action="">
-                    <Input type="file" placeholder="Select dish Image" label="Dish Image" bound="imagem" />   
+                    <Input type="file" placeholder="Select dish Image" label="Dish Image" bound="imagem">
+                        <label htmlFor='imagem'>Select dish image</label>
+                    </Input>   
                     <Input type="text" placeholder="Ex: Ceasar Salad" label="Name" bound="name" />
                     <Select type="select" placeholder="Select dish Image" label="Category" bound="category" options={options} /> 
                     <Input type="number" label="Price" bound="price" placeholder="€ 00,00" />
