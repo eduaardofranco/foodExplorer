@@ -7,6 +7,7 @@ import { Input } from '../../components/Input'
 import { Select } from '../../components/Select'
 import { Textarea } from '../../components/Textarea'
 import { Button } from '../../components/Button'
+import { AddIngredient } from '../../components/AddIngredient'
 
 export function New() {
     const options = [
@@ -26,7 +27,16 @@ export function New() {
                         <label htmlFor='imagem'>Select dish image</label>
                     </Input>   
                     <Input type="text" placeholder="Ex: Ceasar Salad" label="Name" bound="name" />
-                    <Select type="select" placeholder="Select dish Image" label="Category" bound="category" options={options} /> 
+                    <Select type="select" placeholder="Select dish Image" label="Category" bound="category" options={options} />
+                    <div className="addTag">
+                        <label>Ingredients</label>
+                        <div className="container">
+                            <AddIngredient value="Letuces" />
+                            <AddIngredient value="pinapple" />
+                            <AddIngredient value="watermelon" />
+                            <AddIngredient value="" placeholder="Add" isNew />
+                        </div>
+                    </div>
                     <Input type="number" label="Price" bound="price" placeholder="€ 00,00" />
                     <Textarea type="text" label="Description" bound="description" placeholder="Briefly talk about the dish, its ingredients and composition" />
                 </form>
