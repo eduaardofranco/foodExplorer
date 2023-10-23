@@ -2,6 +2,7 @@ import { Header } from '../../components/Header'
 import { Container } from './styles'
 import { Footer } from '../../components/Footer'
 import { DishSlider } from '../../components/DishSlider'
+import { Menu } from '../../components/Menu'
 
 export function Home() {
   const categories = [
@@ -66,6 +67,7 @@ export function Home() {
 
   return(
     <Container>
+      <Menu />
       <Header />
       <main>
         <div className="content">

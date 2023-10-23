@@ -10,7 +10,7 @@ import { Button } from '../../components/Button'
 import { AddIngredient } from '../../components/AddIngredient'
 import { useState } from 'react'
 
-export function New() {
+export function Update() {
     const [tags, setTags] = useState([])
     const [newTag, setNewTag] = useState()
 
@@ -37,12 +37,12 @@ export function New() {
             <Header isAdmin />
             <main className='content'>
                 <ButtonText title="Back" />
-                <Title title="New Dish" />
+                <Title title="Update Dish" />
                 <form action="">
-                    <Input type="file" placeholder="Select dish Image" label="Dish Image" bound="imagem">
-                        <label htmlFor='imagem'>Select dish image</label>
+                    <Input type="file" label="Dish Image" bound="imagem">
+                        <label htmlFor='imagem'>Update dish Image</label>
                     </Input>   
-                    <Input type="text" placeholder="Ex: Ceasar Salad" label="Name" bound="name" />
+                    <Input type="text" value="Ceaser Salad" label="Name" bound="name" />
                     <Select type="select" placeholder="Select dish Image" label="Category" bound="category" options={options} />
                     <div className="addTag">
                         <label>Ingredients</label>
@@ -71,7 +71,10 @@ export function New() {
                     <Input type="number" label="Price" bound="price" placeholder="€ 00,00" />
                     <Textarea type="text" label="Description" bound="description" placeholder="Briefly talk about the dish, its ingredients and composition" />
                 </form>
-                <Button title="Save" disabled />
+                <div className="buttons">
+                    <Button title="Delete" className="delete" />
+                    <Button title="Save" />
+                </div>
             </main>
 
 

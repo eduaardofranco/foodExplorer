@@ -19,4 +19,11 @@ export const Container = styled.div`
             gap: 1.6rem;
         }
     }
+    .buttons {
+        display: flex;
+        gap: 1.5rem;
+        .delete {
+            background: ${({ theme }) => theme.COLORS.BG_DARK_800};
+        }
+    }
 `;

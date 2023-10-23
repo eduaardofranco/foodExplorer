@@ -6,7 +6,7 @@ export const Container = styled.div`
         border-radius: .8rem;
         display: flex;
         padding: 1rem 1.6rem;
-        width: auto;
+        /* width: auto; */
 
         > input {
             background-color: transparent;

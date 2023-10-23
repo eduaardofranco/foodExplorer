@@ -4,12 +4,15 @@ import { AiOutlinePlus, AiOutlineClose } from 'react-icons/ai'
 export function AddIngredient({ value, isNew = false, onClick, ...rest}) {
     return(
         <Container $isnew={isNew}>
-            <input value={value} type="text" { ...rest } />
+            <input
+                value={value}
+                type="text"
+                readOnly={!isNew}
+                { ...rest }
+            />
             <button
                 type="button"
-                className={ isNew ? 'button-add' : 'button-remove'}
                 onClick={onClick}
-                readOnly={!isNew}
             >
                 { isNew ? <AiOutlinePlus /> : <AiOutlineClose /> }
             </button>
