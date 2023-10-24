@@ -4,14 +4,16 @@ import { Footer } from '../Footer'
 import { SearchBar } from '../SerachBar'
 import { useState } from 'react'
 
-export function Menu({ menuIsOpen }) {
-    const [menuIsOpen, setMenuIsOpen] = useState(false)
+export function Menu({ menuIsOpen, onCloseMenu }) {
+    
     return(
         <Container data-menu-is-open={menuIsOpen}>
             <div className="container">
                 <div className="header">
                     <button>
-                        <AiOutlineClose />
+                        <AiOutlineClose
+                            onClick={onCloseMenu}
+                        />
                     </button>
                     Menu
                 </div>

@@ -4,12 +4,14 @@ export const Container = styled.aside`
     background-color: ${({ theme }) => theme.COLORS.BG_DARK_400};
     width: 100%;
     position: fixed;
-    left: -100%;
+    transform: translateX(-100%);
     top: 0;
+    left: 0;
     z-index: 1;
+    transition: transform .3s ease-in-out;
 
     &[data-menu-is-open="true"] {
-        left: 0;
+        transform: translateX(0);
     }
     
     .container {

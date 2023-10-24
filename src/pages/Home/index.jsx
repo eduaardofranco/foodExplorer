@@ -3,8 +3,11 @@ import { Container } from './styles'
 import { Footer } from '../../components/Footer'
 import { DishSlider } from '../../components/DishSlider'
 import { Menu } from '../../components/Menu'
+import { useState } from 'react'
 
 export function Home() {
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+
   const categories = [
     {
       category: 'Meals',
@@ -67,8 +70,11 @@ export function Home() {
 
   return(
     <Container>
-      <Menu />
-      <Header />
+      <Menu
+        menuIsOpen={menuIsOpen}
+        onCloseMenu={() => setMenuIsOpen(false)}
+      />
+      <Header onOpenMenu={() => setMenuIsOpen(true)} />
       <main>
         <div className="content">
           <div className="banner">

@@ -1,8 +1,11 @@
 import { Container } from './styles'
 import { GrMenu } from 'react-icons/gr'
 import { PiReceipt } from 'react-icons/pi'
+import { useState } from 'react';
 
 export function Header({ isAdmin, onOpenMenu }) {
+    const [isMenuOpen, setMenuOpen] = useState(false);
+
     return(
         <Container>
             <button onClick={onOpenMenu}>
