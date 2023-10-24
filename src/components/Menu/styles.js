@@ -1,12 +1,16 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const Container = styled.aside`
     background-color: ${({ theme }) => theme.COLORS.BG_DARK_400};
     width: 100%;
     position: fixed;
-    left: 0;
+    left: -100%;
     top: 0;
     z-index: 1;
+
+    &[data-menu-is-open="true"] {
+        left: 0;
+    }
     
     .container {
         height: calc(100vh - 67px);
@@ -31,4 +35,23 @@ export const Container = styled.div`
             }
         }
     }
+
+    .main {
+        padding: 2.8rem;
+    }
+    ul {
+        margin-top: 3.6rem;
+    }
+    li {
+        border-bottom: 1px solid ${({ theme }) => theme.COLORS.BG_DARK_1000};
+        a {
+            color: ${({ theme }) => theme.COLORS.TXT_GRAY_400};
+            display: block;
+            font-size: 2.2rem;
+            font-weight: 300;
+            padding: 1.2rem 0 1.2rem 1rem;
+            text-decoration: none;
+        }
+    }
+    
 `;

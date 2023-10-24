@@ -2,10 +2,10 @@ import { Container } from './styles'
 import { GrMenu } from 'react-icons/gr'
 import { PiReceipt } from 'react-icons/pi'
 
-export function Header({ isAdmin }) {
+export function Header({ isAdmin, onOpenMenu }) {
     return(
         <Container>
-            <button>
+            <button onClick={onOpenMenu}>
                 <GrMenu />
             </button>
             <h1>
