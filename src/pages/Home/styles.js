@@ -5,7 +5,7 @@ export const Container = styled.div`
         padding-left: 2.4rem;
     }    
 
-h2 {
+.subtitle {
     color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};
     font-size: 1.8rem;
     font-weight: 500;

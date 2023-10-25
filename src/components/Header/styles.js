@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../../styles/layoutBreakpoints'
 
 export const Container = styled.header`
     background-color: ${({ theme }) => theme.COLORS.BG_DARK_700};
@@ -6,23 +7,18 @@ export const Container = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-around;
-
-    > h1 {
-        color: white;
-        font-size: 2.1rem;
-        font-family: ${({ theme }) => theme.FONTS.ROBOTO};
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        gap: .8rem;
-        > span {
-            color: ${({ theme }) => theme.COLORS.TXT_BLUE_200};
-            font-size: 1.2rem;
-            font-weight: 400;
+    button {
+        border: 0;
+        position: relative;
+        > svg {
+            color: white;
+            font-size: 3.2rem;
+            path {
+                stroke: white;
+            }
         }
     }
-
-    > button {
+    > .menuBtn {
         background-color: transparent;
         border: none;
         position: relative;
@@ -31,12 +27,11 @@ export const Container = styled.header`
                 font-size: 2.8rem;
             }
         }
-        > svg {
-            color: white;
-            font-size: 3.2rem;
-            path {
-                stroke: white;
-            }
+    }
+    .ordersSmallBtn{
+        button {
+            background-color: transparent;
+            border: 0;
         }
         span {
             background-color: ${({ theme }) => theme.COLORS.BG_RED_100};
@@ -49,6 +44,35 @@ export const Container = styled.header`
             top: -.8rem;
             height: 2.3rem;
             width: 2.3rem;
+        }
+    }
+    .searchInput {
+        width: 50%;
+        display: none;
+    }
+    .btnBig {
+        display: none;
+        width: 21.5rem;
+    }
+    .logout {
+        display: none;
+        font-size: 3.2rem;
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+        > .menuBtn {
+            display: none;
+        }
+        .btnBig {
+            display: block;
+        }
+        .searchInput {
+            display: block;
+        }
+        .ordersSmallBtn {
+            display: none;
+        }
+        .logout {
+            display: block;
         }
     }
 `;

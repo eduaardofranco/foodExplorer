@@ -44,7 +44,7 @@ export function DishSlider({ sectionName, dishes, isAdmin }) {
 
   return (
     <div>
-      <h2>{sectionName}</h2>
+      <h2 className="subtitle">{sectionName}</h2>
       <Slider {...settings}>
         {dishes.map((dish, index) => (
           <DishCard

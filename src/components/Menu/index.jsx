@@ -2,7 +2,7 @@ import { Container } from './styles'
 import { AiOutlineClose } from 'react-icons/ai'
 import { HiOutlineLogout } from 'react-icons/hi'
 import { Footer } from '../Footer'
-import { SearchBar } from '../SerachBar'
+import { SearchBar } from '../SearchBar'
 import { useState } from 'react'
 
 export function Menu({ menuIsOpen, onCloseMenu }) {
