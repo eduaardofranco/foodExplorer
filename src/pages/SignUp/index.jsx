@@ -17,7 +17,9 @@ export function SignUp() {
                 <Input placeholder="min 6 characters" label="Password"  bound="password" />
                 <Input placeholder="min 6 characters" label="Repeat Password"  bound="repeatPassword" />
                 <Button title="Enter" />
-                <a href="" className='newAccount'>Login</a>
+                <span className='loginOrNew'>
+                    <a href="">Login</a>
+                </span>
             </Form>
         </Container>
     )

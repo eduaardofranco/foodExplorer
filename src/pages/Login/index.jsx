@@ -15,7 +15,9 @@ export function Login() {
                 <Input placeholder="email@email.com" label="E-mail"  bound="email" />
                 <Input placeholder="min 6 characters" label="Password"  bound="password" />
                 <Button title="Enter" />
-                <a href="" className='newAccount'>Create Account</a>
+                <span className='loginOrNew'>
+                    <a href="">Create Account</a>
+                </span>
             </Form>
         </Container>
     )

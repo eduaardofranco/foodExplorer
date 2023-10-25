@@ -12,6 +12,7 @@ export const Container = styled.div`
         display: none;
         margin-bottom: 3.2rem;
         text-align: center;
+        padding-top: 0;
     }
     
     .logo {
@@ -44,12 +45,14 @@ export const Form = styled.form`
         }
 
     }
-    .newAccount {
-        color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};
+    .loginOrNew {
         display: block;
         margin: 1rem auto;
         text-align: center;
-        text-decoration: none;
+        a {
+            color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};
+            text-decoration: none;
+        }
     }
     button {
         margin: 3.2rem 0;
