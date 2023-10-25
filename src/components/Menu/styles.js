@@ -48,7 +48,9 @@ export const Container = styled.aside`
         border-bottom: 1px solid ${({ theme }) => theme.COLORS.BG_DARK_1000};
         a {
             color: ${({ theme }) => theme.COLORS.TXT_GRAY_400};
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             font-size: 2.2rem;
             font-weight: 300;
             padding: 1.2rem 0 1.2rem 1rem;
