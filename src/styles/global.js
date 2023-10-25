@@ -19,7 +19,7 @@ export default createGlobalStyle`
 
     main {
         padding: 3.7rem 0 2.4rem 0;
-        min-height: calc(100vh - 205px);
+        min-height: calc(100vh - 181px);
     }
     .ingredients {
         display: flex;
