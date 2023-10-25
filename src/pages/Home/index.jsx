@@ -78,7 +78,7 @@ export function Home() {
       <main>
         <div className="content">
           <div className="banner">
-            <img src="https://placehold.co/476x120" alt="Banner" />
+            <img src="https://placehold.co/1920x300" alt="Banner" />
           </div>
           {categories.map((category, index) => (
              <div key={index}>

@@ -29,7 +29,7 @@ export const Container = styled.div`
     input {
         background: ${({ theme }) => theme.COLORS.BG_DARK_800};
         color: ${({ theme }) => theme.COLORS.TXT_GRAY_500};
-        border: 0;
+        border: none;
         border-radius: .8rem;
         display: block;
         font-family: ${({ theme }) => theme.FONTS.ROBOTO};
