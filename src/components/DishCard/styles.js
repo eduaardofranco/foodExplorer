@@ -1,15 +1,21 @@
 import styled from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../../styles/layoutBreakpoints' 
+  
 
 export const Container = styled.div`
     background-color: ${({ theme }) => theme.COLORS.BG_DARK_300};
     border-radius: .8rem;
     border: .1rem solid ${({ theme }) => theme.COLORS.BG_DARK_300};
-    display: block;
     cursor: pointer;
     padding: 2.4rem;
     position: relative;
-    width: 21rem;
     margin-right: 1.6rem;
+    width: 21rem;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 
     &:hover {
         img {
@@ -17,10 +23,6 @@ export const Container = styled.div`
         }
     }
 
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
     h3 {
         margin: 1.2rem 0;
     }
@@ -75,5 +77,53 @@ export const Container = styled.div`
         padding: 1.2rem;
         width: 100%;
 
+    }
+    .description {
+        color: ${({ theme }) => theme.COLORS.TXT_GRAY_400};
+        display: none;
+        font-family: ${({ theme}) => theme.FONTS.ROBOTO};
+        font-size: 1.4rem;
+        margin: 1.5rem 0;
+        text-align: center;
+
+        overflow: hidden;
+        height: 2.8rem;
+
+    }
+    .finalize {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+        flex-direction: column;
+        width: 30rem;
+        h3 {
+            font-size: 2.4rem;
+            margin: 1.5rem 0;
+        }
+        .price {
+            font-size: 3.2rem;
+        }
+        figure {
+            height: 17.6rem;
+            width: 17.6rem;
+
+            img {
+                width: 17.6rem;
+            }
+        }
+        .description {
+            display: block;
+        }
+        .finalize {
+            margin-top: 2rem;
+            flex-direction: row;
+            gap: 1.6rem;
+            button {
+                height: 4.8rem;
+            }
+        }
     }
 `;

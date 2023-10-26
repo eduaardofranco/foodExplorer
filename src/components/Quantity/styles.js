@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../../styles/layoutBreakpoints' 
+
 
 export const Container = styled.div`
     button {
@@ -25,6 +27,14 @@ export const Container = styled.div`
         span {
             font-size: ${({ isbig }) => (isbig ? '2.3rem' : '1.6rem')};
             margin: 0 1.4rem
+        }
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+        .increments {
+            margin: 0;
+            span {
+                font-size: 2rem;
+            }
         }
     }
 `;

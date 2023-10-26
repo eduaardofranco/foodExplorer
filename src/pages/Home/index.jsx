@@ -30,22 +30,33 @@ export function Home() {
           name: 'Salada Ravanello 3',
           price: 'R$ 59,99',
           isFavourite: false,
-          user: "admin"
         },
         {
           img: '/src/assets/dish.png',
           name: 'Salada Ravanello 4',
           price: 'R$ 59,99',
           isFavourite: false,
+        },
+        {
+          img: '/src/assets/dish.png',
+          name: 'Salada Ravanello 5',
+          price: 'R$ 59,99',
+          isFavourite: false,
+        },
+        {
+          img: '/src/assets/dish.png',
+          name: 'Salada Ravanello 6',
+          price: 'R$ 59,99',
+          isFavourite: false,
         }
-        // Add more dishes for this category
+
       ],
     },
     {
       category: 'Main Dishes',
       dishes: [
         {
-          img: '/src/assets/spagueti.png',
+          img: 'https://placehold.co/400x330',
           name: 'Spaguetti Gambe 1',
           price: 'R$ 49,99',
           isFavourite: true,

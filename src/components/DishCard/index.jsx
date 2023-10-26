@@ -17,9 +17,14 @@ export function DishCard({ img, name, price, isFavourite, isAdmin}) {
 
             </figure>
             <h3>{name}</h3>
+            <p className="description">
+            Presunto de parma e rúcula em um pão com fermentação natural.
+            </p>
             <span className="price">{price}</span>
-            {isAdmin ? '' : <Quantity />}
-            {isAdmin ? '' : <Button title="add" />}
+            <div className="finalize">
+                {isAdmin ? '' : <Quantity />}
+                {isAdmin ? '' : <Button title="add" />}
+            </div>
         </Container>
     )
 }

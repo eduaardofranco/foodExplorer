@@ -11,17 +11,17 @@ export function DishSlider({ sectionName, dishes, isAdmin }) {
     infinite: false,
     speed: 300,
     variableWidth: true,
-    // slidesToShow: 2,
-    // slidesToScroll: 4,
-    initialSlide: 0,
+    // slidesToShow: 1,
+    // slidesToScroll: 2,
+    rows: 1,
     arrows: false,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          dots: true,
+          // slidesToShow: 3,
+          // slidesToScroll: 3,
+          arrows: true,
         },
       },
       {
@@ -30,14 +30,7 @@ export function DishSlider({ sectionName, dishes, isAdmin }) {
           slidesToShow: 2,
           slidesToScroll: 2,
         },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
+      }
     ],
   };
   // const { dishes } = category

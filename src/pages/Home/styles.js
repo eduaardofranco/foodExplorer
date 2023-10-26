@@ -29,5 +29,10 @@ export const Container = styled.div`
             width: 100%;
         }
     }
+    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+        .subtitle {
+            font-size: 3.2rem;
+        }
+    }
 
-`
+`;

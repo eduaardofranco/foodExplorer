@@ -1,5 +1,9 @@
+
 .slick-slide {
     width: 21rem!important;
+    @media (min-width: 1024px) {
+        width: 30rem!important;
+    }
 }
 .slick-slide + .slick-slide {
     margin-left: 16px;
