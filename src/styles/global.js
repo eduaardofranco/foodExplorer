@@ -1,4 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../styles/layoutBreakpoints' 
+
 
 export default createGlobalStyle`
     :root {
@@ -26,5 +28,11 @@ export default createGlobalStyle`
         flex-wrap: wrap;
         justify-content: center;
         gap: 1.4rem;
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+        .content {
+            margin: 0 auto;
+            width: 1000px;
+        }
     }
 `

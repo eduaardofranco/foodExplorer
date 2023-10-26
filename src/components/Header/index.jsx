@@ -21,8 +21,8 @@ export function Header({ isAdmin, onOpenMenu }) {
             </div>
             <div className="searchInput">
                 <SearchBar placeholder="Search by dish or ingredient"  />
-
             </div>
+            {isAdmin ? '' : <><a href="">Favourites</a><a href="">My Orders</a></>}
             {isAdmin ? <Button className="btnBig" title="New Dish" /> : <Button className="btnBig" icon="FiLogOut" title="Orders" />}
             <a className='logout'><FiLogOut /></a>
             

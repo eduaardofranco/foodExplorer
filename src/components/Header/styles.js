@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { DEVICE_BREAKPOINTS } from '../../styles/layoutBreakpoints'
+import { DEVICE_BREAKPOINTS } from '../../styles/layoutBreakpoints' 
 
 export const Container = styled.header`
     background-color: ${({ theme }) => theme.COLORS.BG_DARK_700};
@@ -47,18 +47,25 @@ export const Container = styled.header`
         }
     }
     .searchInput {
-        width: 50%;
+        width: 30rem;
         display: none;
     }
     .btnBig {
         display: none;
-        width: 21.5rem;
+        padding: 1.2rem 3.7rem;
+        width: auto;
     }
     .logout {
-        display: none;
         font-size: 3.2rem;
     }
+    a {
+        color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};
+        display: none;
+        text-decoration: none;
+    }
     @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+        justify-content: center;
+        gap: 4.3rem;
         > .menuBtn {
             display: none;
         }
@@ -71,7 +78,7 @@ export const Container = styled.header`
         .ordersSmallBtn {
             display: none;
         }
-        .logout {
+        a {
             display: block;
         }
     }

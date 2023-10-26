@@ -1,8 +1,16 @@
 import styled from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../../styles/layoutBreakpoints' 
+
 
 export const Container = styled.div`
     .content {
         padding-left: 2.4rem;
+        @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+            padding-left: 0;
+            .banner {
+                margin: 1.6rem 0 2rem 0;
+            }
+        }
     }    
 
 .subtitle {
