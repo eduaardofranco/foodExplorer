@@ -5,30 +5,20 @@ import 'slick-carousel/slick/slick-theme.css';
 import { DishCard } from '../DishCard';
 import './styles.css'
 
+
 export function DishSlider({ sectionName, dishes, isAdmin }) {
   const settings = {
     dots: false,
     infinite: false,
     speed: 300,
     variableWidth: true,
-    // slidesToShow: 1,
-    // slidesToScroll: 2,
     rows: 1,
-    arrows: false,
+    arrows: true,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          // slidesToShow: 3,
-          // slidesToScroll: 3,
-          arrows: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          arrows: false,
         },
       }
     ],

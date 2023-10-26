@@ -6,6 +6,50 @@
     }
 }
 .slick-slide + .slick-slide {
+    @media (min-width: 1024px) {
+        margin-left: 27px!important;
+    }
+}
+.slick-slide + .slick-slide {
     margin-left: 16px;
 
+}
+.slick-prev, .slick-next {
+        background: #000A0F;
+        z-index: 10;
+        height: 100%;
+        width: 300px;
+        @media (min-width: 1024px) {
+            display: block;
+        }
+}
+.slick-prev {
+    background: linear-gradient(to right, rgba(0, 10, 15, 1), rgba(0, 10, 15, 0));
+    left: 0;
+}
+.slick-next {
+    background: linear-gradient(to left, rgba(0, 10, 15, 1), rgba(0, 0, 0, 0));
+    right: 0;
+}
+.slick-prev:before, .slick-next:before {
+    content: '';
+    margin-top: -20px;
+    position: absolute;
+    height: 40px;
+    width: 40px;
+}
+.slick-prev:before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M25.8839 6.61612C26.372 7.10427 26.372 7.89573 25.8839 8.38388L14.2678 20L25.8839 31.6161C26.372 32.1043 26.372 32.8957 25.8839 33.3839C25.3957 33.872 24.6043 33.872 24.1161 33.3839L11.6161 20.8839C11.128 20.3957 11.128 19.6043 11.6161 19.1161L24.1161 6.61612C24.6043 6.12796 25.3957 6.12796 25.8839 6.61612Z' fill='white'/%3E%3C/svg%3E");
+    left: 0;
+}
+.slick-next:before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M25.8839 6.61612C26.372 7.10427 26.372 7.89573 25.8839 8.38388L14.2678 20L25.8839 31.6161C26.372 32.1043 26.372 32.8957 25.8839 33.3839C25.3957 33.872 24.6043 33.872 24.1161 33.3839L11.6161 20.8839C11.128 20.3957 11.128 19.6043 11.6161 19.1161L24.1161 6.61612C24.6043 6.12796 25.3957 6.12796 25.8839 6.61612Z' fill='white'/%3E%3C/svg%3E");
+    right: 0;
+    transform: rotate(180deg);
+}
+.slick-prev:hover, .slick-prev:focus {
+    background: linear-gradient(to right, rgba(0, 10, 15, 1), rgba(0, 10, 15, 0));
+}
+.slick-next:hover, .slick-next:focus {
+    background: linear-gradient(to left, rgba(0, 10, 15, 1), rgba(0, 0, 0, 0));
 }
