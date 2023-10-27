@@ -97,5 +97,8 @@ export const Container = styled.div`
                 height: 4.8rem;
             }
         }
+        .add-edit {
+            width: 13rem;
+        }
     }
 `;
