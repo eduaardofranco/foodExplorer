@@ -38,7 +38,7 @@ export function DishSlider({ sectionName, dishes, isAdmin }) {
             name={dish.name}
             price={dish.price}
             isFavourite={dish.isFavourite}
-            isAdmin={isAdmin}
+            isAdmin={dish.user}
           />
         ))}
       </Slider>

@@ -23,7 +23,7 @@ export function Header({ isAdmin, onOpenMenu }) {
                 <SearchBar placeholder="Search by dish or ingredient"  />
             </div>
             {isAdmin ? '' : <><a href="">Favourites</a><a href="">My Orders</a></>}
-            {isAdmin ? <Button className="btnBig" title="New Dish" /> : <Button className="btnBig" icon="FiLogOut" title="Orders" />}
+            {isAdmin ? <Button className="btnBig" title="New Dish" /> : <Button className="btnBig" icon={PiReceipt} title="Orders (0)" />}
             <a className='logout'><FiLogOut /></a>
             
         </Container>

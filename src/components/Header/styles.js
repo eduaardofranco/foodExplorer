@@ -65,12 +65,14 @@ export const Container = styled.header`
     }
     @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
         justify-content: center;
-        gap: 4.3rem;
+        gap: 3rem;
         > .menuBtn {
             display: none;
         }
         .btnBig {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
         .searchInput {
             display: block;

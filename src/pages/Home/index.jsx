@@ -7,7 +7,6 @@ import { useState } from 'react'
 
 export function Home() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-
   const categories = [
     {
       category: 'Meals',
@@ -17,7 +16,6 @@ export function Home() {
           name: 'Salada Ravanello 1',
           price: 'R$ 59,99',
           isFavourite: false,
-          user: "admin"
         },
         {
           img: '/src/assets/dish.png',
