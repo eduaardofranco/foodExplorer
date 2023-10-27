@@ -14,11 +14,13 @@ export function DishSlider({ sectionName, dishes, isAdmin }) {
     variableWidth: true,
     rows: 1,
     arrows: true,
+    slidesToScroll: 3,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           arrows: false,
+          slidesToScroll: 1
         },
       }
     ],

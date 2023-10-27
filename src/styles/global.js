@@ -35,4 +35,10 @@ export default createGlobalStyle`
             width: 1000px;
         }
     }
+    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+        .content {
+            margin: 0 auto;
+            width: 1120px;
+        }
+    }
 `

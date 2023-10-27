@@ -82,4 +82,7 @@ export const Container = styled.header`
             display: block;
         }
     }
+    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+        gap: 5.5rem;
+    }
 `;
