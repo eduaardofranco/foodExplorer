@@ -8,32 +8,36 @@ import { PiReceipt } from 'react-icons/pi'
 import { Footer } from '../../components/Footer'
  
 export function Detail() {
-    const user = "admin"
+    const user = "user"
     return(
         <Container>
-            <Header isAdmin />
+            <Header />
             <main>
                 <div className="content">
-                <ButtonText title="Back" isBig />
-                    <figure>
-                        <img src="src/assets/grande.png" alt="Prato" />
-                    </figure>
-                    <h1>Salada Ravanello</h1>
-                    <h3>€15</h3>
-                    <p className="description">
-                    Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.
-                    </p>
-                    <div className="ingredients">
-                        <Ingredient name="Alface" />
-                        <Ingredient name="cebola" />
-                        <Ingredient name="pepino" />
-                        <Ingredient name="pão naan" />
-                        <Ingredient name="rabanete" />
-                        <Ingredient name="tomate" />
-                    </div>
-                    <div className="finalize">
-                        {user == "admin" ? '' : <Quantity isbig={true} />}
-                        {user == "admin" ? <Button className="add" title="Edit" /> : <Button className="add" title="Add" icon={PiReceipt} />}
+                    <ButtonText title="Back" isBig />
+                    <div className="center">
+                        <figure>
+                            <img src="src/assets/grande.png" alt="Prato" />
+                        </figure>
+                        <div className="infos">
+                            <h1>Salada Ravanello</h1>
+                            <h3>€15</h3>
+                            <p className="description">
+                            Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.
+                            </p>
+                            <div className="ingredients">
+                                <Ingredient name="Alface" />
+                                <Ingredient name="cebola" />
+                                <Ingredient name="pepino" />
+                                <Ingredient name="pão naan" />
+                                <Ingredient name="rabanete" />
+                                <Ingredient name="tomate" />
+                            </div>
+                            <div className="finalize">
+                                {user == "admin" ? '' : <Quantity isbig={true} />}
+                                {user == "admin" ? <Button className="add" title="Edit" /> : <Button className="add" title="Add" icon={PiReceipt} />}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>

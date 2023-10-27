@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../../styles/layoutBreakpoints' 
+
 
 export const Container = styled.div`
     .content {
@@ -38,6 +40,61 @@ export const Container = styled.div`
             svg {
                 font-size: 2.5rem;
                 margin-right: 1rem;
+            }
+        }
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.SM}) {
+        .content {
+            margin-left: auto;
+            margin-right: auto;
+            width: 40rem;
+        }
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
+        .content {
+            margin: 0 auto;
+            width: 70rem;
+        }
+        .finalize {
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+        .content {
+            width: 1024px;
+        }
+        figure {
+            margin-right: 5rem;
+            img {
+                width: 39rem;
+            }
+        }
+        h1 {
+            font-size: 4rem;
+        }
+        h3 {
+            font-size: 3rem;
+        }
+        .description {
+            font-size: 2.4rem;
+        }
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .infos {
+            text-align: left;
+        }
+        .ingredients {
+            justify-content: start;
+        }
+        .finalize {
+            margin-left: 0;
+            .add {
+                height: 4.8rem;
             }
         }
     }
