@@ -5,8 +5,7 @@ export const Container = styled.div`
         background-color: ${({ theme }) => theme.COLORS.TXT_GRAY_500};
         border-radius: .8rem;
         display: flex;
-        padding: 1rem 1.6rem;
-        /* width: auto; */
+        padding: .5rem 1.6rem;
 
         > input {
             background-color: transparent;

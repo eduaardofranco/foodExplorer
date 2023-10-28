@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../../styles/layoutBreakpoints' 
+
 
 export const Container = styled.div`
     .content {
@@ -24,6 +26,32 @@ export const Container = styled.div`
         gap: 1.5rem;
         .delete {
             background: ${({ theme }) => theme.COLORS.BG_DARK_800};
+        }
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+        .line {
+            display: flex;
+            gap: 3.2rem;
+            justify-content: space-between;
+            > div {
+                width: 33%;
+            }
+            .addTag {
+                width: 70%;
+            }
+        }
+        form {
+            button {
+                float: right;
+                width: 20%;
+            }
+
+        }
+        .buttons {
+            justify-content: end;
+            button {
+                width: 13.5rem;
+            }
         }
     }
 `;
