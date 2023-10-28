@@ -3,10 +3,13 @@ import { DEVICE_BREAKPOINTS } from '../../styles/layoutBreakpoints'
 
 export const Container = styled.header`
     background-color: ${({ theme }) => theme.COLORS.BG_DARK_700};
-    height: 11.4rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    .main-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        height: 11.4rem;
+
+    }
     button {
         border: 0;
         position: relative;
@@ -18,7 +21,7 @@ export const Container = styled.header`
             }
         }
     }
-    > .menuBtn {
+    .menuBtn {
         background-color: transparent;
         border: none;
         position: relative;
@@ -66,7 +69,7 @@ export const Container = styled.header`
     @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
         justify-content: center;
         gap: 3rem;
-        > .menuBtn {
+        .menuBtn {
             display: none;
         }
         .btnBig {
@@ -82,6 +85,11 @@ export const Container = styled.header`
         }
         a {
             display: block;
+        }
+        .main-content {
+            justify-content: space-between;
+            margin: 0 auto;
+            width: 100rem;
         }
     }
     @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
