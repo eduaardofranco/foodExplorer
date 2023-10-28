@@ -6,12 +6,19 @@ import { Button } from '../../components/Button'
 import { Ingredient } from '../../components/Ingredient'
 import { PiReceipt } from 'react-icons/pi'
 import { Footer } from '../../components/Footer'
+import { Menu } from '../../components/Menu'
+import { useState } from 'react'
  
 export function Detail() {
-    const user = "admin"
+    const [menuIsOpen, setMenuIsOpen] = useState(false);
+    const user = "admsin"
     return(
         <Container>
-            <Header />
+            <Menu
+                menuIsOpen={menuIsOpen}
+                onCloseMenu={() => setMenuIsOpen(false)}
+            />
+            <Header onOpenMenu={() => setMenuIsOpen(true)} isAddmin={user} />
             <main>
                 <div className="content">
                     <ButtonText title="Back" isBig />
