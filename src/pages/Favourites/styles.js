@@ -19,14 +19,23 @@ export const Container = styled.div`
         }
     }
     @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
-        main {
-            width: 1000px;
-            margin: 0 auto;
-        }
         .container {
             display: flex;
             gap: 4.8rem;
             flex-wrap: wrap;
         }
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+        main {
+            margin: 0 auto;
+            width: 1000px;
+        }
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+        main {
+            margin: 0 auto;
+            width: 1120px;
+        }
+
     }
 `;
