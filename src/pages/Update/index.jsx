@@ -35,7 +35,7 @@ export function Update() {
     ]
     return(
         <Container>
-            <Header isAddmin />
+            <Header />
             <main className='content'>
                 <ButtonText title="Back" />
                 <Title title="Update Dish" />
