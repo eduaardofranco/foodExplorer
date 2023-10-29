@@ -37,7 +37,7 @@ export function Update() {
         <Container>
             <Header />
             <main className='content'>
-                <ButtonText title="Back" />
+                <ButtonText to="/" title="Back" />
                 <Title title="Update Dish" />
                 <form action="">
                     <div className="line">

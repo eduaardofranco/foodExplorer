@@ -1,4 +1,6 @@
 import { Container, Form } from './styles'
+import { Link } from 'react-router-dom'
+
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 import { Title } from '../../components/Title'
@@ -16,7 +18,7 @@ export function Login() {
                 <Input placeholder="min 6 characters" label="Password"  bound="password" />
                 <Button title="Enter" />
                 <span className='loginOrNew'>
-                    <a href="">Create Account</a>
+                    <Link to="/register">Create Account</Link>
                 </span>
             </Form>
         </Container>

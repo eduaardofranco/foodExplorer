@@ -37,7 +37,7 @@ export function New() {
         <Container>
             <Header isAdmin />
             <main className='content'>
-                <ButtonText title="Back" />
+                <ButtonText to="/" title="Back" />
                 <Title title="New Dish" />
                 <form action="">
                     <div className="line">

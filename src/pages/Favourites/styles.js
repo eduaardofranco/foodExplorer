@@ -4,7 +4,7 @@ import { DEVICE_BREAKPOINTS } from '../../styles/layoutBreakpoints'
 
 export const Container = styled.div`
     main {
-        padding: 0 2rem;
+        padding: 2rem;
     }
     h2 {
         font-size: 2rem;
@@ -19,6 +19,10 @@ export const Container = styled.div`
         }
     }
     @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
+        main {
+            width: 1000px;
+            margin: 0 auto;
+        }
         .container {
             display: flex;
             gap: 4.8rem;

@@ -6,8 +6,9 @@ import { useState } from 'react';
 import { SearchBar } from '../SearchBar'
 import { Button } from '../Button'
 import { FiLogOut } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
 
-export function Header({ isAdmin, onOpenMenu }) {
+export function Header({ isAdmin = true, onOpenMenu }) {
     const [isMenuOpen, setMenuOpen] = useState(false);
 
     return(
@@ -24,7 +25,7 @@ export function Header({ isAdmin, onOpenMenu }) {
                     <SearchBar placeholder="Search by dish or ingredient"  />
                 </div>
                 {isAdmin ? '' : <><a href="">Favourites</a><a href="">My Orders</a></>}
-                {isAdmin ? <Button className="btnBig" title="New Dish" /> : <Button className="btnBig" icon={PiReceipt} title="Orders (0)" />}
+                {isAdmin ? <Link to="/new"><Button className="btnBig" title="New Dish" /></Link> : <Button className="btnBig" icon={PiReceipt} title="Orders (0)" />}
                 <a className='logout'><FiLogOut /></a>
             </div>
             

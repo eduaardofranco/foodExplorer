@@ -5,6 +5,7 @@ import { Title } from '../../components/Title'
 import { DishList } from '../../components/DishList'
 import { Menu } from '../../components/Menu' 
 import { useState } from 'react'
+import { ButtonText } from '../../components/ButtonText'
 
 export function Favourites() {
     const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -17,6 +18,8 @@ export function Favourites() {
             /> 
             <Header onOpenMenu={() => setMenuIsOpen(true)} />
             <main>
+                <ButtonText to="/" title="Back" />
+
                 <Title title="My Favourites" />
                 <div className="container">
                     <DishList
@@ -39,7 +42,6 @@ export function Favourites() {
                         btn="Remove from Favourites"
                         img="https://placehold.co/150x150"
                     />
-                    
                 </div>
 
             </main>

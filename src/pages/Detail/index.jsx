@@ -1,4 +1,5 @@
 import { Container } from './styles.js'
+import { Link } from 'react-router-dom'
 import { Header } from '../../components/Header'
 import { ButtonText } from '../../components/ButtonText'
 import { Quantity } from '../../components/Quantity'
@@ -21,10 +22,10 @@ export function Detail() {
             <Header onOpenMenu={() => setMenuIsOpen(true)} isAddmin={user} />
             <main>
                 <div className="content">
-                    <ButtonText title="Back" isBig />
+                    <ButtonText to="/" title="Back" isBig />
                     <div className="center">
                         <figure>
-                            <img src="src/assets/grande.png" alt="Prato" />
+                            <img src="/src/assets/grande.png" alt="Prato" />
                         </figure>
                         <div className="infos">
                             <h1>Salada Ravanello</h1>

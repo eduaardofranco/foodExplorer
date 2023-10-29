@@ -1,4 +1,5 @@
 import { Container, Form } from './styles'
+import { Link } from 'react-router-dom'
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 import { Title } from '../../components/Title'
@@ -18,7 +19,7 @@ export function SignUp() {
                 <Input placeholder="min 6 characters" label="Repeat Password"  bound="repeatPassword" />
                 <Button title="Enter" />
                 <span className='loginOrNew'>
-                    <a href="">Login</a>
+                    <Link to="/">Login</Link>
                 </span>
             </Form>
         </Container>
