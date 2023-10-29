@@ -1,5 +1,5 @@
 import { Header } from '../../components/Header'
-import { Container } from './styles'
+import { Container, Banner } from './styles'
 import { Footer } from '../../components/Footer'
 import { DishSlider } from '../../components/DishSlider'
 import { Menu } from '../../components/Menu'
@@ -86,14 +86,14 @@ export function Home() {
       <Header onOpenMenu={() => setMenuIsOpen(true)} isAddmin />
       <main>
         <div className="content">
-          <div className="banner">
+          <Banner>
             <img src="https://placehold.co/1920x300" alt="Banner" />
-          </div>
+          </Banner>
           {categories.map((category, index) => (
              <div key={index}>
                 <DishSlider dishes={category.dishes} sectionName={category.category} />
             </div>
-      ))}
+         ))}
         </div>
         </main>
       <Footer />
