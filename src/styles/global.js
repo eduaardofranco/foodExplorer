@@ -40,5 +40,6 @@ export default createGlobalStyle`
             margin: 0 auto;
             width: 1120px;
         }
+
     }
 `

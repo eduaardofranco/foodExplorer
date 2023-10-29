@@ -15,6 +15,9 @@ export const Container = styled.div`
                 width: 33%;
             }
         }
+        > .content {
+            padding: 1rem 0;
+        }
     }
 `;
 

@@ -86,7 +86,7 @@ export const Container = styled.header`
         a {
             display: block;
         }
-        .main-content {
+        .main-content { 
             justify-content: space-between;
             margin: 0 auto;
             width: 100rem;
@@ -94,5 +94,8 @@ export const Container = styled.header`
     }
     @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
         gap: 5.5rem;
+        .main-content {
+            width: 1120px;
+        }
     }
 `;
