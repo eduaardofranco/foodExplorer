@@ -5,6 +5,7 @@ export const Container = styled.div`
     align-items: center;
     gap: 1.3rem;
     margin-bottom: 2rem;
+    max-width: 25rem;
     img {
         border-radius: 100%;
         display: block;
@@ -14,6 +15,8 @@ export const Container = styled.div`
         color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};
         font-size: 2rem;
         font-weight: 500;
+        max-height: 4rem;
+        overflow: hidden;
     }
     button {
         background-color: transparent;

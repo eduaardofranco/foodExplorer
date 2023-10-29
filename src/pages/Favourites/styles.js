@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../../styles/layoutBreakpoints' 
+
 
 export const Container = styled.div`
     main {
@@ -6,8 +8,8 @@ export const Container = styled.div`
     }
     h2 {
         font-size: 2rem;
-        margin: 2rem 0;
-    }
+        margin: 2rem 0;;
+    } 
     .finalize {
         display: flex;
         justify-content: end;
@@ -16,29 +18,11 @@ export const Container = styled.div`
             width: 15rem;
         }
     }
-`;
-
-export const ItemOrder = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 1.3rem;
-    margin-bottom: 2rem;
-    img {
-        border-radius: 100%;
-        display: block;
-        width: 8rem;
-    }
-    h3 {
-        color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};
-        font-size: 2rem;
-        font-weight: 500;
-    }
-    button {
-        background-color: transparent;
-        border: none;
-        color: ${({ theme }) => theme.COLORS.BG_RED_400};
-        cursor: pointer;
-        padding: 0;
-        margin-top: .5rem;
+    @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
+        .container {
+            display: flex;
+            gap: 4.8rem;
+            flex-wrap: wrap;
+        }
     }
 `;

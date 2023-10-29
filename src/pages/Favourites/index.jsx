@@ -1,4 +1,4 @@
-import { Container, ItemOrder } from './styles'
+import { Container } from './styles'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { Title } from '../../components/Title'
@@ -14,20 +14,33 @@ export function Favourites() {
             <Menu
                 menuIsOpen={menuIsOpen}
                 onCloseMenu={() => setMenuIsOpen(false)}
-            />
+            /> 
             <Header onOpenMenu={() => setMenuIsOpen(true)} />
             <main>
                 <Title title="My Favourites" />
-                <DishList
-                    name="House Burger"
-                    btn="Remove from Favourites"
-                    img="https://placehold.co/150x150"
-                />
-                <DishList
-                    name="House Burger"
-                    btn="Remove from Favourites"
-                    img="https://placehold.co/150x150"
-                />
+                <div className="container">
+                    <DishList
+                        name="House Burger"
+                        btn="Remove from Favourites"
+                        img="https://placehold.co/150x150"
+                    />
+                    <DishList
+                        name="House Burger with lettuce and souce"
+                        btn="Remove from Favourites"
+                        img="https://placehold.co/150x150"
+                    />
+                    <DishList
+                        name="House Burger with lettuce and souce"
+                        btn="Remove from Favourites"
+                        img="https://placehold.co/150x150"
+                    />
+                    <DishList
+                        name="House Burger with lettuce and souce"
+                        btn="Remove from Favourites"
+                        img="https://placehold.co/150x150"
+                    />
+                    
+                </div>
 
             </main>
 
