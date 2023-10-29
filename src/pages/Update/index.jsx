@@ -1,4 +1,4 @@
-import { Container } from './styles'
+import { Container, Form, TagContainer, TagContent } from './styles'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { ButtonText } from '../../components/ButtonText'
@@ -35,22 +35,22 @@ export function Update() {
     ]
     return(
         <Container>
-            <Header />
+            <Header isAdmin />
             <main className='content'>
                 <ButtonText to="/" title="Back" />
-                <Title title="Update Dish" />
-                <form action="">
+                <Title title="New Dish" />
+                <Form>
                     <div className="line">
-                        <Input type="file" label="Dish Image" bound="imagem" onChange={(e) => setLabelName(e.target.value)}>
+                        <Input type="file" placeholder="Select dish Image" label="Dish Image" bound="imagem" onChange={(e)=> setLabelName(e.target.value)}>
                             <label htmlFor='imagem'>{labelName}</label>
                         </Input>   
-                        <Input type="text" value="Ceaser Salad" label="Name" bound="name" />
+                        <Input type="text" placeholder="Ex: Ceasar Salad" label="Name" bound="name" />
                         <Select type="select" placeholder="Select dish Image" label="Category" bound="category" options={options} />
                     </div>
                     <div className="line">
-                        <div className="addTag">
+                        <TagContainer>
                             <label>Ingredients</label>
-                            <div className="container">
+                            <TagContent>
                                 {
                                     tags.map((tag, index) => (
                                         <AddIngredient
@@ -70,16 +70,17 @@ export function Update() {
                                     value={newTag}
                                     onClick={handleAddTag}
                                 />
-                            </div>
-                        </div>
+                            </TagContent>
+                        </TagContainer>
                         <Input type="number" label="Price" bound="price" placeholder="€ 00,00" />
                     </div>
                     <Textarea type="text" label="Description" bound="description" placeholder="Briefly talk about the dish, its ingredients and composition" />
-                </form>
-                <div className="buttons">
-                    <Button title="Delete" className="delete" />
-                    <Button title="Save" />
-                </div>
+                    <div className="finalize">
+                        <Button className="delete" title="Delete" />
+                        <Button title="Save" />
+
+                    </div>
+                </Form>
             </main>
 
 
