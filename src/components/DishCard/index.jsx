@@ -1,4 +1,5 @@
-import { Container } from './styles'
+import { Container, Price, Finalize, Description, Favourite, Img } from './styles'
+
 import { BsHeart } from 'react-icons/bs'
 import { AiFillHeart } from 'react-icons/ai'
 import { Quantity } from '../Quantity'
@@ -8,23 +9,22 @@ import { PiPencilSimpleBold } from 'react-icons/pi'
 export function DishCard({ img, name, price, isFavourite, isAdmin}) {
     return(
         <Container>
-            <button className="favourite">
-                
-            {isAdmin ? <PiPencilSimpleBold /> : (isFavourite ? <AiFillHeart /> : <BsHeart />)}
-            </button>
-            <figure>
+            <Favourite>
+                {isAdmin ? <PiPencilSimpleBold /> : (isFavourite ? <AiFillHeart /> : <BsHeart />)}
+            </Favourite>
+            <Img>
                 <img src={img} alt="Dish name" />
 
-            </figure>
+            </Img>
             <h3>{name}</h3>
-            <p className="description">
-            Presunto de parma e rúcula em um pão com fermentação natural.
-            </p>
-            <span className="price">{price}</span>
-            <div className="finalize">
+            <Description>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+            </Description>
+            <Price>{price}</Price>
+            <Finalize>
                 {isAdmin ? '' : <Quantity />}
                 {isAdmin ? '' : <Button title="add" />}
-            </div>
+            </Finalize>
         </Container>
     )
 }

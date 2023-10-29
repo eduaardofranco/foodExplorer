@@ -29,73 +29,11 @@ export const Container = styled.div`
     svg {
         color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};
     }
-    figure {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 8.8rem;
-        height: 8.8rem;
-
-        img {
-            width: 8.8rem;
-            transition: transform .3s;
-        }
-    }
     button {
         border: 0;
         cursor: pointer;
     }
-    .price {
-        color: ${({ theme }) => theme.COLORS.TXT_BLUE_200};
-        font-family: ${({ theme}) => theme.FONTS.ROBOTO};
-        font-size: 1.6rem;
-    }
     
-    .favourite {
-        background-color: transparent;
-        cursor: pointer;
-        position: absolute;
-        right: 1rem;
-        top: 1rem;
-        &:hover {
-            path {
-                color: ${({ theme }) => theme.COLORS.BG_RED_400};
-            }
-        }
-        svg {
-            font-size: 2.4rem;
-            path {
-                stroke: white;
-            }
-        }
-    }
-    .add {
-        background-color: ${({ theme }) => theme.COLORS.BG_RED_100};
-        border-radius: .5rem;
-        color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};
-        display: block;
-        padding: 1.2rem;
-        width: 100%;
-
-    }
-    .description {
-        color: ${({ theme }) => theme.COLORS.TXT_GRAY_400};
-        display: none;
-        font-family: ${({ theme}) => theme.FONTS.ROBOTO};
-        font-size: 1.4rem;
-        margin: 1.5rem 0;
-        text-align: center;
-
-        overflow: hidden;
-        height: 2.8rem;
-
-    }
-    .finalize {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
     @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
         flex-direction: column;
         width: 30rem;
@@ -103,27 +41,85 @@ export const Container = styled.div`
             font-size: 2.4rem;
             margin: 1.5rem 0;
         }
-        .price {
-            font-size: 3.2rem;
-        }
-        figure {
-            height: 17.6rem;
-            width: 17.6rem;
+    }
+`;
 
-            img {
-                width: 17.6rem;
-            }
+export const Price = styled.span`
+    color: ${({ theme }) => theme.COLORS.TXT_BLUE_200};
+    font-family: ${({ theme}) => theme.FONTS.ROBOTO};
+    font-size: 1.6rem;
+    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+        font-size: 3.2rem;
+    }
+`;
+
+export const Description = styled.p`
+     color: ${({ theme }) => theme.COLORS.TXT_GRAY_400};
+    display: none;
+    font-family: ${({ theme}) => theme.FONTS.ROBOTO};
+    font-size: 1.4rem;
+    margin: 1.5rem 0;
+    text-align: center;
+
+    overflow: hidden;
+    height: 2.8rem;
+    
+    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+        display: block;
+    }
+`;
+
+export const Finalize = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+        margin-top: 2rem;
+        flex-direction: row;
+        gap: 1.6rem;
+        button {
+            height: 4.8rem;
         }
-        .description {
-            display: block;
+    }
+`;
+
+export const Favourite = styled.button`
+    background-color: transparent;
+    cursor: pointer;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    &:hover {
+        path {
+            color: ${({ theme }) => theme.COLORS.BG_RED_400};
         }
-        .finalize {
-            margin-top: 2rem;
-            flex-direction: row;
-            gap: 1.6rem;
-            button {
-                height: 4.8rem;
-            }
+    }
+    svg {
+        font-size: 2.4rem;
+        path {
+            stroke: white;
+        }
+    }
+`;
+
+export const Img = styled.figure`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 8.8rem;
+    height: 8.8rem;
+
+    img {
+        width: 8.8rem;
+        transition: transform .3s;
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+        height: 17.6rem;
+        width: 17.6rem;
+
+        img {
+            width: 17.6rem;
         }
     }
 `;
