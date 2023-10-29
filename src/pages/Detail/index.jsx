@@ -1,4 +1,4 @@
-import { Container } from './styles.js'
+import { Container, Infos, Finalize, Ingredients, Description, Img } from './styles.js'
 import { Link } from 'react-router-dom'
 import { Header } from '../../components/Header'
 import { ButtonText } from '../../components/ButtonText'
@@ -12,7 +12,7 @@ import { useState } from 'react'
  
 export function Detail() {
     const [menuIsOpen, setMenuIsOpen] = useState(false);
-    const user = "admsin"
+    const user = "ad"
     return(
         <Container>
             <Menu
@@ -24,28 +24,28 @@ export function Detail() {
                 <div className="content">
                     <ButtonText to="/" title="Back" isBig />
                     <div className="center">
-                        <figure>
+                        <Img>
                             <img src="/src/assets/grande.png" alt="Prato" />
-                        </figure>
-                        <div className="infos">
+                        </Img>
+                        <Infos>
                             <h1>Salada Ravanello</h1>
                             <h3>€15</h3>
-                            <p className="description">
-                            Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.
-                            </p>
-                            <div className="ingredients">
+                            <Description>
+                                Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.
+                            </Description>
+                            <Ingredients>
                                 <Ingredient name="Alface" />
                                 <Ingredient name="cebola" />
                                 <Ingredient name="pepino" />
                                 <Ingredient name="pão naan" />
                                 <Ingredient name="rabanete" />
                                 <Ingredient name="tomate" />
-                            </div>
-                            <div className="finalize">
+                            </ Ingredients>
+                            <Finalize>
                                 {user == "admin" ? '' : <Quantity isbig={true} />}
                                 {user == "admin" ? <Button className="add-edit" title="Edit" /> : <Button className="add" title="Add" icon={PiReceipt} />}
-                            </div>
-                        </div>
+                            </ Finalize>
+                        </Infos>
                     </div>
                 </div>
             </main>
