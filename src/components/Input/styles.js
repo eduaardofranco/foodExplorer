@@ -41,6 +41,10 @@ export const Container = styled.div`
         height: 4.8rem;
         width: 100%;
 
+        &.error-border {
+            border-color: ${({ theme }) => theme.COLORS.BG_RED_100}!important;
+        }
+
         &[type="file"] {
             display: none;
         }
