@@ -35,10 +35,11 @@ export const Container = styled.div`
     }
     @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
         .content {
+            padding: 0;
             width: 1024px;
         }
         h1 {
-            font-size: 4rem;
+            font-size: 4rem;    
         }
         h3 {
             font-size: 3rem;
@@ -81,6 +82,7 @@ export const Ingredients = styled.div`
     display: flex;
     justify-content: center;
     gap: 1rem;
+    flex-wrap: wrap;
     @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
         justify-content: start;
     }
