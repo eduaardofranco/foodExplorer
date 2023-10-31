@@ -10,8 +10,10 @@ import { Logo } from '../../components/Logo'
 import { ModalMessage } from '../../components/ModalMessage'
 import { ValidationMessage } from '../../components/ValidationMessage'
 import { api } from '../../services/api'
+import { useAuth } from '../../hooks/auth'
 
 export function SignUp() {
+
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -102,7 +104,7 @@ export function SignUp() {
                 {/* if there is a error message, show it */}
                 {errorMessage && (
                     <ValidationMessage message={errorMessage} isError={true} />
-                    )}
+                )}
 
                 <Button
                     title="Create"

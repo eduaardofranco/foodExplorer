@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export function ModalMessage({ message, title, navigation }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
+
     const navigate = useNavigate()
 
     function handleOkClick() {
