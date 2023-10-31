@@ -1,12 +1,14 @@
 import { Container, Form } from './styles'
-import { Link } from 'react-router-dom'
+
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 import { Title } from '../../components/Title'
 import { Logo } from '../../components/Logo'
 import { ModalMessage } from '../../components/ModalMessage'
 import { ValidationMessage } from '../../components/ValidationMessage'
-import { useState } from 'react'
 import { api } from '../../services/api'
 
 export function SignUp() {
@@ -16,6 +18,8 @@ export function SignUp() {
     const [repeatPassword, setRepeatPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState('');
     const [modalMessage, setModalMessage] = useState({ message: '', title: ''})
+
+    const navigate = useNavigate()
     
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     
@@ -47,7 +51,7 @@ export function SignUp() {
 
         api.post('/users', { name, email, password })
         .then(() => {
-            setModalMessage({ title: 'Sucess', message: 'User Created Sucessfully!'})
+            setModalMessage({ title: 'Sucess', message: 'User Created Sucessfully!', navigate: '/'})
         })
         .catch(error => {
             if(error.response) {
@@ -108,7 +112,7 @@ export function SignUp() {
                     <Link to="/">Login</Link>
                 </span>
             </Form>
-            <ModalMessage title={modalMessage.title} message={modalMessage.message} />
+            <ModalMessage title={modalMessage.title} message={modalMessage.message} navigation={modalMessage.navigate} />
         </Container>
     )
 }
