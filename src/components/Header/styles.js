@@ -59,6 +59,7 @@ export const Container = styled.header`
         width: auto;
     }
     .logout {
+        cursor: pointer;
         font-size: 3.2rem;
     }
     a {

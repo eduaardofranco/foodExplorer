@@ -83,7 +83,7 @@ export function Home() {
         menuIsOpen={menuIsOpen}
         onCloseMenu={() => setMenuIsOpen(false)}
       />
-      <Header onOpenMenu={() => setMenuIsOpen(true)} isAddmin />
+      <Header onOpenMenu={() => setMenuIsOpen(true)} />
       <main>
         <div className="content">
           <Banner>
