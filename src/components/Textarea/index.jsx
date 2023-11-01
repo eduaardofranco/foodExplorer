@@ -4,7 +4,7 @@ export function Textarea({ type, bound, label, placeholder, ...rest }) {
     return(
         <Container>
             <label htmlFor={bound}>{label}</label>
-            <textarea type={type} placeholder={placeholder} id={bound}></textarea>
+            <textarea type={type} placeholder={placeholder} id={bound} {...rest}></textarea>
         </Container>
     )
 }

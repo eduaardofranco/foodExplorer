@@ -9,7 +9,7 @@ import { FiLogOut } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 
-export function Header({ isAdmin = true, onOpenMenu }) {
+export function Header({ isAdmin = false, onOpenMenu }) {
     const [isMenuOpen, setMenuOpen] = useState(false);
 
     const { signOut } = useAuth()

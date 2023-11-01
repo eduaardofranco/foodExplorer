@@ -9,21 +9,31 @@ import { Textarea } from '../../components/Textarea'
 import { Button } from '../../components/Button'
 import { AddIngredient } from '../../components/AddIngredient'
 import { useState } from 'react'
+import { api } from '../../services/api'
 
 export function New() {
-    const [tags, setTags] = useState([])
-    const [newTag, setNewTag] = useState()
+    const [ingredients, setIngredients] = useState([])
+    const [newIngredient, setNewIngredient] = useState()
+
+    const [image, setImage] = useState('')
+    const [name, setName] =useState('')
+    const [category, setCategory] = useState('')
+    const [price, setPrice] = useState('')
+    const [description, setDescription] = useState('')
+
+
+    
     const [labelName, setLabelName] = useState('Select dish image')
 
-    function handleAddTag() {
-        if(newTag) {
-            setTags( prevState => [...prevState, newTag])
-            setNewTag('')
+    function handleAddIngredient() {
+        if(newIngredient) {
+            setIngredients( prevState => [...prevState, newIngredient])
+            setNewIngredient('')
         }
     }
 
-    function handleRemoveTag(deleted) {
-        setTags(prevState => prevState.filter((tag, index) => index !== deleted))
+    function handleRemoveIngredient(deleted) {
+        setIngredients(prevState => prevState.filter((ingredient, index) => index !== deleted))
 
     }
 
@@ -33,6 +43,27 @@ export function New() {
         "Desert",
         "Drinks"
     ]
+
+    function handleImg(e) {
+        const inputValue = e.target.value
+        setLabelName(inputValue)
+        setImage(inputValue)
+    }
+
+    async function handleNewDish(e) {
+        e.preventDefault()
+        
+        await api.post('/dishes', {
+            avatar: image,
+            name,
+            ingredients,
+            price,
+            description,
+            category
+
+        })
+        alert('cadastrou')
+    }
     return(
         <Container>
             <Header isAdmin />
@@ -41,22 +72,39 @@ export function New() {
                 <Title title="New Dish" />
                 <Form>
                     <div className="line">
-                        <Input type="file" placeholder="Select dish Image" label="Dish Image" bound="imagem" onChange={(e)=> setLabelName(e.target.value)}>
-                            <label htmlFor='imagem'>{labelName}</label>
+                        <Input
+                            type="file"
+                            placeholder="Select dish Image"
+                            label="Dish Image" bound="imagem"
+                            onChange={handleImg}>
+                                <label htmlFor='imagem'>{labelName}</label>
                         </Input>   
-                        <Input type="text" placeholder="Ex: Ceasar Salad" label="Name" bound="name" />
-                        <Select type="select" placeholder="Select dish Image" label="Category" bound="category" options={options} />
+                        <Input
+                            type="text"
+                            placeholder="Ex: Ceasar Salad"
+                            label="Name"
+                            bound="name"
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <Select
+                            type="select"
+                            placeholder="Select dish Category"
+                            label="Category"
+                            bound="category"
+                            options={options}
+                            onChange={(e) => setCategory(e.target.value)}
+                        />
                     </div>
                     <div className="line">
                         <TagContainer>
                             <label>Ingredients</label>
                             <TagContent>
                                 {
-                                    tags.map((tag, index) => (
+                                    ingredients.map((ingredient, index) => (
                                         <AddIngredient
-                                            value={tag}
+                                            value={ingredient}
                                             key={String(index)}
-                                            onClick={() => handleRemoveTag(index)}
+                                            onClick={() => handleRemoveIngredient(index)}
                                         />
 
                                     ))
@@ -66,16 +114,28 @@ export function New() {
                                 <AddIngredient
                                     placeholder="Add"
                                     isNew
-                                    onChange={e => setNewTag(e.target.value)}
-                                    value={newTag}
-                                    onClick={handleAddTag}
+                                    onChange={e => setNewIngredient(e.target.value)}
+                                    value={newIngredient}
+                                    onClick={handleAddIngredient}
                                 />
                             </TagContent>
                         </TagContainer>
-                        <Input type="number" label="Price" bound="price" placeholder="€ 00,00" />
+                        <Input
+                            type="number"
+                            label="Price"
+                            bound="price"
+                            placeholder="€ 00,00"
+                            onChange={(e) => setPrice(e.target.value)}
+                        />
                     </div>
-                    <Textarea type="text" label="Description" bound="description" placeholder="Briefly talk about the dish, its ingredients and composition" />
-                    <Button title="Save" />
+                    <Textarea
+                        type="text"
+                        label="Description"
+                        bound="description"
+                        placeholder="Briefly talk about the dish, its ingredients and composition"
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+                    <Button title="Save" onClick={handleNewDish}/>
                 </Form>
             </main>
 

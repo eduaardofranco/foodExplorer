@@ -46,7 +46,10 @@ export const Container = styled.div`
         }
 
         &[type="file"] {
-            display: none;
+            opacity: 0;
+            height: 0;
+            width: 0;
+            visibility: hidden;
         }
 
         &:focus {
