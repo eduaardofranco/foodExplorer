@@ -45,11 +45,13 @@ export function Login() {
                 <Input
                     placeholder="email@email.com"
                     label="E-mail"
+                    tyoe="email"
                     bound="email"
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <Input
                     placeholder="min 6 characters"
+                    type="password"
                     label="Password"
                     bound="password"
                     onChange={(e) => setPassword(e.target.value)}

@@ -4,8 +4,11 @@ import { HiOutlineLogout } from 'react-icons/hi'
 import { Footer } from '../Footer'
 import { SearchBar } from '../SearchBar'
 import { useState } from 'react'
+import { useAuth } from '../../hooks/auth'
 
 export function Menu({ menuIsOpen, onCloseMenu }) {
+
+    const { signOut } = useAuth()
     
     return(
         <Container data-menu-is-open={menuIsOpen}>
@@ -24,7 +27,7 @@ export function Menu({ menuIsOpen, onCloseMenu }) {
                         <li><a href="">My Favourites</a></li>
                         <li><a href="">Orders</a></li>
                         <li>
-                            <a href="">Logout <HiOutlineLogout /></a>
+                            <a href="" onClick={signOut}>Logout <HiOutlineLogout /></a>
                             </li>
                     </ul>
                 </div>
