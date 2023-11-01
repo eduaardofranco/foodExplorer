@@ -97,7 +97,7 @@ export function New() {
                         >
                             {
                                 categoryList && categoryList.map(category => (
-                                    <option> {category.name} </option>
+                                    <option key={String(category.index)}> {category.name} </option>
                                 ))
                             }
                         </Select>
