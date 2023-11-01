@@ -24,6 +24,8 @@ export function New() {
 
     const [labelName, setLabelName] = useState('Select dish image')
 
+    console.log(category)
+
     function handleAddIngredient() {
         if(newIngredient) {
             setIngredients( prevState => [...prevState, newIngredient])
@@ -97,7 +99,7 @@ export function New() {
                         >
                             {
                                 categoryList && categoryList.map(category => (
-                                    <option key={String(category.index)}> {category.name} </option>
+                                    <option value={category.id} key={String(category.id)}> {category.name} </option>
                                 ))
                             }
                         </Select>
