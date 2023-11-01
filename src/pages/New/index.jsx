@@ -8,12 +8,13 @@ import { Select } from '../../components/Select'
 import { Textarea } from '../../components/Textarea'
 import { Button } from '../../components/Button'
 import { AddIngredient } from '../../components/AddIngredient'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 
 export function New() {
     const [ingredients, setIngredients] = useState([])
     const [newIngredient, setNewIngredient] = useState()
+    const [categoryList, setCategoryList] = useState([])
 
     const [image, setImage] = useState('')
     const [name, setName] =useState('')
@@ -21,8 +22,6 @@ export function New() {
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
 
-
-    
     const [labelName, setLabelName] = useState('Select dish image')
 
     function handleAddIngredient() {
@@ -37,13 +36,6 @@ export function New() {
 
     }
 
-    const options = [
-        "Main Course",
-        "Starter",
-        "Desert",
-        "Drinks"
-    ]
-
     function handleImg(e) {
         const inputValue = e.target.value
         setLabelName(inputValue)
@@ -52,7 +44,7 @@ export function New() {
 
     async function handleNewDish(e) {
         e.preventDefault()
-        
+
         await api.post('/dishes', {
             avatar: image,
             name,
@@ -64,6 +56,16 @@ export function New() {
         })
         alert('cadastrou')
     }
+
+    useEffect(() => {
+        async function fetchCategory() {
+            const categoryResponse =  await api.get('/category')
+            setCategoryList(categoryResponse.data)
+            console.log(categoryResponse)
+
+        }
+        fetchCategory()
+    }, [])
     return(
         <Container>
             <Header isAdmin />
@@ -91,9 +93,14 @@ export function New() {
                             placeholder="Select dish Category"
                             label="Category"
                             bound="category"
-                            options={options}
                             onChange={(e) => setCategory(e.target.value)}
-                        />
+                        >
+                            {
+                                categoryList && categoryList.map(category => (
+                                    <option> {category.name} </option>
+                                ))
+                            }
+                        </Select>
                     </div>
                     <div className="line">
                         <TagContainer>
