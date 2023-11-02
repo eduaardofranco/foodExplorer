@@ -24,8 +24,6 @@ export function New() {
 
     const [labelName, setLabelName] = useState('Select dish image')
 
-    console.log(category)
-
     function handleAddIngredient() {
         if(newIngredient) {
             setIngredients( prevState => [...prevState, newIngredient])
@@ -46,9 +44,15 @@ export function New() {
 
     async function handleNewDish(e) {
         e.preventDefault()
+        console.log( image,
+            name,
+            ingredients,
+            price,
+            description,
+            category)
 
         await api.post('/dishes', {
-            avatar: image,
+            image,
             name,
             ingredients,
             price,
@@ -59,11 +63,11 @@ export function New() {
         alert('cadastrou')
     }
 
+    //fetch category
     useEffect(() => {
         async function fetchCategory() {
             const categoryResponse =  await api.get('/category')
             setCategoryList(categoryResponse.data)
-            console.log(categoryResponse)
 
         }
         fetchCategory()
