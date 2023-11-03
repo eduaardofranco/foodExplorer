@@ -128,7 +128,7 @@ export function New() {
                             placeholder="Select dish Image"
                             label="Dish Image" bound="imagem"
                             onChange={handleImg}>
-                                <label htmlFor='imagem'>{labelName}</label>
+                                <label htmlFor='imagem'><span>{labelName}</span></label>
                         </Input>   
                         <Input
                             type="text"
