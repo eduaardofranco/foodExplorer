@@ -7,7 +7,6 @@ import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 import { Title } from '../../components/Title'
 import { Logo } from '../../components/Logo'
-import { ModalMessage } from '../../components/ModalMessage'
 import { ValidationMessage } from '../../components/ValidationMessage'
 
 export function Login() {

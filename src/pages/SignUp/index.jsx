@@ -10,7 +10,6 @@ import { Logo } from '../../components/Logo'
 import { ModalMessage } from '../../components/ModalMessage'
 import { ValidationMessage } from '../../components/ValidationMessage'
 import { api } from '../../services/api'
-import { useAuth } from '../../hooks/auth'
 
 export function SignUp() {
 

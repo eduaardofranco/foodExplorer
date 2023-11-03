@@ -14,6 +14,8 @@ export const Container = styled.div`
     height: 100%;
     width: 100%;
     transition: all .4s ease-in-out;
+    top: 0;
+    left: 0;
     &.open {
         opacity: 1;
         visibility: visible;

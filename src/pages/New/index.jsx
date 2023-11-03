@@ -9,12 +9,16 @@ import { Textarea } from '../../components/Textarea'
 import { Button } from '../../components/Button'
 import { AddIngredient } from '../../components/AddIngredient'
 import { useEffect, useState } from 'react'
+import { ValidationMessage } from '../../components/ValidationMessage'
+import { ModalMessage } from '../../components/ModalMessage'
 import { api } from '../../services/api'
 
 export function New() {
     const [ingredients, setIngredients] = useState([])
     const [newIngredient, setNewIngredient] = useState()
     const [categoryList, setCategoryList] = useState([])
+    const [errorMessage, setErrorMessage] = useState('');
+    const [modalMessage, setModalMessage] = useState({ message: '', title: ''})
 
     const [image, setImage] = useState('')
     const [name, setName] =useState('')
@@ -35,6 +39,13 @@ export function New() {
         setIngredients(prevState => prevState.filter((ingredient, index) => index !== deleted))
 
     }
+    function handlePrice(e) {
+        // Ensure the entered value is a valid number before formatting
+        const newValue = parseFloat(e.target.value);
+        if (!isNaN(newValue)) {
+        setPrice(newValue.toFixed(2)); // Format to two decimal places
+        }
+    }
 
     function handleImg(e) {
         const inputValue = e.target.value
@@ -44,12 +55,29 @@ export function New() {
 
     async function handleNewDish(e) {
         e.preventDefault()
-        console.log( image,
-            name,
-            ingredients,
-            price,
-            description,
-            category)
+
+        if(!image) {
+            setErrorMessage('Please, select a image');
+            return
+        }
+        if(!name) {
+            setErrorMessage('Name is required');
+            return
+        }
+        if(ingredients.length == 0) {
+            setErrorMessage('Add ate least one ingredient');
+            return
+        }
+        if(!price) {
+            setErrorMessage('Please, inform a price');
+            return
+        }
+        if(!description) {
+            setErrorMessage('Please, describe the dish');
+            return
+        }
+         //clear the message before caling it again
+        setModalMessage({ title: 'Processing', message: 'Creating user...' });
 
         await api.post('/dishes', {
             image,
@@ -58,9 +86,20 @@ export function New() {
             price,
             description,
             category
-
+            
         })
-        alert('cadastrou')
+        .then(() => {
+            setModalMessage({ title: 'Sucess', message: 'Dish created!', navigate: '/'})
+        })
+        .catch(error => {
+            if(error.response) {
+                return setModalMessage({ title: 'Error', message: error.response.data.message})
+            }
+            else {
+                return setModalMessage({ title: 'Error', message: 'Error registering dish'})
+            }
+        })
+
     }
 
     //fetch category
@@ -78,6 +117,10 @@ export function New() {
             <main className='content'>
                 <ButtonText to="/" title="Back" />
                 <Title title="New Dish" />
+                 {/* if there is a error message, show it */}
+                 {errorMessage !== '' && (
+                    <ValidationMessage message={errorMessage} />
+                )}
                 <Form>
                     <div className="line">
                         <Input
@@ -135,10 +178,10 @@ export function New() {
                         </TagContainer>
                         <Input
                             type="number"
-                            label="Price"
+                            label="Price (€)"
                             bound="price"
                             placeholder="€ 00,00"
-                            onChange={(e) => setPrice(e.target.value)}
+                            onChange={handlePrice}
                         />
                     </div>
                     <Textarea
@@ -155,6 +198,7 @@ export function New() {
 
             
         <Footer />
+        <ModalMessage title={modalMessage.title} message={modalMessage.message} navigation={modalMessage.navigate} />
         </Container>
     )
 }
