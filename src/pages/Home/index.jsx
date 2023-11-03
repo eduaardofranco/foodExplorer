@@ -3,10 +3,12 @@ import { Container, Banner } from './styles'
 import { Footer } from '../../components/Footer'
 import { DishSlider } from '../../components/DishSlider'
 import { Menu } from '../../components/Menu'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { api } from '../../services/api'
 
 export function Home() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [dishes, setDishes] = useState([])
   const categories = [
     {
       category: 'Meals',
@@ -77,6 +79,17 @@ export function Home() {
     // Add more categories with their respective dishes
   ];
 
+  console.log(dishes)
+
+useEffect(() => {
+  async function fetchDishes() {
+    const dishesData = await api.get('/dishes?name&ingredients')
+    setDishes(dishesData.data)
+  }
+  
+  fetchDishes()
+}, [])
+
   return(
     <Container>
       <Menu
@@ -89,9 +102,9 @@ export function Home() {
           <Banner>
             <img src="https://placehold.co/1920x300" alt="Banner" />
           </Banner>
-          {categories.map((category, index) => (
-             <div key={index}>
-                <DishSlider dishes={category.dishes} sectionName={category.category} />
+          {dishes && dishes.map((dish, index) => (
+             <div key={String(index)}>
+                <DishSlider dishes={dish} sectionName={''} />
             </div>
          ))}
         </div>
