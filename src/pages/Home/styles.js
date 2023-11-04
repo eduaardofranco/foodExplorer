@@ -18,6 +18,9 @@ export const Container = styled.div`
     font-size: 1.8rem;
     font-weight: 500;
     margin: 2.4rem 0;
+    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+        font-size: 3rem;
+    }
 }      
 
 `;
@@ -26,10 +29,5 @@ export const Banner = styled.div`
     margin: 1.6rem 1.6rem 2rem 0;
     img {
         width: 100%;
-    }
-    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
-        .subtitle {
-            font-size: 3.2rem;
-        }
     }
 `;

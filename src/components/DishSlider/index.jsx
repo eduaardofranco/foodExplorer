@@ -6,7 +6,7 @@ import { DishCard } from '../DishCard';
 import './styles.css'
 
 
-export function DishSlider({ sectionName, dishes, isAdmin }) {
+export function DishSlider({ dishes, isAdmin }) {
   const settings = {
     dots: false,
     infinite: false,
@@ -29,14 +29,14 @@ export function DishSlider({ sectionName, dishes, isAdmin }) {
 
   return (
     <div>
-      <h2 className="subtitle">{sectionName}</h2>
       <Slider {...settings}>
         {dishes.map((dish, index) => (
           <DishCard
-            key={index}
-            img={dish.img}
+            key={String(index)}
+            img={dish.image}
             name={dish.name}
             price={dish.price}
+            description={dish.description}
             isFavourite={dish.isFavourite}
             isAdmin={dish.user}
           />
