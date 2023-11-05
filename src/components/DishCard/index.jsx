@@ -20,7 +20,7 @@ export function DishCard({ img, name, description, price, isFavourite, isAdmin})
             <Description>
                 {description}
             </Description>
-            <Price>{price}</Price>
+            <Price>€{price}</Price>
             <Finalize>
                 {isAdmin ? '' : <Quantity />}
                 {isAdmin ? '' : <Button title="add" />}

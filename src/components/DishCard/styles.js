@@ -14,6 +14,7 @@ export const Container = styled.div`
 
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -107,6 +108,7 @@ export const Img = styled.figure`
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
     width: 8.8rem;
     height: 8.8rem;
 

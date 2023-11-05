@@ -108,7 +108,7 @@ useEffect(() => {
           {
             mainDishes.length !== 0 && (
               <div>
-                <h2 className="subtitle">Startes Dishes</h2>
+                <h2 className="subtitle">Startes</h2>
                 <div>
                     <DishSlider dishes={starterDishes} />
                 </div>
