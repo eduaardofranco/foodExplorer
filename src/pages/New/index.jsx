@@ -53,8 +53,13 @@ export function New() {
         setImage(inputValue)
     }
 
+    async function handleCategory(e) {
+        setCategory(e.target.value)
+    }
+
     async function handleNewDish(e) {
         e.preventDefault()
+        console.log(category)
 
         if(!image) {
             setErrorMessage('Please, select a image');
@@ -62,6 +67,10 @@ export function New() {
         }
         if(!name) {
             setErrorMessage('Name is required');
+            return
+        }
+        if(!category) {
+            setErrorMessage('Category is required');
             return
         }
         if(ingredients.length == 0) {
@@ -142,8 +151,9 @@ export function New() {
                             placeholder="Select dish Category"
                             label="Category"
                             bound="category"
-                            onChange={(e) => setCategory(e.target.value)}
+                            onChange={handleCategory}
                         >
+                            <option>Select dish Category</option>
                             {
                                 categoryList && categoryList.map(category => (
                                     <option value={category.id} key={String(category.id)}> {category.name} </option>
