@@ -48,9 +48,9 @@ export function New() {
     }
 
     function handleImg(e) {
-        const inputValue = e.target.value
-        setLabelName(inputValue)
-        setImage(inputValue)
+        const inputValue = e.target.files[0]
+        setLabelName(inputValue.name)
+        setImage(inputValue.name)
     }
 
     async function handleCategory(e) {
