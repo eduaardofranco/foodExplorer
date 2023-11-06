@@ -26,6 +26,11 @@ export const Container = styled.div`
 
     h3 {
         margin: 1.2rem 0;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 90%;
     }
     svg {
         color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};

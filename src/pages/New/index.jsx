@@ -43,7 +43,7 @@ export function New() {
         // Ensure the entered value is a valid number before formatting
         const newValue = parseFloat(e.target.value);
         if (!isNaN(newValue)) {
-        setPrice(newValue.toFixed(2)); // Format to two decimal places
+            setPrice(newValue.toFixed(2)); // Format to two decimal places
         }
     }
 
@@ -60,7 +60,10 @@ export function New() {
     async function handleNewDish(e) {
         e.preventDefault()
 
-        if(!image) {
+        console.log(image)
+
+        //if image is not selected, image is not an instance of File
+        if(!(image instanceof File)) {
             setErrorMessage('Please, select a image');
             return
         }
