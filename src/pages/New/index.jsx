@@ -20,7 +20,7 @@ export function New() {
     const [errorMessage, setErrorMessage] = useState('');
     const [modalMessage, setModalMessage] = useState({ message: '', title: ''})
 
-    const [image, setImage] = useState('')
+    const [image, setImage] = useState({})
     const [name, setName] =useState('')
     const [category, setCategory] = useState('')
     const [price, setPrice] = useState('')
@@ -50,7 +50,7 @@ export function New() {
     function handleImg(e) {
         const inputValue = e.target.files[0]
         setLabelName(inputValue.name)
-        setImage(inputValue.name)
+        setImage(inputValue)
     }
 
     async function handleCategory(e) {
@@ -59,7 +59,6 @@ export function New() {
 
     async function handleNewDish(e) {
         e.preventDefault()
-        console.log(category)
 
         if(!image) {
             setErrorMessage('Please, select a image');
@@ -85,28 +84,34 @@ export function New() {
             setErrorMessage('Please, describe the dish');
             return
         }
-         //clear the message before caling it again
-        setModalMessage({ title: 'Processing', message: 'Creating user...' });
+        
+        // Create a new FormData object and append all form data fields to it
+        const formData = new FormData()
 
-        await api.post('/dishes', {
-            image,
-            name,
-            ingredients,
-            price,
-            description,
-            category
-            
-        })
+        formData.append('image', image)
+        formData.append('name', name)
+        formData.append('category', category)
+        formData.append('price', price)
+        formData.append('description', description)
+
+        // Append the ingredients array as separate fields
+        ingredients.forEach((ingredient, index) => {
+            formData.append(`ingredients[${index}]`, ingredient);
+        });
+
+
+        // Send the POST request to your server
+        await api.post('/dishes', formData)
         .then(() => {
-            setModalMessage({ title: 'Sucess', message: 'Dish created!', navigate: '/'})
+            setModalMessage({ title: 'Success', message: 'Dish created!', navigate: '/' });
+
         })
-        .catch(error => {
-            if(error.response) {
-                return setModalMessage({ title: 'Error', message: error.response.data.message})
-            }
-            else {
-                return setModalMessage({ title: 'Error', message: 'Error registering dish'})
-            }
+        .catch((error) => {
+        if (error.response) {
+            return setModalMessage({ title: 'Error', message: error.response.data.message });
+        } else {
+            return setModalMessage({ title: 'Error', message: 'Error registering dish' });
+        }
         })
 
     }
@@ -130,12 +135,14 @@ export function New() {
                  {errorMessage !== '' && (
                     <ValidationMessage message={errorMessage} />
                 )}
-                <Form>
+                <Form encType="multipart/form-data">
                     <div className="line">
                         <Input
                             type="file"
                             placeholder="Select dish Image"
-                            label="Dish Image" bound="imagem"
+                            label="Dish Image"
+                            bound="imagem"
+                            name="image"
                             onChange={handleImg}>
                                 <label htmlFor='imagem'><span>{labelName}</span></label>
                         </Input>   
@@ -201,7 +208,7 @@ export function New() {
                         placeholder="Briefly talk about the dish, its ingredients and composition"
                         onChange={(e) => setDescription(e.target.value)}
                     />
-                    <Button title="Save" onClick={handleNewDish}/>
+                    <Button type="submit" title="Save" onClick={handleNewDish}/>
                 </Form>
             </main>
 
