@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { api } from "../services/api";
 import { ModalMessage } from '../components/ModalMessage'
 
-export const AuthContext = createContext({})
+export const AuthContext = createContext({ user: null, role: null })
 
 function AuthProvider( { children }) {
     const [data, setData] = useState('')
@@ -64,7 +64,8 @@ function AuthProvider( { children }) {
         <AuthContext.Provider value={{ 
             signIn,
             signOut,
-            user: data.user
+            user: data.user,
+            role: data.user?.role || 'user', // Include the user's role or set to user
         }}>
             {children}
         </AuthContext.Provider>
