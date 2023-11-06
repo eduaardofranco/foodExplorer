@@ -94,7 +94,7 @@ export function Home() {
     fetchDishes()
   }, [])
 
-  const { role } = useAuth()
+  const { role = 'user' } = useAuth()
   let isAdmin = false
   if(role === 'admin') isAdmin = true
 
@@ -111,7 +111,7 @@ export function Home() {
             <img src="https://placehold.co/1920x300" alt="Banner" />
           </Banner>
           {
-            mainDishes.length !== 0 && (
+            starterDishes.length !== 0 && (
               <div>
                 <h2 className="subtitle">Startes</h2>
                 <div>

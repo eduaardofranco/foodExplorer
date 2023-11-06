@@ -5,8 +5,18 @@ import { AiFillHeart } from 'react-icons/ai'
 import { Quantity } from '../Quantity'
 import { Button } from '../Button'
 import { PiPencilSimpleBold } from 'react-icons/pi'
+import { useState } from 'react'
 
-export function DishCard({ img, name, description, price, isFavourite, isAdmin}) {
+export function DishCard({ img, name, description, price, isFavourite, isAdmin }) {
+    const [quantity, setQuantity] = useState(1);
+    const [totalPrice, setTotalPrice] = useState(price);
+
+    const updatePrice = (newQuantity) => {
+        setQuantity(newQuantity);
+        setTotalPrice(price * newQuantity);
+      };
+
+
     return(
         <Container>
             <Favourite>
@@ -20,9 +30,12 @@ export function DishCard({ img, name, description, price, isFavourite, isAdmin})
             <Description>
                 {description}
             </Description>
-            <Price>€{price}</Price>
+            <Price>€{totalPrice}</Price>
             <Finalize>
-                {isAdmin ? '' : <Quantity />}
+                {isAdmin ? '' : <Quantity
+                    quantity={quantity}
+                    updatePrice={updatePrice}
+                />}
                 {isAdmin ? '' : <Button title="add" />}
             </Finalize>
         </Container>

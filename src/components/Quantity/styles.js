@@ -26,7 +26,9 @@ export const Container = styled.div`
         }
         span {
             font-size: ${({ isbig }) => (isbig ? '2.3rem' : '1.6rem')};
-            margin: 0 1.4rem
+            margin: 0 1.4rem;
+            text-align: center;
+            width: 2rem;
         }
     }
     @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
