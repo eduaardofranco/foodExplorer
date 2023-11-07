@@ -3,16 +3,16 @@ import { IoMdRemove } from 'react-icons/io'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { useState } from 'react'
 
-export function Quantity({ isbig, quantity, updatePrice, ...rest }) {
+export function Quantity({ isbig, ...rest }) {
+
+    const [quantity, setQuantity] = useState(1)
 
     function increment() {
-        if(updatePrice) {
-            updatePrice(quantity + 1);
-        }
+        setQuantity(quantity + 1);
     }
     function decrement() {
-        if(quantity > 1 && updatePrice) {
-            updatePrice(quantity - 1);
+        if(quantity > 1) {
+            setQuantity(quantity - 1);
         }
     }
     return(

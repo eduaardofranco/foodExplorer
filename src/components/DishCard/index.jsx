@@ -8,13 +8,7 @@ import { PiPencilSimpleBold } from 'react-icons/pi'
 import { useState } from 'react'
 
 export function DishCard({ img, name, description, price, isFavourite, isAdmin, onClick }) {
-    const [quantity, setQuantity] = useState(1);
     const [totalPrice, setTotalPrice] = useState(price);
-
-    const updatePrice = (newQuantity) => {
-        setQuantity(newQuantity);
-        setTotalPrice(price * newQuantity);
-      };
 
 
     return(
@@ -36,8 +30,6 @@ export function DishCard({ img, name, description, price, isFavourite, isAdmin, 
             </a>
             <Finalize>
                 {isAdmin ? '' : <Quantity
-                    quantity={quantity}
-                    updatePrice={updatePrice}
                 />}
                 {isAdmin ? '' : <Button title="add" />}
             </Finalize>
