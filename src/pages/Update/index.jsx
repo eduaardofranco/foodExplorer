@@ -8,12 +8,18 @@ import { Select } from '../../components/Select'
 import { Textarea } from '../../components/Textarea'
 import { Button } from '../../components/Button'
 import { AddIngredient } from '../../components/AddIngredient'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { api } from '../../services/api'
+import { useParams } from 'react-router-dom'
 
 export function Update() {
     const [tags, setTags] = useState([])
     const [newTag, setNewTag] = useState()
     const [labelName, setLabelName] = useState('Update dish Image')
+    const [categoryList, setCategoryList] = useState([])
+    const [data, setData] = useState(null)
+
+    const params = useParams()
 
     function handleAddTag() {
         if(newTag) {
@@ -26,62 +32,94 @@ export function Update() {
         setTags(prevState => prevState.filter((tag, index) => index !== deleted))
 
     }
+    //fetch category
+    useEffect(() => {
+        async function fetchCategory() {
+            const categoryResponse =  await api.get('/category')
+            setCategoryList(categoryResponse.data)
 
-    const options = [
-        "Main Course",
-        "Starter",
-        "Desert",
-        "Drinks"
-    ]
+        }
+        fetchCategory()
+    }, [])
+
+    //fecth data
+    useEffect(() => {
+        async function fetchData() {
+            const response = await api.get(`/dishes/${params.id}`)
+            setData(response.data)
+        }
+        fetchData()
+
+    },[])
+
     return(
         <Container>
-            <Header isAdmin />
-            <main className='content'>
-                <ButtonText to="/" title="Back" />
-                <Title title="New Dish" />
-                <Form>
-                    <div className="line">
-                        <Input type="file" placeholder="Select dish Image" label="Dish Image" bound="imagem" onChange={(e)=> setLabelName(e.target.value)}>
-                            <label htmlFor='imagem'>{labelName}</label>
-                        </Input>   
-                        <Input type="text" placeholder="Ex: Ceasar Salad" label="Name" bound="name" />
-                        <Select type="select" placeholder="Select dish Image" label="Category" bound="category" options={options} />
-                    </div>
-                    <div className="line">
-                        <TagContainer>
-                            <label>Ingredients</label>
-                            <TagContent>
+            <Header />
+            {
+                data &&
+                <main className='content'>
+                    <ButtonText to="/" title="Back" />
+                    <Title title="New Dish" />
+                    <Form>
+                        <div className="line">
+                            <Input type="file" placeholder="Select dish Image" label="Dish Image" bound="imagem" onChange={(e)=> setLabelName(e.target.value)}>
+                                <label htmlFor='imagem'>{data.image}</label>
+                            </Input>   
+                            <Input type="text" placeholder="Ex: Ceasar Salad" label="Name" bound="name" value={data.name} />
+                            <Select
+                                type="select"
+                                placeholder="Select dish Image"
+                                label="Category"
+                                bound="category"
+                            >
                                 {
-                                    tags.map((tag, index) => (
-                                        <AddIngredient
-                                            value={tag}
-                                            key={String(index)}
-                                            onClick={() => handleRemoveTag(index)}
-                                        />
-
+                                    categoryList && categoryList.map(category => (
+                                        <option
+                                            value={category.id}
+                                            key={String(category.id)}
+                                            >
+                                            {category.name}
+                                        </option>
                                     ))
-
                                 }
+                            </Select>
+                        </div>
+                        <div className="line">
+                            <TagContainer>
+                                <label>Ingredients</label>
+                                <TagContent>
+                                    {
+                                        data.ingredients.map((ingredient, index) => (
+                                            <AddIngredient
+                                                value={ingredient.name}
+                                                key={String(index)}
+                                                onClick={() => handleRemoveTag(index)}
+                                            />
 
-                                <AddIngredient
-                                    placeholder="Add"
-                                    isNew
-                                    onChange={e => setNewTag(e.target.value)}
-                                    value={newTag}
-                                    onClick={handleAddTag}
-                                />
-                            </TagContent>
-                        </TagContainer>
-                        <Input type="number" label="Price" bound="price" placeholder="€ 00,00" />
-                    </div>
-                    <Textarea type="text" label="Description" bound="description" placeholder="Briefly talk about the dish, its ingredients and composition" />
-                    <div className="finalize">
-                        <Button className="delete" title="Delete" />
-                        <Button title="Save" />
+                                        ))
 
-                    </div>
-                </Form>
-            </main>
+                                    }
+
+                                    <AddIngredient
+                                        placeholder="Add"
+                                        isNew
+                                        onChange={e => setNewTag(e.target.value)}
+                                        value={newTag}
+                                        onClick={handleAddTag}
+                                    />
+                                </TagContent>
+                            </TagContainer>
+                            <Input type="number" label="Price" bound="price" placeholder="€ 00,00" value={data.price} />
+                        </div>
+                        <Textarea type="text" label="Description" bound="description" placeholder="Briefly talk about the dish, its ingredients and composition" value={data.description} />
+                        <div className="finalize">
+                            <Button className="delete" title="Delete" />
+                            <Button title="Save" />
+
+                        </div>
+                    </Form>
+                </main>
+            }
 
 
             

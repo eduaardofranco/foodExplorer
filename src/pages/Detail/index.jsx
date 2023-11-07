@@ -1,5 +1,5 @@
 import { Container, Infos, Finalize, Ingredients, Description, Img } from './styles.js'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { Header } from '../../components/Header'
 import { ButtonText } from '../../components/ButtonText'
 import { Quantity } from '../../components/Quantity'
@@ -19,11 +19,16 @@ export function Detail() {
     const imageUrl = `${api.defaults.baseURL}/files/`
 
     const params = useParams()
+    const navigate = useNavigate()
 
     //verify is is admin, default comes false
     const { role = 'user' } = useAuth()
     let isAdmin = false
     if(role === 'admin') isAdmin = true
+
+    function handleUpdate(id) {
+        navigate(`/update/${id}`)
+    }
 
     useEffect(() => {
         async function fetchDish() {
@@ -71,7 +76,7 @@ export function Detail() {
                                 </ Ingredients>
                                 <Finalize>
                                     {isAdmin ? '' : <Quantity isbig={true} />}
-                                    {isAdmin ? <Button className="add-edit" title="Edit" /> : <Button className="add" title="Add" icon={PiReceipt} />}
+                                    {isAdmin ? <Button className="add-edit" title="Edit" onClick={() => handleUpdate(data.id)} /> : <Button className="add" title="Add" icon={PiReceipt} />}
                                 </ Finalize>
                             </Infos>
                         </div>
