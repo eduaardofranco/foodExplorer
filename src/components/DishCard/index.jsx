@@ -30,7 +30,7 @@ export function DishCard({ img, name, description, price, isFavourite, isAdmin }
             <Description>
                 {description}
             </Description>
-            <Price>€{totalPrice}</Price>
+            <Price>€{totalPrice.toFixed(2)}</Price>
             <Finalize>
                 {isAdmin ? '' : <Quantity
                     quantity={quantity}
