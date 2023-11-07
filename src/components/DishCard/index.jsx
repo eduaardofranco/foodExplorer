@@ -7,7 +7,7 @@ import { Button } from '../Button'
 import { PiPencilSimpleBold } from 'react-icons/pi'
 import { useState } from 'react'
 
-export function DishCard({ img, name, description, price, isFavourite, isAdmin }) {
+export function DishCard({ img, name, description, price, isFavourite, isAdmin, onClick }) {
     const [quantity, setQuantity] = useState(1);
     const [totalPrice, setTotalPrice] = useState(price);
 
@@ -22,15 +22,18 @@ export function DishCard({ img, name, description, price, isFavourite, isAdmin }
             <Favourite>
                 {isAdmin ? <PiPencilSimpleBold /> : (isFavourite ? <AiFillHeart /> : <BsHeart />)}
             </Favourite>
-            <Img>
-                <img src={img} alt={name} />
+            <a href="#" onClick={onClick}>
+                <Img>
+                    <img src={img} alt={name} />
 
-            </Img>
-            <h3>{name}</h3>
-            <Description>
-                {description}
-            </Description>
-            <Price>€{totalPrice.toFixed(2)}</Price>
+                </Img>
+                <h3>{name}</h3>
+                <Description>
+                    {description}
+                </Description>
+                <Price>€{totalPrice.toFixed(2)}</Price>
+
+            </a>
             <Finalize>
                 {isAdmin ? '' : <Quantity
                     quantity={quantity}

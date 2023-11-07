@@ -23,6 +23,11 @@ export const Container = styled.div`
             transform: scale(1.1);
         }
     }
+    a {
+        color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};
+        text-decoration: none;
+        text-align: center;
+    }
 
     h3 {
         margin: 1.2rem 0;

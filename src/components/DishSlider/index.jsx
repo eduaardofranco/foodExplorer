@@ -5,10 +5,18 @@ import 'slick-carousel/slick/slick-theme.css';
 import { DishCard } from '../DishCard';
 import './styles.css'
 import { api } from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 
 export function DishSlider({ dishes, isAdmin }) {
   const imageUrl = `${api.defaults.baseURL}/files/`
+
+  const navigate = useNavigate()
+
+  function handleDetail(event, id) {
+    event.preventDefault()
+    navigate(`/detail/${id}`)
+  }
 
   const settings = {
     dots: false,
@@ -42,6 +50,7 @@ export function DishSlider({ dishes, isAdmin }) {
             description={dish.description}
             isFavourite={dish.isFavourite}
             isAdmin={isAdmin}
+            onClick={(event) => handleDetail(event, dish.id)}
           />
         ))}
       </Slider>

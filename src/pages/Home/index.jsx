@@ -10,80 +10,12 @@ import { useAuth } from '../../hooks/auth'
 export function Home() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [dishes, setDishes] = useState([])
-  const categories = [
-    {
-      category: 'Meals',
-      dishes: [
-        {
-          img: '/src/assets/dish.png',
-          name: 'Salada Ravanello 1',
-          price: 'R$ 59,99',
-          isFavourite: false,
-        },
-        {
-          img: '/src/assets/dish.png',
-          name: 'Salada Ravanello 2',
-          price: 'R$ 59,99',
-          isFavourite: false,
-        },
-        {
-          img: '/src/assets/dish.png',
-          name: 'Salada Ravanello 3',
-          price: 'R$ 59,99',
-          isFavourite: false,
-        },
-        {
-          img: '/src/assets/dish.png',
-          name: 'Salada Ravanello 4',
-          price: 'R$ 59,99',
-          isFavourite: false,
-        },
-        {
-          img: '/src/assets/dish.png',
-          name: 'Salada Ravanello 5',
-          price: 'R$ 59,99',
-          isFavourite: false,
-        },
-        {
-          img: '/src/assets/dish.png',
-          name: 'Salada Ravanello 6',
-          price: 'R$ 59,99',
-          isFavourite: false,
-        }
-
-      ],
-    },
-    {
-      category: 'Main Dishes',
-      dishes: [
-        {
-          img: 'https://placehold.co/400x330',
-          name: 'Spaguetti Gambe 1',
-          price: 'R$ 49,99',
-          isFavourite: true,
-        },
-        {
-          img: '/src/assets/spagueti.png',
-          name: 'Spaguetti Gambe 2',
-          price: 'R$ 49,99',
-          isFavourite: true,
-        },
-        {
-          img: '/src/assets/spagueti.png',
-          name: 'Spaguetti Gambe 3',
-          price: 'R$ 49,99',
-          isFavourite: true,
-        }
-
-      ],
-    },
-    // Add more categories with their respective dishes
-  ];
 
   const starterDishes = dishes.filter(dish => dish.category_id === 1)
   const mainDishes = dishes.filter(dish => dish.category_id === 2)
   const drinksDishes = dishes.filter(dish => dish.category_id === 3)
   const desertDishes = dishes.filter(dish => dish.category_id === 4)
+
 
   useEffect(() => {
     async function fetchDishes() {
