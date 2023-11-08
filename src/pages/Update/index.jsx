@@ -81,7 +81,10 @@ export function Update() {
 
     //remove ingredient
     function handleRemoveIngredient(deleted) {
-        setIngredients(prevState => prevState.filter((ingredient, index) => index !== deleted))
+        setInputValues(prevInputValues => ({
+            ...prevInputValues,
+            ingredients:    prevInputValues.ingredients.filter((ingredient, index) => index !== deleted)
+        }))
 
     }
     //fetch category
@@ -128,7 +131,10 @@ export function Update() {
                                 label="Category"
                                 bound="category"
                                 value={inputValues.category}
-                                onChange={(e) => setCategory(e.target.value)}
+                                onChange={(e) => setInputValues({
+                                    ...inputValues,
+                                    category: e.target.value
+                                })}
                             >
                                 {
                                     categoryList && categoryList.map(category => (
