@@ -28,12 +28,13 @@ export function Update() {
     })
     
     const params = useParams()
+    const dish_id = params.id
 
      //fecth dish
      useEffect(() => {
         async function fetchDish() {
             try {
-                const response = await api.get(`/dishes/${params.id}`);
+                const response = await api.get(`/dishes/${dish_id}`);
                 const dish = response.data;
                 setData(dish)
 
@@ -41,6 +42,7 @@ export function Update() {
                 setInputValues({
                     name: dish.name,
                     category: dish.category_id,
+                    image: dish.image,
                     labelName: dish.image,
                     price: dish.price,
                     description: dish.description,
@@ -64,8 +66,11 @@ export function Update() {
     //handle img, change label name when new image
     function handleImg(e) {
         const inputValue = e.target.files[0]
-        setLabelName(inputValue.name)
-        setImage(inputValue)
+        setInputValues({
+            ...inputValues,
+            image: inputValue,
+            labelName: inputValue.name
+        })
     }
 
     // add ingredient
@@ -83,10 +88,35 @@ export function Update() {
     function handleRemoveIngredient(deleted) {
         setInputValues(prevInputValues => ({
             ...prevInputValues,
-            ingredients:    prevInputValues.ingredients.filter((ingredient, index) => index !== deleted)
+            ingredients: prevInputValues.ingredients.filter((ingredient, index) => index !== deleted)
         }))
 
     }
+
+    //post update
+    async function handleUpdate() {
+        try{
+            await api.patch('dishes')
+            .where({ dish_id })
+            .update({
+                image: inputValues.image,
+                name: inputValues.name,
+                category_id: inputValues.category,
+                ingredients: inputValues.ingredients,
+                price: inputValues.price,
+                description: inputValues.description
+            })
+
+        } catch(error) {
+            if(error) {
+                console.log('Error: ' +error.message)
+            } else {
+                console.log('Error: Failed to update')
+            }
+        }
+    }
+
+
     //fetch category
     useEffect(() => {
         async function fetchCategory() {
@@ -192,7 +222,7 @@ export function Update() {
                             />
                         <div className="finalize">
                             <Button className="delete" title="Delete" />
-                            <Button title="Save" />
+                            <Button title="Save" onClick={handleUpdate} />
 
                         </div>
                     </Form>
