@@ -13,18 +13,22 @@ import { api } from '../../services/api'
 import { useParams } from 'react-router-dom'
 
 export function Update() {
-    const[image, setImage] = useState(null)
-    const[name, setName] = useState(null)
-    const[category, setCategory] = useState(null)
-    const[price, setPrice] = useState(null)
-    const[description, setDescription] = useState(null)
 
     const [data, setData] = useState(null)
-    const [tags, setTags] = useState([])
-    const [newTag, setNewTag] = useState()
-    const [labelName, setLabelName] = useState('Update dish Image')
+    const [newIngredient, setNewIngredient] = useState()
     const [categoryList, setCategoryList] = useState([])
+
+    const [inputValues, setInputValues] = useState({
+        name: '',
+        ingredients: [],
+        labelName: '',
+        category: 0,
+        price: 0,
+        description: ''
+    })
     
+    const params = useParams()
+
      //fecth dish
      useEffect(() => {
         async function fetchDish() {
@@ -34,11 +38,14 @@ export function Update() {
                 setData(dish)
 
                 //set the variables with dish data
-                setLabelName(dish.image)
-                setCategory(dish.category_id)
-                setName(dish.name)
-                setPrice(dish.price)
-                setDescription(dish.description)
+                setInputValues({
+                    name: dish.name,
+                    category: dish.category_id,
+                    labelName: dish.image,
+                    price: dish.price,
+                    description: dish.description,
+                    ingredients: dish.ingredients.map(ingredient => ingredient.name)
+                })
             
             } catch (error) {
                 if (error.response && error.response.data) {
@@ -54,20 +61,27 @@ export function Update() {
 
     },[])
 
-    
+    //handle img, change label name when new image
+    function handleImg(e) {
+        const inputValue = e.target.files[0]
+        setLabelName(inputValue.name)
+        setImage(inputValue)
+    }
 
-
-    const params = useParams()
-
-    function handleAddTag() {
-        if(newTag) {
-            setTags( prevState => [...prevState, newTag])
-            setNewTag('')
+    // add ingredient
+    function handleAddIngredient() {
+        if (newIngredient) {
+            setInputValues(prevInputValues => ({
+                ...prevInputValues,
+                ingredients: [...prevInputValues.ingredients, newIngredient],
+            }));
+            setNewIngredient('');
         }
     }
 
-    function handleRemoveTag(deleted) {
-        setTags(prevState => prevState.filter((tag, index) => index !== deleted))
+    //remove ingredient
+    function handleRemoveIngredient(deleted) {
+        setIngredients(prevState => prevState.filter((ingredient, index) => index !== deleted))
 
     }
     //fetch category
@@ -96,16 +110,16 @@ export function Update() {
                                 placeholder="Select dish Image"
                                 label="Dish Image"
                                 bound="imagem"
-                                onChange={(e)=> setLabelName(e.target.value)}
+                                onChange={handleImg}
                                 >
-                                <label htmlFor='imagem'>{labelName}</label>
+                                <label htmlFor='imagem'>{inputValues.labelName}</label>
                             </Input>   
                             <Input 
                                 type="text" 
                                 placeholder="Ex: Ceasar Salad" 
                                 label="Name"
                                 bound="name"
-                                value={name}
+                                value={inputValues.name}
                                 onChange={(e)=> setName(e.target.value)}
                             />
                             <Select
@@ -113,7 +127,7 @@ export function Update() {
                                 placeholder="Select dish Image"
                                 label="Category"
                                 bound="category"
-                                value={category}
+                                value={inputValues.category}
                                 onChange={(e) => setCategory(e.target.value)}
                             >
                                 {
@@ -133,11 +147,11 @@ export function Update() {
                                 <label>Ingredients</label>
                                 <TagContent>
                                     {
-                                        data.ingredients.map((ingredient, index) => (
+                                        inputValues.ingredients.map((ingredient, index) => (
                                             <AddIngredient
-                                                value={ingredient.name}
+                                                value={ingredient}
                                                 key={String(index)}
-                                                onClick={() => handleRemoveTag(index)}
+                                                onClick={() => handleRemoveIngredient(index)}
                                             />
 
                                         ))
@@ -147,9 +161,9 @@ export function Update() {
                                     <AddIngredient
                                         placeholder="Add"
                                         isNew
-                                        onChange={e => setNewTag(e.target.value)}
-                                        value={newTag}
-                                        onClick={handleAddTag}
+                                        onChange={e => setNewIngredient(e.target.value)}
+                                        value={newIngredient}
+                                        onClick={handleAddIngredient}
                                     />
                                 </TagContent>
                             </TagContainer>
@@ -158,7 +172,7 @@ export function Update() {
                                 label="Price"
                                 bound="price"
                                 placeholder="€ 00,00"
-                                value={price}
+                                value={inputValues.price}
                                 onChange={(e) => setPrice(e.target.value)}
                                 />
                         </div>
@@ -167,7 +181,7 @@ export function Update() {
                             label="Description"
                             bound="description"
                             placeholder="Briefly talk about the dish, its ingredients and composition"
-                            value={description}
+                            value={inputValues.description}
                             onChange={(e) => setDescription(e.target.value)}
                             />
                         <div className="finalize">
