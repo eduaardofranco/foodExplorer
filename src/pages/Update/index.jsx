@@ -11,12 +11,15 @@ import { AddIngredient } from '../../components/AddIngredient'
 import { useState, useEffect } from 'react'
 import { api } from '../../services/api'
 import { useParams } from 'react-router-dom'
+import { ModalMessage } from '../../components/ModalMessage'
 
 export function Update() {
 
     const [data, setData] = useState(null)
     const [newIngredient, setNewIngredient] = useState()
     const [categoryList, setCategoryList] = useState([])
+
+    const [modalMessage, setModalMessage] = useState({ message: '', title: ''})
 
     const [inputValues, setInputValues] = useState({
         name: '',
@@ -63,6 +66,15 @@ export function Update() {
 
     },[])
 
+    const dishUpdated = {
+        image: inputValues.image,
+        name: inputValues.name,
+        category_id: inputValues.category,
+        ingredients: inputValues.ingredients,
+        price: inputValues.price,
+        description: inputValues.description
+    }
+
     //handle img, change label name when new image
     function handleImg(e) {
         const inputValue = e.target.files[0]
@@ -93,26 +105,29 @@ export function Update() {
 
     }
 
-    //post update
-    async function handleUpdate() {
-        try{
-            await api.patch('dishes')
-            .where({ dish_id })
-            .update({
-                image: inputValues.image,
-                name: inputValues.name,
-                category_id: inputValues.category,
-                ingredients: inputValues.ingredients,
-                price: inputValues.price,
-                description: inputValues.description
-            })
+    // update
+    async function handleUpdate(e) {
+        e.preventDefault()
+        setModalMessage('')
 
-        } catch(error) {
-            if(error) {
-                console.log('Error: ' +error.message)
+        if(!dish_id) {
+            console.log('Dish not found')
+            return
+        }
+        try{
+
+            const response = await api.patch(`dishes/update/${dish_id}` ,dishUpdated)    
+            // Check if the update was successful based on the response status
+            if (response.status === 200) {
+                console.log('Dish updated successfully');
+                setModalMessage({ title: 'Sucess!', message: 'Dish Updated!', navigate: '/'})
             } else {
-                console.log('Error: Failed to update')
+                console.log('Error: Failed to update -', response.data.message);
+                setModalMessage({ title: 'Failed to update!', message: response.data.message})
             }
+        } catch (error) {
+            console.error('Error updating dish:', error.message);
+            setModalMessage({ title: 'Error updating dish', message: error.message})
         }
     }
 
@@ -153,7 +168,10 @@ export function Update() {
                                 label="Name"
                                 bound="name"
                                 value={inputValues.name}
-                                onChange={(e)=> setName(e.target.value)}
+                                onChange={(e) => setInputValues({
+                                    ...inputValues,
+                                    name: e.target.value
+                                })}
                             />
                             <Select
                                 type="select"
@@ -209,7 +227,10 @@ export function Update() {
                                 bound="price"
                                 placeholder="€ 00,00"
                                 value={inputValues.price}
-                                onChange={(e) => setPrice(e.target.value)}
+                                onChange={(e) => setInputValues({
+                                    ...inputValues,
+                                    price: e.target.value
+                                })}
                                 />
                         </div>
                         <Textarea
@@ -218,7 +239,10 @@ export function Update() {
                             bound="description"
                             placeholder="Briefly talk about the dish, its ingredients and composition"
                             value={inputValues.description}
-                            onChange={(e) => setDescription(e.target.value)}
+                            onChange={(e) => setInputValues({
+                                ...inputValues,
+                                description: e.target.value
+                            })}
                             />
                         <div className="finalize">
                             <Button className="delete" title="Delete" />
@@ -232,6 +256,7 @@ export function Update() {
 
             
         <Footer />
+        <ModalMessage title={modalMessage.title} message={modalMessage.message} navigation={modalMessage.navigate} />
         </Container>
     )
 }
