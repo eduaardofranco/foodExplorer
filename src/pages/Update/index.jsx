@@ -114,9 +114,15 @@ export function Update() {
             console.log('Dish not found')
             return
         }
+        const formData = new FormData();
+
+        // Append all fields from the state object to FormData
+        Object.entries(dishUpdated).forEach(([key, value]) => {
+            formData.append(key, value);
+        });
         try{
 
-            const response = await api.patch(`dishes/update/${dish_id}` ,dishUpdated)    
+            const response = await api.patch(`dishes/update/${dish_id}` ,formData)    
             // Check if the update was successful based on the response status
             if (response.status === 200) {
                 console.log('Dish updated successfully');

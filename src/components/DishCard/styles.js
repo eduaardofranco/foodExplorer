@@ -12,11 +12,7 @@ export const Container = styled.div`
     margin-right: 1.6rem;
     width: 21rem;
 
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    
 
     &:hover {
         img {
@@ -27,6 +23,12 @@ export const Container = styled.div`
         color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};
         text-decoration: none;
         text-align: center;
+        
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     h3 {
@@ -51,6 +53,7 @@ export const Container = styled.div`
         h3 {
             font-size: 2.4rem;
             margin: 1.5rem 0;
+            height: 3rem;
         }
     }
 `;
