@@ -77,13 +77,14 @@ export function Update() {
 
     //handle img, change label name when new image
     function handleImg(e) {
-        const inputValue = e.target.files[0]
-        setInputValues({
-            ...inputValues,
-            image: inputValue,
-            labelName: inputValue.name
-        })
+        const imageFile = e.target.files[0]
+        setInputValues((prevInputValues) => ({
+            ...prevInputValues,
+            image: imageFile,
+            labelName: imageFile.name
+        }))
     }
+
 
     // add ingredient
     function handleAddIngredient() {
@@ -116,13 +117,15 @@ export function Update() {
         }
         const formData = new FormData();
 
-        // Append all fields from the state object to FormData
+        //Append all fields from the state object to FormData
         Object.entries(dishUpdated).forEach(([key, value]) => {
             formData.append(key, value);
         });
+
         try{
 
             const response = await api.patch(`dishes/update/${dish_id}` ,formData)    
+            
             // Check if the update was successful based on the response status
             if (response.status === 200) {
                 console.log('Dish updated successfully');
@@ -157,7 +160,7 @@ export function Update() {
                 <main className='content'>
                     <ButtonText to="/" title="Back" />
                     <Title title="New Dish" />
-                    <Form>
+                    <Form encType="multipart/form-data">
                         <div className="line">
                             <Input
                                 type="file"
