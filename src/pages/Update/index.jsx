@@ -18,14 +18,15 @@ export function Update() {
     const [data, setData] = useState(null)
     const [newIngredient, setNewIngredient] = useState()
     const [categoryList, setCategoryList] = useState([])
+    const [imageLabelName, setImageLabelName] = useState('')
 
     const [modalMessage, setModalMessage] = useState({ message: '', title: ''})
 
     const [inputValues, setInputValues] = useState({
         name: '',
         ingredients: [],
-        labelName: '',
-        category: 0,
+        image: '',
+        category_id: 0,
         price: 0,
         description: ''
     })
@@ -44,13 +45,13 @@ export function Update() {
                 //set the variables with dish data
                 setInputValues({
                     name: dish.name,
-                    category: dish.category_id,
+                    category_id: dish.category_id,
                     image: dish.image,
-                    labelName: dish.image,
                     price: dish.price,
                     description: dish.description,
                     ingredients: dish.ingredients.map(ingredient => ingredient.name)
                 })
+                setImageLabelName(dish.image)
             
             } catch (error) {
                 if (error.response && error.response.data) {
@@ -66,23 +67,21 @@ export function Update() {
 
     },[])
 
-    const dishUpdated = {
-        image: inputValues.image,
-        name: inputValues.name,
-        category_id: inputValues.category,
-        ingredients: inputValues.ingredients,
-        price: inputValues.price,
-        description: inputValues.description
-    }
-
     //handle img, change label name when new image
     function handleImg(e) {
         const imageFile = e.target.files[0]
-        setInputValues((prevInputValues) => ({
-            ...prevInputValues,
-            image: imageFile,
-            labelName: imageFile.name
-        }))
+        if(imageFile) {
+            setInputValues((prevInputValues) => ({
+                ...prevInputValues,
+                image: imageFile,
+            }))
+            setImageLabelName(imageFile.name)
+        } else {
+            setInputValues((prevInputValues) => ({
+                ...prevInputValues,
+                image: null,
+            }))
+        }
     }
 
 
@@ -117,27 +116,65 @@ export function Update() {
         }
         const formData = new FormData();
 
+        const dishResponse = await api.get(`/dishes/${dish_id}`);
+        const dish = dishResponse.data;
+        const dishIngredientsDatabase = dish.ingredients.map(ingredient => ingredient.name)
+
+
+        const updatedDish = {}
+
+        //check if the fields were updated comparing fields with data in the database
+        if( imageLabelName !== dish.image) {
+            updatedDish['image'] = inputValues.image
+        }
+        if(inputValues.name !== dish.name) {
+            updatedDish['name'] = inputValues.name
+        }
+        if(inputValues.category_id !== dish.category_id) {
+            updatedDish['category_id'] = inputValues.category_id
+        }
+        if(JSON.stringify(inputValues.ingredients) !== JSON.stringify(dishIngredientsDatabase)) {
+            updatedDish['ingredients'] = inputValues.ingredients
+        }
+        if(inputValues.price !== dish.price) {
+            updatedDish['price'] = inputValues.price
+        }
+        if(inputValues.description !== dish.description) {
+            updatedDish['description'] = inputValues.description
+        }
+        
+
         //Append all fields from the state object to FormData
-        Object.entries(dishUpdated).forEach(([key, value]) => {
-            formData.append(key, value);
+        Object.entries(updatedDish).forEach(([key, value]) => {
+            if(key === 'ingredients') {
+                formData.append('ingredients', JSON.stringify(inputValues.ingredients))
+            } else {
+                formData.append(key, value);
+            }
         });
 
-        try{
+        //check if there is any field updated
+        if(Object.keys(updatedDish).length > 0) {
 
-            const response = await api.patch(`dishes/update/${dish_id}` ,formData)    
-            
-            // Check if the update was successful based on the response status
-            if (response.status === 200) {
-                console.log('Dish updated successfully');
-                setModalMessage({ title: 'Sucess!', message: 'Dish Updated!', navigate: '/'})
-            } else {
-                console.log('Error: Failed to update -', response.data.message);
-                setModalMessage({ title: 'Failed to update!', message: response.data.message})
+            try{
+    
+                const response = await api.patch(`dishes/update/${dish_id}` ,formData)    
+                
+                // Check if the update was successful based on the response status
+                if (response.status === 200) {
+                    console.log('Dish updated successfully');
+                    setModalMessage({ title: 'Sucess!', message: 'Dish Updated!', navigate: '/'})
+                } else {
+                    console.log('Error: Failed to update -', response.data.message);
+                    setModalMessage({ title: 'Failed to update!', message: response.data.message})
+                }
+            } catch (error) {
+                console.error('Error updating dish:', error.message);
+                setModalMessage({ title: 'Error updating dish', message: error.message})
             }
-        } catch (error) {
-            console.error('Error updating dish:', error.message);
-            setModalMessage({ title: 'Error updating dish', message: error.message})
+
         }
+
     }
 
 
@@ -169,7 +206,7 @@ export function Update() {
                                 bound="imagem"
                                 onChange={handleImg}
                                 >
-                                <label htmlFor='imagem'>{inputValues.labelName}</label>
+                                <label htmlFor='imagem'>{imageLabelName}</label>
                             </Input>   
                             <Input 
                                 type="text" 
@@ -187,10 +224,10 @@ export function Update() {
                                 placeholder="Select dish Image"
                                 label="Category"
                                 bound="category"
-                                value={inputValues.category}
+                                value={inputValues.category_id}
                                 onChange={(e) => setInputValues({
                                     ...inputValues,
-                                    category: e.target.value
+                                    category_id: e.target.value
                                 })}
                             >
                                 {
