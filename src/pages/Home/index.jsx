@@ -6,15 +6,29 @@ import { Menu } from '../../components/Menu'
 import { useState, useEffect } from 'react'
 import { api } from '../../services/api'
 import { useAuth } from '../../hooks/auth'
+import { DishCard } from '../../components/DishCard'
+// import Swiper JS
+import Swiper from 'swiper';
+// import Swiper styles
+import 'swiper/css';
+
 
 export function Home() {
+  const imageUrl = `${api.defaults.baseURL}/files/`
+
+
+  // init Swiper:  
+  const swiper = new Swiper('.swiper', {
+    // Optional parameters
+    // direction: 'vertical',
+    lidesPerView: 5,
+    loop: true
+    
+  });
+
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [dishes, setDishes] = useState([])
-
-  const starterDishes = dishes.filter(dish => dish.category_id === 1)
-  const mainDishes = dishes.filter(dish => dish.category_id === 2)
-  const drinksDishes = dishes.filter(dish => dish.category_id === 3)
-  const desertDishes = dishes.filter(dish => dish.category_id === 4)
+  const [categories, setCategories] = useState([])
 
 
   useEffect(() => {
@@ -24,6 +38,14 @@ export function Home() {
     }
     
     fetchDishes()
+  }, [])
+
+  useEffect(() => {
+    async function fetchCategories() {
+      const result = await api.get('category')
+      setCategories(result.data)
+    }
+    fetchCategories()
   }, [])
 
   const { role = 'user' } = useAuth()
@@ -42,45 +64,33 @@ export function Home() {
           <Banner>
             <img src="https://placehold.co/1920x300" alt="Banner" />
           </Banner>
-          {
-            starterDishes.length !== 0 && (
-              <div>
-                <h2 className="subtitle">Startes</h2>
-                <div>
-                    <DishSlider dishes={starterDishes} isAdmin={isAdmin} />
-                </div>
-              </div>
-            )
 
-          }
-          {
-            mainDishes.length !== 0 && (
-              <div>
-                <h2 className="subtitle">Mains</h2>
-                <div>
-                    <DishSlider dishes={mainDishes} isAdmin={isAdmin} />
-                </div>
-              </div>
-            )
-          }
-          {
-          drinksDishes.length !== 0 && (
-            <div>
-              <h2 className="subtitle">Drinks</h2>
-              <div>
-                  <DishSlider dishes={drinksDishes} isAdmin={isAdmin} />
-              </div>
-            </div>
-          )
-          }
-          {
-          desertDishes.length !== 0 && (
-            <div>
-              <h2 className="subtitle">Dessert</h2>
-              <DishSlider dishes={desertDishes} isAdmin={isAdmin} />
-            </div>
-          )
-        }
+          <div className="swiper-container">
+              {categories &&
+                categories.map((category, index) => (
+                  <>
+                  <h2 className="subtitle">{category.name}</h2>
+                  <div className="swiper-wrapper">
+                  <div key={String(index)} className="swiper-slide">
+                      {dishes &&
+                        dishes.map((dish, index) =>
+                          dish.category_id === category.id ? (
+                            <div key={String(index)} className="swiper-slide">
+                              <DishCard
+                                name={dish.name}
+                                price={dish.price}
+                                img={imageUrl + dish.image}
+                                description={dish.description}
+                              />
+                            </div>
+                          ) : null
+                        )}
+                    </div>
+                  </div>
+                  </>
+                ))}
+
+          </div>
 
         </div>
         </main>

@@ -30,4 +30,8 @@ export const Banner = styled.div`
     img {
         width: 100%;
     }
+.swiper {
+    width: 600px;
+    height: 300px;
+  }
 `;
