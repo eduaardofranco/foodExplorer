@@ -46,7 +46,16 @@ export const Container = styled.div`
         background-color: ${({ theme }) => theme.COLORS.TXT_BLUE_200};
         border: none;
         border-radius: .5rem;
+        cursor: pointer;
         margin-top: 2rem;
         padding: .5rem 2rem;
+        &+ button {
+            margin-left: 1rem;
+        }
+        &.cancel {
+            background-color: ${({ theme }) => theme.COLORS.BG_DARK_400};
+            color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};
+
+        }
     }
 `;

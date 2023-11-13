@@ -15,12 +15,15 @@ import { ModalMessage } from '../../components/ModalMessage'
 
 export function Update() {
 
+    
+    
     const [data, setData] = useState(null)
     const [newIngredient, setNewIngredient] = useState()
     const [categoryList, setCategoryList] = useState([])
     const [imageLabelName, setImageLabelName] = useState('')
-
-    const [modalMessage, setModalMessage] = useState({ message: '', title: ''})
+    
+    const [modalMessage, setModalMessage] = useState({ message: '', title: '', confirmType: false, fncConfirm: '' })
+    
 
     const [inputValues, setInputValues] = useState({
         name: '',
@@ -177,14 +180,24 @@ export function Update() {
 
     }
 
+    const resetModal = () => {
+        setModalMessage({ title: '', message: ''});
+    }
+    
     async function handleDelete(e) {
         e.preventDefault()
-        const deleteConfirm = window.confirm('Delete dish')
         
-        if(deleteConfirm) {
+        const handleConfirm = async () => {
             await api.delete(`/dishes/${params.id}`)
             navigate('/')
         }
+        setModalMessage({
+            title: 'Delete Dish',
+            message: `Delete '${inputValues.name}' ?`,
+            confirmType: true,
+            fncConfirm: handleConfirm
+        })
+
     }
 
 
@@ -316,7 +329,15 @@ export function Update() {
 
             
         <Footer />
-        <ModalMessage title={modalMessage.title} message={modalMessage.message} navigation={modalMessage.navigate} />
+        <ModalMessage
+            title={modalMessage.title}
+            message={modalMessage.message}
+            navigation={modalMessage.navigate}
+            confirmType={modalMessage.confirmType}
+            fncConfirm={modalMessage.fncConfirm}
+            onModalClose={resetModal}
+
+            />
         </Container>
     )
 }
