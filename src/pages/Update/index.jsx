@@ -10,7 +10,7 @@ import { Button } from '../../components/Button'
 import { AddIngredient } from '../../components/AddIngredient'
 import { useState, useEffect } from 'react'
 import { api } from '../../services/api'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { ModalMessage } from '../../components/ModalMessage'
 
 export function Update() {
@@ -30,7 +30,7 @@ export function Update() {
         price: 0,
         description: ''
     })
-    
+    const navigate = useNavigate()
     const params = useParams()
     const dish_id = params.id
 
@@ -105,7 +105,7 @@ export function Update() {
 
     }
 
-    // update
+    // update function
     async function handleUpdate(e) {
         e.preventDefault()
         setModalMessage('')
@@ -157,7 +157,7 @@ export function Update() {
         if(Object.keys(updatedDish).length > 0) {
 
             try{
-    
+                //patch data
                 const response = await api.patch(`dishes/update/${dish_id}` ,formData)    
                 
                 // Check if the update was successful based on the response status
@@ -175,6 +175,16 @@ export function Update() {
 
         }
 
+    }
+
+    async function handleDelete(e) {
+        e.preventDefault()
+        const deleteConfirm = window.confirm('Delete dish')
+        
+        if(deleteConfirm) {
+            await api.delete(`/dishes/${params.id}`)
+            navigate('/')
+        }
     }
 
 
@@ -291,7 +301,11 @@ export function Update() {
                             })}
                             />
                         <div className="finalize">
-                            <Button className="delete" title="Delete" />
+                            <Button
+                                className="delete"
+                                title="Delete"
+                                onClick={handleDelete}
+                                />
                             <Button title="Save" onClick={handleUpdate} />
 
                         </div>
