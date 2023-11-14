@@ -3,6 +3,9 @@ import { DEVICE_BREAKPOINTS } from '../../styles/layoutBreakpoints'
 
 
 export const Container = styled.div`
+    .swiper-slide {
+        width: auto;
+    }
     .content {
         padding-left: 2.4rem;
         @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
@@ -30,8 +33,4 @@ export const Banner = styled.div`
     img {
         width: 100%;
     }
-.swiper {
-    width: 600px;
-    height: 300px;
-  }
 `;

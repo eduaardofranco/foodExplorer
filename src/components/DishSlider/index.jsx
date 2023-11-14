@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -8,8 +8,11 @@ import { api } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 
 
-export function DishSlider({ dishes, isAdmin }) {
+export function DishSlider({ category_id, isAdmin }) {
   const imageUrl = `${api.defaults.baseURL}/files/`
+  const [categories, setCategories] = useState([])
+  const [dishes, setDishes] = useState([])
+  const [favourites, setFavourites] = useState([])
 
   const navigate = useNavigate()
 
@@ -17,6 +20,32 @@ export function DishSlider({ dishes, isAdmin }) {
     event.preventDefault()
     navigate(`/detail/${id}`)
   }
+
+  useEffect(() => {
+    async function fetchDishes() {
+      const dishesData = await api.get('/dishes?name&ingredients')
+      setDishes(dishesData.data)
+
+    }
+    
+    fetchDishes()
+  }, [])
+
+  useEffect(() => {
+    async function fetchCategories() {
+      const response = await api.get('category')
+      setCategories(response.data)
+      // console.log(response.data)
+    }
+    fetchCategories()
+  },[])
+  useEffect(() => {
+    async function fetchFavourites() {
+      const response = await api.get('favourites')
+      setFavourites(response.data)
+    }
+    fetchFavourites()
+  },[])
 
   const settings = {
     dots: false,
@@ -36,23 +65,28 @@ export function DishSlider({ dishes, isAdmin }) {
       }
     ],
   };
-  // const { dishes } = category
 
   return (
     <div>
       <Slider {...settings}>
-        {dishes.map((dish, index) => (
-          <DishCard
-            key={String(index)}
-            img={imageUrl + dish.image}
-            name={dish.name}
-            price={dish.price}
-            description={dish.description}
-            isFavourite={dish.isFavourite}
-            isAdmin={isAdmin}
-            onClick={(event) => handleDetail(event, dish.id)}
-          />
-        ))}
+        {
+          dishes && dishes.map((dish,index) => (
+            //map only dishes with category|_id equal to parameter received
+            dish.category_id === category_id ?
+            <DishCard
+              key={String(index)}
+              img={imageUrl + dish.image}
+              name={dish.name}
+              price={dish.price}
+              description={dish.description}
+              onClick={(event) => handleDetail(event, dish.id)}
+              //check if it is favourited
+              isFavourite={favourites.some((favorite) => favorite.dish_id === dish.id)}
+            />
+            : null
+          ))
+
+        }
       </Slider>
     </div>
   );
