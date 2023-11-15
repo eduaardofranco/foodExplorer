@@ -8,17 +8,18 @@ import { PiPencilSimpleBold } from 'react-icons/pi'
 import { useState } from 'react'
 import { useAuth } from '../../hooks/auth'
 
-export function DishCard({ img, name, description, price, isFavourite, onClick }) {
+export function DishCard({ img, name, description, price, isFavourite, onClick, onClickFavourite }) {
     const [totalPrice, setTotalPrice] = useState(price);
 
     const { role = 'user' } = useAuth()
     let isAdmin = false
     if(role === 'admin') isAdmin = true
 
+
     return(
         <Container>
             <Favourite>
-                {isAdmin ? <PiPencilSimpleBold /> : (isFavourite ? <AiFillHeart /> : <BsHeart />)}
+                {isAdmin ? <PiPencilSimpleBold /> : (isFavourite ? <AiFillHeart onClick={onClickFavourite} /> : <BsHeart onClick={onClickFavourite} />)}
             </Favourite>
             <a href="#" onClick={onClick}>
                 <Img>

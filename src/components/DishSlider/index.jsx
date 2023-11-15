@@ -21,6 +21,25 @@ export function DishSlider({ category_id, isAdmin }) {
     navigate(`/detail/${id}`)
   }
 
+  const handleToggleFavourite = async (event, id) => {
+    
+    try {
+      const isAlreadyFavourite = favourites.some((favorite) => favorite.dish_id === id);
+
+      if (isAlreadyFavourite) {
+        await api.delete(`/favourites/${id}`);
+      } else {
+        await api.post(`/favourites/${id}`);
+      }
+
+      const updatedResponse = await api.get('/favourites');
+      setFavourites(updatedResponse.data);
+    } catch (error) {
+      console.error('Error toggling favorite:', error);
+    }
+
+  }
+
   useEffect(() => {
     async function fetchDishes() {
       const dishesData = await api.get('/dishes?name&ingredients')
@@ -39,6 +58,7 @@ export function DishSlider({ category_id, isAdmin }) {
     }
     fetchCategories()
   },[])
+
   useEffect(() => {
     async function fetchFavourites() {
       const response = await api.get('favourites')
@@ -71,7 +91,7 @@ export function DishSlider({ category_id, isAdmin }) {
       <Slider {...settings}>
         {
           dishes && dishes.map((dish,index) => (
-            //map only dishes with category|_id equal to parameter received
+            //map only dishes with category_id equal to parameter received
             dish.category_id === category_id ?
             <DishCard
               key={String(index)}
@@ -82,6 +102,7 @@ export function DishSlider({ category_id, isAdmin }) {
               onClick={(event) => handleDetail(event, dish.id)}
               //check if it is favourited
               isFavourite={favourites.some((favorite) => favorite.dish_id === dish.id)}
+              onClickFavourite={(event) => handleToggleFavourite(event, dish.id)}
             />
             : null
           ))
