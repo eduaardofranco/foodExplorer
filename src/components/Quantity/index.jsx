@@ -2,10 +2,15 @@ import { Container } from './styles'
 import { IoMdRemove } from 'react-icons/io'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { useState } from 'react'
+import { useCart } from '../../hooks/cart'
 
 export function Quantity({ isbig, ...rest }) {
 
+    const { cartItemCount, addToCart, removeFromCart } = useCart()
+
     const [quantity, setQuantity] = useState(1)
+
+    console.log(cartItemCount)
 
     function increment() {
         setQuantity(quantity + 1);
