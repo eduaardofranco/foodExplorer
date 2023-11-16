@@ -94,6 +94,7 @@ export function DishSlider({ category_id, isAdmin }) {
             //map only dishes with category_id equal to parameter received
             dish.category_id === category_id ?
             <DishCard
+              id={dish.id}
               key={String(index)}
               img={imageUrl + dish.image}
               name={dish.name}

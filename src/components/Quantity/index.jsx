@@ -6,11 +6,7 @@ import { useCart } from '../../hooks/cart'
 
 export function Quantity({ isbig, ...rest }) {
 
-    const { cartItemCount, addToCart, removeFromCart } = useCart()
-
     const [quantity, setQuantity] = useState(1)
-
-    console.log(cartItemCount)
 
     function increment() {
         setQuantity(quantity + 1);

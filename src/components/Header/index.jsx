@@ -8,6 +8,7 @@ import { Button } from '../Button'
 import { FiLogOut } from 'react-icons/fi'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
+import { useCart } from '../../hooks/cart'
 
 export function Header({ onOpenMenu }) {
     const [isMenuOpen, setMenuOpen] = useState(false);
@@ -15,6 +16,10 @@ export function Header({ onOpenMenu }) {
     const navigate = useNavigate()
 
     const { signOut } = useAuth()
+    const { productCount  } = useCart()
+
+    const totalProductsInCart = Object.values(productCount).reduce((total, currentValue) => total + currentValue, 0)
+
 
     function handleSignOut() {
         signOut()
@@ -41,7 +46,7 @@ export function Header({ onOpenMenu }) {
                     <SearchBar placeholder="Search by dish or ingredient"  />
                 </div>
                 {isAdmin ? '' : <><a href="">Favourites</a><a href="">My Orders</a></>}
-                {isAdmin ? <Link to="/new"><Button className="btnBig" title="New Dish" /></Link> : <Button className="btnBig" icon={PiReceipt} title="Orders (0)" />}
+                {isAdmin ? <Link to="/new"><Button className="btnBig" title="New Dish" /></Link> : <Button className="btnBig" icon={PiReceipt} title={`Orders (${totalProductsInCart})`} />}
                 <a className='logout' onClick={handleSignOut} ><FiLogOut /></a>
             </div>
             
