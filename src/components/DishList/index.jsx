@@ -1,6 +1,6 @@
 import { Container } from './styles'
 
-export function DishList({ name, btn, img}) {
+export function DishList({ name, btn, img, onClick}) {
     return(
         <Container>
             <figure>
@@ -8,7 +8,7 @@ export function DishList({ name, btn, img}) {
             </figure>
             <div className="inf">
                 <h3>{ name }</h3>
-                <button>{ btn }</button>
+                <button onClick={onClick}>{ btn }</button>
             </div>
         </Container>
     )

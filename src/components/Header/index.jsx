@@ -24,7 +24,10 @@ export function Header({ onOpenMenu }) {
     function handleSignOut() {
         signOut()
         navigate('/')
-
+    }
+    function handleFavourites(e) {
+        e.preventDefault()
+        navigate('/favourites')
     }
     
     const { role } = useAuth()
@@ -45,7 +48,7 @@ export function Header({ onOpenMenu }) {
                 <div className="searchInput">
                     <SearchBar placeholder="Search by dish or ingredient"  />
                 </div>
-                {isAdmin ? '' : <><a href="">Favourites</a><a href="">My Orders</a></>}
+                {isAdmin ? '' : <><a href="" onClick={handleFavourites} >Favourites</a><a href="">My Orders</a></>}
                 {isAdmin ? <Link to="/new"><Button className="btnBig" title="New Dish" /></Link> : <Button className="btnBig" icon={PiReceipt} title={`Orders (${totalProductsInCart})`} />}
                 <a className='logout' onClick={handleSignOut} ><FiLogOut /></a>
             </div>

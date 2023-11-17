@@ -6,8 +6,17 @@ export const Container = styled.div`
     gap: 1.3rem;
     margin-bottom: 2rem;
     max-width: 25rem;
-    img {
+    figure {
         border-radius: 100%;
+        overflow: hidden;
+        height: 8rem;
+        width: 8rem;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    img {
         display: block;
         width: 8rem;
     }
