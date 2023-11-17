@@ -27,7 +27,7 @@ export function Favourites() {
             await api.delete(`favourites/${id}`)
 
             // Refetch the updated list of favorites
-            const updatedFavorites = await api.get('/favorites');
+            const updatedFavorites = await api.get('/favourites');
     
             // Update your local state with the new list of favorites
             setFavourites(updatedFavorites.data);
@@ -55,7 +55,6 @@ export function Favourites() {
             try {
                 const result = await api.get('/dishes?name&ingredients')
                 setDishes(result.data)
-                // console.log(result.data)
             } catch (error) {
                 console.log('Error fetching Dishes', error)
             }
@@ -75,15 +74,19 @@ export function Favourites() {
 
                 <Title title="My Favourites" />
                 <div className="container">
-                    {allFilteredFavourites && allFilteredFavourites.map((favourite, index) => (
-                        <DishList
-                            key={String(index)}
-                            name={favourite.name}
-                            btn="Remove from Favourites"
-                            img={`${imageUrl}/${favourite.image}`}
-                            onClick={(() => handleRemoveFavourite(favourite.id))}
+                    {allFilteredFavourites.length > 0 ? 
+                        allFilteredFavourites.map((favourite, index) => (
+                            <DishList
+                                key={String(index)}
+                                name={favourite.name}
+                                btn="Remove from Favourites"
+                                img={`${imageUrl}/${favourite.image}`}
+                                onClick={(() => handleRemoveFavourite(favourite.id))}
                             />
-                            ))}
+                        ))
+                    : 
+                    <h2>No Favourites yet</h2>
+                    }
 
                 </div>
 
