@@ -11,13 +11,16 @@ import { useCart } from '../../hooks/cart'
 
 export function DishCard({ id, img, name, description, price, isFavourite, onClick, onClickFavourite }) {
     const [totalPrice, setTotalPrice] = useState(price);
+    const [quantity, setQuantity] = useState(1)
     const { addToCart, removeFromCart } = useCart()
 
     const { role = 'user' } = useAuth()
     let isAdmin = false
     if(role === 'admin') isAdmin = true
 
-    // console.log(cartItemCount)
+    const getQuantity = (quantity) => {
+        setQuantity(quantity)   
+    }
 
 
     return(
@@ -38,9 +41,8 @@ export function DishCard({ id, img, name, description, price, isFavourite, onCli
 
             </a>
             <Finalize>
-                {isAdmin ? '' : <Quantity
-                />}
-                {isAdmin ? '' : <Button title="add" onClick={() => addToCart(id)} />}
+                {isAdmin ? '' : <Quantity getQuantity={getQuantity} />}
+                {isAdmin ? '' : <Button title="add" onClick={() => addToCart(id, quantity)} />}
             </Finalize>
         </Container>
     )

@@ -1,19 +1,22 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const CartContext = createContext()
 
 export function CartProvider({ children }) {
     const [productCount, setProductCount] = useState({})
 
-    const addToCart = (id) => {
+    const addToCart = (id, quantity) => {
         setProductCount((prevState) => ({
             ...prevState,
             //object key is the ID, if there is this in on the object, increments, otherwise create a new one
-            [id]: (prevState[id] || 0) +1,
+            [id]: (prevState[id] || 0) + quantity,
         }))
-
-        console.log(productCount)
     }
+    useEffect(() => {
+        console.log(productCount)
+
+    }, [productCount])
+    
     const removeFromCart = () => {
         // setProductCount( cartItemCount - 1)
     }

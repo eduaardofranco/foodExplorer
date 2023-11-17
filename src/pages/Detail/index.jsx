@@ -11,12 +11,16 @@ import { Menu } from '../../components/Menu'
 import { useState, useEffect } from 'react'
 import { api } from '../../services/api.js'
 import { useAuth } from '../../hooks/auth.jsx'
+import { useCart } from '../../hooks/cart.jsx'
  
 export function Detail() {
     const [menuIsOpen, setMenuIsOpen] = useState(false);
     const [data, setData] = useState(null)
+    const [quantity, setQuantity] = useState(1)
 
     const imageUrl = `${api.defaults.baseURL}/files/`
+
+    const { addToCart, removeFromCart } = useCart()
 
     const params = useParams()
     const navigate = useNavigate()
@@ -28,6 +32,10 @@ export function Detail() {
 
     function handleUpdate(id) {
         navigate(`/update/${id}`)
+    }
+
+    const getQuantity = (quantity) => {
+        setQuantity(quantity)   
     }
 
     useEffect(() => {
@@ -75,8 +83,8 @@ export function Detail() {
                                     }
                                 </ Ingredients>
                                 <Finalize>
-                                    {isAdmin ? '' : <Quantity isbig={true} />}
-                                    {isAdmin ? <Button className="add-edit" title="Edit" onClick={() => handleUpdate(data.id)} /> : <Button className="add" title="Add" icon={PiReceipt} />}
+                                    {isAdmin ? '' : <Quantity isbig={true} getQuantity={getQuantity} />}
+                                    {isAdmin ? <Button className="add-edit" title="Edit" onClick={() => handleUpdate(data.id)} /> : <Button className="add" title="Add" icon={PiReceipt} onClick={() => addToCart(data.id, quantity)} />}
                                 </ Finalize>
                             </Infos>
                         </div>
