@@ -49,7 +49,15 @@ export function Header({ onOpenMenu }) {
                     <SearchBar placeholder="Search by dish or ingredient"  />
                 </div>
                 {isAdmin ? '' : <><a href="" onClick={handleFavourites} >Favourites</a><a href="">My Orders</a></>}
-                {isAdmin ? <Link to="/new"><Button className="btnBig" title="New Dish" /></Link> : <Button className="btnBig" icon={PiReceipt} title={`Orders (${totalProductsInCart})`} />}
+                
+                {isAdmin ?
+                <Link to="/new"><Button className="btnBig" title="New Dish" /></Link>
+                : <Button
+                    className="btnBig"
+                    icon={PiReceipt}
+                    title={`Orders (${totalProductsInCart})`}
+                    onClick={() => navigate('/cart')}
+                    />}
                 <a className='logout' onClick={handleSignOut} ><FiLogOut /></a>
             </div>
             
