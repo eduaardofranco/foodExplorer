@@ -15,7 +15,7 @@ export function AppRoutes() {
             <Route path="/detail/:id" element={<Detail />} />
             <Route path="/update/:id" element={<Update />} />
             <Route path="/favourites" element={<Favourites />} />
-            <Route path="cart/" element={<Cart />} />
+            <Route path="/cart" element={<Cart />} />
         </Routes>
     )
 }
