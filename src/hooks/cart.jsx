@@ -13,18 +13,23 @@ export function CartProvider({ children }) {
 
     })
 
+    //get the total amount of items in the cart
     const getTotalCartAmount = () => {
-        let totalAmount = 0
-        for( const item in productsCart) {
-            console.log('item',item)
-            if(productsCart[item] !== undefined) {
-                let itemPrice = dishes.find((dish) => dish.id === Number(item))
-                totalAmount += productsCart[item] * itemPrice.price
+        let totalAmount = 0;
+        //do a for in the products cart object
+        for (const item in productsCart) {
+          if (productsCart[item] !== undefined) {
+            //find dish with id 
+            let itemPrice = dishes.find((dish) => dish.id === Number(item));
+      
+            if (itemPrice) {
+              totalAmount += productsCart[item] * itemPrice.price;
             }
+          }
         }
-
-        return totalAmount
-    }
+      
+        return totalAmount;
+      };
 
     const addToCart = (id, quantity) => {
         setProductsCart((prevState) => ({
@@ -35,7 +40,7 @@ export function CartProvider({ children }) {
     }
     //update sessionStorage when productCount changes
     useEffect(() => {
-        console.log(productsCart)
+        // console.log(productsCart)
         sessionStorage.setItem('@cart', JSON.stringify(productsCart))
 
     }, [productsCart])
@@ -44,10 +49,12 @@ export function CartProvider({ children }) {
     useEffect(() => {
         async function fetchDishes() {
             try {
-                const result = await api.get('/dishes?name&ingredients')
-                setDishes(result.data)
+                // console.log('Making API request...');
+                const result = await api.get('/dishes?name&ingredients');
+                // console.log('API response:', result.data);
+                setDishes(result.data);
             } catch (error) {
-                console.log('Error fetching Dishes', error)
+                console.log('Error fetching Dishes', error);
             }
         }
         fetchDishes()

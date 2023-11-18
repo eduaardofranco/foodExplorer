@@ -55,7 +55,7 @@ export function Header({ onOpenMenu }) {
                 : <Button
                     className="btnBig"
                     icon={PiReceipt}
-                    title={`Orders (${totalProductsInCart})`}
+                    title={`Cart (${totalProductsInCart})`}
                     onClick={() => navigate('/cart')}
                     />}
                 <a className='logout' onClick={handleSignOut} ><FiLogOut /></a>

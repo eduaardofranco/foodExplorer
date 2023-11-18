@@ -5,7 +5,7 @@ export const Container = styled.div`
     align-items: center;
     gap: 1.3rem;
     margin-bottom: 2rem;
-    max-width: 25rem;
+    max-width: 40rem;
     figure {
         border-radius: 100%;
         overflow: hidden;
@@ -21,11 +21,16 @@ export const Container = styled.div`
         width: 8rem;
     }
     h3 {
-        color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};
+        color: ${({ theme }) => theme.COLORS.TXT_GRAY_00};
         font-size: 2rem;
-        font-weight: 500;
         max-height: 4rem;
         overflow: hidden;
+        span {
+            color: ${({ theme }) => theme.COLORS.TXT_GRAY_400};
+            font-weight: normal;
+            font-size: 1.2rem;
+            font-family: ${({ theme }) => theme.FONTS.ROBOTO};
+        }
     }
     button {
         background-color: transparent;

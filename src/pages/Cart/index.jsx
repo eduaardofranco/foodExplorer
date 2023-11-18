@@ -11,7 +11,8 @@ import { api } from '../../services/api'
 
 export function Cart() {
     const [dishes, setDishes] = useState([])
-    const { productsCart, addToCart, removeFromCart, getTotalAmount } = useCart()
+    const { productsCart, addToCart, removeFromCart, getTotalCartAmount } = useCart()
+    const totalAmount = getTotalCartAmount()
 
     const imageUrl = `${api.defaults.baseURL}/files/`
 
@@ -47,16 +48,17 @@ export function Cart() {
                                 <DishList
                                     key={String(index)}
                                     name={dish.name}
-                                    btn="Remove from cart"
+                                    btn="Remove"
                                     img={imageUrl + dish.image}
                                     quantity={quantityInCart}
+                                    price={dish.price}
                                 />
                             )
                         }
 
                     })}
 
-                    <h2>Total: €{getTotalAmount}</h2>
+                    <h2>Total: €{totalAmount}</h2>
                     <div className="finalize">
                         <Button title="Next" />
                     </div>
