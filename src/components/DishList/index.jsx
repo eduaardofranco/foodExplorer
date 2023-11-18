@@ -1,6 +1,6 @@
 import { Container } from './styles'
 
-export function DishList({ name, btn, img, quantity, price, onClick}) {
+export function DishList({ name, btnTitle, img, quantity, price, onClick}) {
     return(
         <Container>
             <figure>
@@ -11,7 +11,7 @@ export function DishList({ name, btn, img, quantity, price, onClick}) {
                     {quantity ? `${quantity} X  ${name}` : name }
                     { price ? <span> €{price}</span> : null}
                 </h3>
-                <button onClick={onClick}>{ btn }</button>
+                <button onClick={onClick}>{ btnTitle }</button>
             </div>
         </Container>
     )

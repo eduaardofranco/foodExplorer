@@ -48,7 +48,7 @@ export function Cart() {
                                 <DishList
                                     key={String(index)}
                                     name={dish.name}
-                                    btn="Remove"
+                                    btnTitle="Remove"
                                     img={imageUrl + dish.image}
                                     quantity={quantityInCart}
                                     price={dish.price}
