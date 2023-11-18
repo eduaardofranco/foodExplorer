@@ -1,21 +1,57 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { api } from "../services/api";
 
 const CartContext = createContext()
 
 export function CartProvider({ children }) {
-    const [productCount, setProductCount] = useState({})
+    const [dishes, setDishes] = useState([])
+    //load products in sessionStorage
+    //otherwise sets productCount as array
+    const [productsCart, setProductsCart] = useState(() => {
+        const storedProdutsCart = sessionStorage.getItem('@cart')
+        return storedProdutsCart ? JSON.parse(storedProdutsCart) : {}
+
+    })
+
+    const getTotalCartAmount = () => {
+        let totalAmount = 0
+        for( const item in productsCart) {
+            console.log('item',item)
+            if(productsCart[item] !== undefined) {
+                let itemPrice = dishes.find((dish) => dish.id === Number(item))
+                totalAmount += productsCart[item] * itemPrice.price
+            }
+        }
+
+        return totalAmount
+    }
 
     const addToCart = (id, quantity) => {
-        setProductCount((prevState) => ({
+        setProductsCart((prevState) => ({
             ...prevState,
             //object key is the ID, if there is this in on the object, increments, otherwise create a new one
             [id]: (prevState[id] || 0) + quantity,
         }))
     }
+    //update sessionStorage when productCount changes
     useEffect(() => {
-        console.log(productCount)
+        console.log(productsCart)
+        sessionStorage.setItem('@cart', JSON.stringify(productsCart))
 
-    }, [productCount])
+    }, [productsCart])
+
+    //fetch dishes
+    useEffect(() => {
+        async function fetchDishes() {
+            try {
+                const result = await api.get('/dishes?name&ingredients')
+                setDishes(result.data)
+            } catch (error) {
+                console.log('Error fetching Dishes', error)
+            }
+        }
+        fetchDishes()
+    },[])
     
     const removeFromCart = () => {
         // setProductCount( cartItemCount - 1)
@@ -23,10 +59,10 @@ export function CartProvider({ children }) {
 
     return(
         <CartContext.Provider value={{
-            CartContext,
-            productCount,
+            productsCart,
             addToCart,
-            removeFromCart}} >
+            removeFromCart,
+            getTotalCartAmount }} >
                 { children }
         </CartContext.Provider>
     )

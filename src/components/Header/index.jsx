@@ -16,9 +16,9 @@ export function Header({ onOpenMenu }) {
     const navigate = useNavigate()
 
     const { signOut } = useAuth()
-    const { productCount  } = useCart()
+    const { productsCart  } = useCart()
 
-    const totalProductsInCart = Object.values(productCount).reduce((total, currentValue) => total + currentValue, 0)
+    const totalProductsInCart = Object.values(productsCart).reduce((total, currentValue) => total + currentValue, 0)
 
 
     function handleSignOut() {

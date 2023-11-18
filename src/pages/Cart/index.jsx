@@ -4,28 +4,66 @@ import { Footer } from '../../components/Footer'
 import { Title } from '../../components/Title'
 import { Button } from '../../components/Button'
 import { DishList } from '../../components/DishList'
+import { useCart } from '../../hooks/cart'
+import { ButtonText } from '../../components/ButtonText'
+import { useEffect, useState } from 'react'
+import { api } from '../../services/api'
 
 export function Cart() {
+    const [dishes, setDishes] = useState([])
+    const { productsCart, addToCart, removeFromCart, getTotalAmount } = useCart()
+
+    const imageUrl = `${api.defaults.baseURL}/files/`
+
+    //fetch dishes
+    useEffect(() => {
+        async function fetchDishes() {
+            try {
+                const result = await api.get('/dishes?name&ingredients')
+                setDishes(result.data)
+            } catch (error) {
+                console.log('Error fetching Dishes', error)
+            }
+        }
+        fetchDishes()
+    },[])
+
     return(
         <Container>
             <Header />
             <main>
+                <ButtonText to="/" title="Back" />
                 <Title title="My Order" />
-                <DishList
-                    name="House Burger"
-                    btn="Remove from cart"
-                    img="https://placehold.co/150x150"
-                />
-                <DishList
-                    name="House Burger"
-                    btn="Remove from cart"
-                    img="https://placehold.co/150x150"
-                />
+                {Object.keys(productsCart).length > 0 ?
+                
+                <>
+                    {dishes.map((dish, index) => {
+                        //check if there are same id in cart and dishes
+                        const isInCart = productsCart[dish.id] !== undefined;
+                        if(isInCart) {
+                            const quantityInCart = productsCart[dish.id];
 
-                <h2>Total: €159.80</h2>
-                <div className="finalize">
-                    <Button title="Next" />
-                </div>
+                            return (
+                                <DishList
+                                    key={String(index)}
+                                    name={dish.name}
+                                    btn="Remove from cart"
+                                    img={imageUrl + dish.image}
+                                    quantity={quantityInCart}
+                                />
+                            )
+                        }
+
+                    })}
+
+                    <h2>Total: €{getTotalAmount}</h2>
+                    <div className="finalize">
+                        <Button title="Next" />
+                    </div>
+                </>
+                : 
+                <h2>Cart is Empty</h2>
+                }
             </main>
 
 
