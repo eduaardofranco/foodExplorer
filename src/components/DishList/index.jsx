@@ -7,7 +7,10 @@ export function DishList({ name, btn, img, quantity, price, onClick}) {
                 <img src={ img } alt={ name } />
             </figure>
             <div className="inf">
-                <h3>{`${quantity} X  ${name}`} <span>€{price}</span></h3>
+                <h3>
+                    {quantity ? `${quantity} X  ${name}` : name }
+                    { price ? <span> €{price}</span> : null}
+                </h3>
                 <button onClick={onClick}>{ btn }</button>
             </div>
         </Container>
