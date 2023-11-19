@@ -10,13 +10,13 @@ export function DishList({ name, id, btnTitle, img, quantity, price, onClick }) 
     }
 
     return(
-        <Container>
-            <div onClick={(event) => handleDetail(event, id)}>
-                <figure>
+        <Container> 
+            <div>
+                <figure onClick={(event) => handleDetail(event, id)}>
                     <img src={ img } alt={ name } />
                 </figure>
                 <div className="inf">
-                    <h3>
+                    <h3 onClick={(event) => handleDetail(event, id)}>
                         {quantity ? `${quantity} X  ${name}` : name }
                         { price ? <span> €{price}</span> : null}
                     </h3>
