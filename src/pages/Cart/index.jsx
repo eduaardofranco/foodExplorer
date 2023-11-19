@@ -52,6 +52,7 @@ export function Cart() {
                                     img={imageUrl + dish.image}
                                     quantity={quantityInCart}
                                     price={dish.price}
+                                    onClick={() => removeFromCart(dish.id)}
                                 />
                             )
                         }

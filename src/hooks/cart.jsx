@@ -34,9 +34,16 @@ export function CartProvider({ children }) {
     const addToCart = (id, quantity) => {
         setProductsCart((prevState) => ({
             ...prevState,
-            //object key is the ID, if there is this in on the object, increments, otherwise create a new one
+            //object key is the ID, if there is this in the object, increments, otherwise create a new one
             [id]: (prevState[id] || 0) + quantity,
         }))
+    }
+    const removeFromCart = (id) => {
+        setProductsCart((prev) => {
+            const newCart = {...prev}
+            delete newCart[id]
+            return newCart
+        })
     }
     //update sessionStorage when productCount changes
     useEffect(() => {
@@ -59,10 +66,6 @@ export function CartProvider({ children }) {
         }
         fetchDishes()
     },[])
-    
-    const removeFromCart = () => {
-        // setProductCount( cartItemCount - 1)
-    }
 
     return(
         <CartContext.Provider value={{
