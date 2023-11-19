@@ -46,6 +46,7 @@ export function Cart() {
 
                             return (
                                 <DishList
+                                    id={dish.id}
                                     key={String(index)}
                                     name={dish.name}
                                     btnTitle="Remove"

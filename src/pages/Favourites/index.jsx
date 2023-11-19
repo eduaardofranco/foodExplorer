@@ -7,6 +7,7 @@ import { Menu } from '../../components/Menu'
 import { useEffect, useState } from 'react'
 import { ButtonText } from '../../components/ButtonText'
 import { api } from '../../services/api'
+import { useNavigate } from 'react-router-dom'
 
 export function Favourites() {
     const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -14,6 +15,7 @@ export function Favourites() {
     const [dishes, setDishes] = useState([])
 
     const imageUrl = `${api.defaults.baseURL}/files/`
+    const navigate = useNavigate()
 
     const favouritesList = favourites.map(favourite => {
         const filteredFavourites = dishes.filter((dish) => favourite.dish_id === dish.id)
@@ -22,7 +24,8 @@ export function Favourites() {
     // Flatten the array all to same lavel
     const allFilteredFavourites = favouritesList.flat()
 
-    async function handleRemoveFavourite(id) {
+    async function handleRemoveFavourite(event, id) {
+        event.preventDefault()
         try {
             await api.delete(`favourites/${id}`)
 
@@ -78,10 +81,12 @@ export function Favourites() {
                         allFilteredFavourites.map((favourite, index) => (
                             <DishList
                                 key={String(index)}
+                                id={favourite.id}
                                 name={favourite.name}
-                                btn="Remove from Favourites"
+                                btnTitle="Remove from Favourites"
                                 img={`${imageUrl}/${favourite.image}`}
-                                onClick={(() => handleRemoveFavourite(favourite.id))}
+                                onClickDetail={(event) => handleDetail(event, favourite.id)}
+                                onClick={((event) => handleRemoveFavourite(event, favourite.id))}
                             />
                         ))
                     : 

@@ -1,11 +1,15 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 1.3rem;
     margin-bottom: 2rem;
     max-width: 40rem;
+    > div {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 1.3rem;
+
+    }
     figure {
         border-radius: 100%;
         overflow: hidden;
