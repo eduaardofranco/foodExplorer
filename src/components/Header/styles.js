@@ -21,6 +21,9 @@ export const Container = styled.header`
             }
         }
     }
+    h2 {
+        cursor: pointer;
+    }
     .menuBtn {
         background-color: transparent;
         border: none;

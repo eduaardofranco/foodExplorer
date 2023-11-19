@@ -33,6 +33,10 @@ export function Header({ onOpenMenu }) {
     const { role } = useAuth()
     let isAdmin = false
     if(role === 'admin') isAdmin = true
+
+    function handleNavigateHome() {
+        navigate('/')
+    }
     
 
     return(
@@ -41,7 +45,7 @@ export function Header({ onOpenMenu }) {
                 <button className="menuBtn" onClick={onOpenMenu}>
                     <GrMenu />
                 </button>
-                <Logo isAdmin={isAdmin} />
+                <Logo isAdmin={isAdmin} onClick={handleNavigateHome} />
                 <div className='ordersSmallBtn'>
                     {isAdmin ? '' : <button><span>0</span><PiReceipt /></button>}
                 </div>
