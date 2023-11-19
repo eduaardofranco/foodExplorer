@@ -33,7 +33,7 @@ export function Cart() {
         <Container>
             <Header />
             <main>
-                <ButtonText to="/" title="Back" />
+                <ButtonText title="Back" />
                 <Title title="My Order" />
                 {Object.keys(productsCart).length > 0 ?
                 

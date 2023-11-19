@@ -218,7 +218,7 @@ export function Update() {
             {
                 data &&
                 <main className='content'>
-                    <ButtonText to="/" title="Back" />
+                    <ButtonText title="Back" />
                     <Title title="New Dish" />
                     <Form encType="multipart/form-data">
                         <div className="line">

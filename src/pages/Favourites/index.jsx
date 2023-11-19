@@ -73,7 +73,7 @@ export function Favourites() {
             /> 
             <Header onOpenMenu={() => setMenuIsOpen(true)} />
             <main>
-                <ButtonText to="/" title="Back" />
+                <ButtonText title="Back" />
 
                 <Title title="My Favourites" />
                 <div className="container">

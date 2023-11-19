@@ -65,7 +65,7 @@ export function Detail() {
                 data && 
                 <main>
                     <div className="content">
-                        <ButtonText to="/" title="Back" isBig />
+                        <ButtonText title="Back" isBig />
                         <div className="center">
                             <Img>
                                 <img src={`${imageUrl}/${data.image}`} alt={data.name} />
