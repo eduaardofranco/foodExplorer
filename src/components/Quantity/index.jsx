@@ -19,7 +19,7 @@ export function Quantity({ isbig, getQuantity, ...rest }) {
         }
     }
     return(
-        <Container isbig={isbig} {...rest}>
+        <Container $isbig={isbig} {...rest}>
             <div className="increments">
                 <button onClick={decrement}>
                     <IoMdRemove />
