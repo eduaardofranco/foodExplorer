@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
 import { useState, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 
 import { api } from "../services/api";
 import { ModalMessage } from '../components/ModalMessage'
@@ -46,11 +47,38 @@ function AuthProvider( { children }) {
     }
 
     useEffect(() => {
+
         const token = localStorage.getItem('@foodexplorer:token')
         const user = localStorage.getItem('@foodexplorer:user')
+        
+        function checkTokenIsExpired(token) {
+            //if there is a token in localstorage
+            if(token) {
+
+                try {
+                    const decoded = jwtDecode(token);
+                    const currentTime = Math.floor(Date.now() / 1000); // convert to seconds
+                
+                    // Check if the expiration time is defined and bigger than the current time
+                    if (decoded.exp && decoded.exp > currentTime) {
+                      return true;
+                    }  
+                    //token is invalid
+                    return false;
+                  } catch (error) {
+                    // Handle decoding errors
+                    console.error('Error decoding token:', error);
+                    signOut();
+                    return true;
+                  }
+            }
+        }
+        
+        const tokenIsValid = checkTokenIsExpired(token)
+
 
         //if there is token & user in localstorage, set to headres request and data
-        if(token && user) {
+        if(token && tokenIsValid && user) {
             api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
             setData({

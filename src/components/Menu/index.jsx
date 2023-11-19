@@ -31,11 +31,15 @@ export function Menu({ menuIsOpen, onCloseMenu }) {
                 <div className="main">
                     <SearchBar placeholder="Search by dish or ingredient"  />
                     <ul>
-                        <li><a href="" onClick={(event) => handleNavigate(event, 'favourites')}>My Favourites</a></li>
-                        <li><a href="" onClick={(event) => handleNavigate(event, 'orders')}>Orders</a></li>
+                        <li>
+                            <a href="" onClick={(event) => handleNavigate(event, 'favourites')}>My Favourites</a>
+                        </li>
+                        <li>
+                            <a href="" onClick={(event) => handleNavigate(event, 'orders')}>Orders</a>
+                        </li>
                         <li>
                             <a href="" onClick={signOut}>Logout <HiOutlineLogout /></a>
-                            </li>
+                        </li>
                     </ul>
                 </div>
             </div>
