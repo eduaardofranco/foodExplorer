@@ -5,10 +5,17 @@ import { Footer } from '../Footer'
 import { SearchBar } from '../SearchBar'
 import { useState } from 'react'
 import { useAuth } from '../../hooks/auth'
+import { useNavigate } from 'react-router-dom'
 
 export function Menu({ menuIsOpen, onCloseMenu }) {
 
     const { signOut } = useAuth()
+    const navigate = useNavigate()
+
+    function handleNavigate(event, path) {
+        event.preventDefault()
+        navigate(`/${path}`)
+    }
     
     return(
         <Container data-menu-is-open={menuIsOpen}>
@@ -24,8 +31,8 @@ export function Menu({ menuIsOpen, onCloseMenu }) {
                 <div className="main">
                     <SearchBar placeholder="Search by dish or ingredient"  />
                     <ul>
-                        <li><a href="">My Favourites</a></li>
-                        <li><a href="">Orders</a></li>
+                        <li><a href="" onClick={(event) => handleNavigate(event, 'favourites')}>My Favourites</a></li>
+                        <li><a href="" onClick={(event) => handleNavigate(event, 'orders')}>Orders</a></li>
                         <li>
                             <a href="" onClick={signOut}>Logout <HiOutlineLogout /></a>
                             </li>

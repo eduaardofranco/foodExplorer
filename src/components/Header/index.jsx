@@ -47,7 +47,11 @@ export function Header({ onOpenMenu }) {
                 </button>
                 <Logo isAdmin={isAdmin} onClick={handleNavigateHome} />
                 <div className='ordersSmallBtn'>
-                    {isAdmin ? '' : <button><span>0</span><PiReceipt /></button>}
+                    {isAdmin ? ''
+                    :<button>
+                        <span onClick={() => navigate('/cart')} >{totalProductsInCart}</span>
+                        <PiReceipt />
+                    </button>}
                 </div>
                 <div className="searchInput">
                     <SearchBar placeholder="Search by dish or ingredient"  />
