@@ -1,10 +1,10 @@
 import { Container } from './styles'
 import { IoMdRemove } from 'react-icons/io'
 import { AiOutlinePlus } from 'react-icons/ai'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useCart } from '../../hooks/cart'
 
-export function Quantity({ isbig, getQuantity, ...rest }) {
+export function Quantity({ isbig, getQuantity, resetQuantity, ...rest }) {
 
     const [quantity, setQuantity] = useState(1)
 
@@ -18,7 +18,12 @@ export function Quantity({ isbig, getQuantity, ...rest }) {
             getQuantity(quantity - 1)
         }
     }
-    return(
+    useEffect(() => {
+        //when add to cart, changes variable resetQuantity and reset quanttity component
+        setQuantity(1)
+    },[resetQuantity])
+
+    return( 
         <Container $isbig={isbig} {...rest}>
             <div className="increments">
                 <button onClick={decrement}>
