@@ -11,22 +11,20 @@ import { api } from '../../services/api'
 
 export function Cart() {
     const [dishes, setDishes] = useState([])
-    const { productsCart, addToCart, removeFromCart, getTotalCartAmount } = useCart()
-    const totalAmount = getTotalCartAmount()
+    const { productsCart, removeFromCart, getTotalCartAmount } = useCart()
+    
+    let totalAmount = getTotalCartAmount()
 
     const imageUrl = `${api.defaults.baseURL}/files/`
 
     //fetch dishes
     useEffect(() => {
-        async function fetchDishes() {
-            try {
-                const result = await api.get('/dishes?name&ingredients')
-                setDishes(result.data)
-            } catch (error) {
-                console.log('Error fetching Dishes', error)
-            }
-        }
-        fetchDishes()
+        api.get('/dishes?name&ingredients')
+        .then(response => {
+            setDishes(response.data)
+        }).catch(error => {
+            console.log('Error fetching diches: ', error)
+        })
     },[])
 
     return(

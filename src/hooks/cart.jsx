@@ -6,7 +6,7 @@ const CartContext = createContext()
 export function CartProvider({ children }) {
     const [dishes, setDishes] = useState([])
     //load products in sessionStorage
-    //otherwise sets productCount as array
+    //otherwise sets productCart as array
     const [productsCart, setProductsCart] = useState(() => {
         const storedProdutsCart = sessionStorage.getItem('@cart')
         return storedProdutsCart ? JSON.parse(storedProdutsCart) : {}
@@ -55,13 +55,23 @@ export function CartProvider({ children }) {
     //fetch dishes
     useEffect(() => {
         async function fetchDishes() {
+            
             try {
-                // console.log('Making API request...');
-                const result = await api.get('/dishes?name&ingredients');
-                // console.log('API response:', result.data);
-                setDishes(result.data);
-            } catch (error) {
-                console.log('Error fetching Dishes', error);
+                const token = localStorage.getItem('@foodexplorer:token')
+                //check if there is token set
+                if(token) {
+                    api.defaults.headers.common['Authorization'] = [`Bearer ${token}`]
+                    const result = await api.get('/dishes?name&ingredients');
+                    setDishes(result.data);
+                }
+
+            }  catch (error) {
+                if (error.response && error.response.status === 401) {
+                    // Handle unauthorized access here
+                    console.error('Unauthorized access');
+                } else {
+                    console.error('Error fetching dishes', error);
+                }
             }
         }
         fetchDishes()
