@@ -21,6 +21,8 @@ export function Quantity({ isbig, getQuantity, resetQuantity, ...rest }) {
     useEffect(() => {
         //when add to cart, changes variable resetQuantity and reset quanttity component
         setQuantity(1)
+        //set getQuantity to 1 also, this is the value addCart will get to multiply
+        getQuantity(1)
     },[resetQuantity])
 
     return( 
