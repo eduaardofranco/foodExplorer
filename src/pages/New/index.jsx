@@ -1,4 +1,5 @@
 import { Container, Form, TagContainer, TagContent } from './styles'
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { ButtonText } from '../../components/ButtonText'
@@ -12,6 +13,7 @@ import { useEffect, useState } from 'react'
 import { ValidationMessage } from '../../components/ValidationMessage'
 import { ModalMessage } from '../../components/ModalMessage'
 import { api } from '../../services/api'
+import { ProgressBar } from '../../components/ProgessBar'
 
 export function New() {
     const [ingredients, setIngredients] = useState([])
@@ -19,6 +21,7 @@ export function New() {
     const [categoryList, setCategoryList] = useState([])
     const [errorMessage, setErrorMessage] = useState('');
     const [modalMessage, setModalMessage] = useState({ message: '', title: ''})
+    const [sendingdata, setSendingData] = useState(false)
 
     const [image, setImage] = useState({})
     const [name, setName] =useState('')
@@ -60,7 +63,7 @@ export function New() {
     async function handleNewDish(e) {
         e.preventDefault()
 
-        console.log(image)
+        setSendingData(true)
 
         //if image is not selected, image is not an instance of File
         if(!(image instanceof File)) {
@@ -103,10 +106,13 @@ export function New() {
         });
 
 
-        // Send the POST request to your server
+        // Send the POST request to the server
         await api.post('/dishes', formData)
         .then(() => {
-            setModalMessage({ title: 'Success', message: 'Dish created!', navigate: '/' });
+            setTimeout(() => {
+                setModalMessage({ title: 'Success', message: 'Dish created!', navigate: '/' });
+
+            },5000)
 
         })
         .catch((error) => {
@@ -130,6 +136,7 @@ export function New() {
     }, [])
     return(
         <Container>
+            <ProgressBar progress={30} />
             <Header isAdmin />
             <main className='content'>
                 <ButtonText to="/" title="Back" />
@@ -211,7 +218,13 @@ export function New() {
                         placeholder="Briefly talk about the dish, its ingredients and composition"
                         onChange={(e) => setDescription(e.target.value)}
                     />
-                    <Button type="submit" title="Save" onClick={handleNewDish}/>
+                    <Button
+                        type="submit"
+                        title="Save"
+                        onClick={handleNewDish}
+                        disabled={sendingdata ? 'disabled' : ''}
+                        icon={AiOutlineLoading3Quarters}   
+                    />
                 </Form>
             </main>
 
