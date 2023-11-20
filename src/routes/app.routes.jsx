@@ -6,6 +6,7 @@ import { Detail } from '../pages/Detail'
 import { Update } from '../pages/Update'
 import { Favourites } from '../pages/Favourites'
 import { Cart } from '../pages/Cart'
+import { NotFound } from '../pages/404'
 
 export function AppRoutes() {
     return(
@@ -16,6 +17,7 @@ export function AppRoutes() {
             <Route path="/update/:id" element={<Update />} />
             <Route path="/favourites" element={<Favourites />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="*" element={<NotFound />} />
         </Routes>
     )
 }
