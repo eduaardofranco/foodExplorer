@@ -45,8 +45,10 @@ export function Detail() {
                 setData(response.data)
             } catch(error) {
                 if(error){
+                    navigate('/404')
                     console.log(error.message)
                 } else {
+                    navigate('/404')
                     console.log('Fail to fetch')
                 }
             }
