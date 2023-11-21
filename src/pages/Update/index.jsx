@@ -333,7 +333,11 @@ export function Update() {
                                 title="Delete"
                                 onClick={handleDelete}
                                 />
-                            <Button title="Save" onClick={handleUpdate} />
+                            <Button
+                                title="Save"
+                                onClick={handleUpdate}
+                                disabled={loadProgress !=0 ? 'disabled' : ''}
+                            />
 
                         </div>
                     </Form>

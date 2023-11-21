@@ -1,5 +1,4 @@
 import { Container, Form, TagContainer, TagContent } from './styles'
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { ButtonText } from '../../components/ButtonText'
@@ -230,8 +229,7 @@ export function New() {
                         type="submit"
                         title="Save"
                         onClick={handleNewDish}
-                        disabled={sendingdata ? 'disabled' : ''}
-                        icon={AiOutlineLoading3Quarters}   
+                        disabled={loadProgress !=0 ? 'disabled' : ''} 
                     />
                 </Form>
             </main>
