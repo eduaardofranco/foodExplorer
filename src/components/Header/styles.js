@@ -13,6 +13,7 @@ export const Container = styled.header`
     button {
         border: 0;
         position: relative;
+        cursor: pointer;
         > svg {
             color: white;
             font-size: 3.2rem;

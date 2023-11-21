@@ -48,8 +48,8 @@ export function Header({ onOpenMenu }) {
                 <Logo isAdmin={isAdmin} onClick={handleNavigateHome} />
                 <div className='ordersSmallBtn'>
                     {isAdmin ? ''
-                    :<button>
-                        <span onClick={() => navigate('/cart')} >{totalProductsInCart}</span>
+                    :<button onClick={() => navigate('/cart')}>
+                        <span>{totalProductsInCart}</span>
                         <PiReceipt />
                     </button>}
                 </div>

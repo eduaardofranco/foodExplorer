@@ -49,7 +49,7 @@ export function Login() {
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <Input
-                    placeholder="*******"
+                    placeholder="password"
                     type="password"
                     label="Password"
                     bound="password"
