@@ -21,20 +21,20 @@ export function DishCard({ id, img, name, description, price, isFavourite, onCli
     let isAdmin = false
     if(role === 'admin') isAdmin = true
 
-    // console.log(initialQuantity)
-
+    //get quantity number from Quantity component
     const getQuantity = (quantity) => {
         setQuantity(quantity)   
     }
 
     const addProductToCart = (id, quantity) => {
         addToCart(id, quantity)
-        setResetQuantity((prev) => prev + 1)
         //add class responsible for button animation
         setAddItemClicked(true)
         //remove class after 2.5s
         setTimeout(() => {
+            //reset quantity component after 2.5s added
             setAddItemClicked(false)
+            setResetQuantity((prev) => prev + 1)
         },2500)
     }
 
@@ -57,16 +57,21 @@ export function DishCard({ id, img, name, description, price, isFavourite, onCli
 
             </a>
             <Finalize>
-                {isAdmin ? '' : <Quantity getQuantity={getQuantity} resetQuantity={resetQuantity} />}
-                {isAdmin ? '' : <Button
-                                    className={addItemClicked == true ? 'added-cart add' : 'add'}
-                                    icon={IoMdCart}
-                                    title="add"
-                                    onClick={() => addProductToCart(id, quantity)}
-                                    disabled={addItemClicked == true ? 'disabled' : null}
-                                >
-                                    <span className='added'>{quantity} Added</span>
-                                </Button>}
+                {isAdmin ? null
+                :
+                <>
+                    <Quantity getQuantity={getQuantity} resetQuantity={resetQuantity} />
+                    <Button
+                        className={addItemClicked == true ? 'added-cart add' : 'add'}
+                        icon={IoMdCart}
+                        title="add"
+                        onClick={() => addProductToCart(id, quantity)}
+                        disabled={addItemClicked == true ? 'disabled' : null}
+                    >
+                        <span className='added'>{quantity} Added</span>
+                    </Button>
+                </>
+                }
             </Finalize>
         </Container>
     )
