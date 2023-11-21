@@ -12,6 +12,7 @@ import { useState, useEffect } from 'react'
 import { api } from '../../services/api'
 import { useParams, useNavigate } from 'react-router-dom'
 import { ModalMessage } from '../../components/ModalMessage'
+import { ProgressBar } from '../../components/ProgessBar'
 
 export function Update() {
 
@@ -23,6 +24,7 @@ export function Update() {
     const [imageLabelName, setImageLabelName] = useState('')
     
     const [modalMessage, setModalMessage] = useState({ message: '', title: '', confirmType: false, fncConfirm: '' })
+    const [loadProgress, setLoadProgress] = useState(0)
     
 
     const [inputValues, setInputValues] = useState({
@@ -160,6 +162,16 @@ export function Update() {
         if(Object.keys(updatedDish).length > 0) {
 
             try{
+                //set and show progressbar
+                const intervalProgressBar = setInterval(() => {
+                    setLoadProgress((prev) => {
+                        const nextProgress = prev + 10;
+                        if (nextProgress === 110) {
+                            return 10;
+                        }
+                        return nextProgress;
+                    })
+                }, 1000);
                 //patch data
                 const response = await api.patch(`dishes/update/${dish_id}` ,formData)    
                 
@@ -167,6 +179,7 @@ export function Update() {
                 if (response.status === 200) {
                     console.log('Dish updated successfully');
                     setModalMessage({ title: 'Sucess!', message: 'Dish Updated!', navigate: '/'})
+                    clearInterval(intervalProgressBar)
                 } else {
                     console.log('Error: Failed to update -', response.data.message);
                     setModalMessage({ title: 'Failed to update!', message: response.data.message})
@@ -214,6 +227,7 @@ export function Update() {
 
     return(
         <Container>
+            { loadProgress > 10 && <ProgressBar progress={loadProgress} /> }
             <Header />
             {
                 data &&

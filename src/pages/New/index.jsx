@@ -22,6 +22,7 @@ export function New() {
     const [errorMessage, setErrorMessage] = useState('');
     const [modalMessage, setModalMessage] = useState({ message: '', title: ''})
     const [sendingdata, setSendingData] = useState(false)
+    const [loadProgress, setLoadProgress] = useState(0)
 
     const [image, setImage] = useState({})
     const [name, setName] =useState('')
@@ -105,22 +106,29 @@ export function New() {
             formData.append(`ingredients[${index}]`, ingredient);
         });
 
+        //set and show progressbar
+        const intervalProgressBar = setInterval(() => {
+            setLoadProgress((prev) => {
+                const nextProgress = prev + 10;
+                if (nextProgress === 110) {
+                    return 10;
+                }
+                return nextProgress;
+            })
+        }, 1000);
 
         // Send the POST request to the server
         await api.post('/dishes', formData)
         .then(() => {
-            setTimeout(() => {
-                setModalMessage({ title: 'Success', message: 'Dish created!', navigate: '/' });
-
-            },5000)
-
+            setModalMessage({ title: 'Success', message: 'Dish created!', navigate: '/' });
+            clearInterval(intervalProgressBar)
         })
         .catch((error) => {
-        if (error.response) {
-            return setModalMessage({ title: 'Error', message: error.response.data.message });
-        } else {
-            return setModalMessage({ title: 'Error', message: 'Error registering dish' });
-        }
+            if (error.response) {
+                return setModalMessage({ title: 'Error', message: error.response.data.message });
+            } else {
+                return setModalMessage({ title: 'Error', message: 'Error registering dish' });
+            }
         })
 
     }
@@ -136,7 +144,7 @@ export function New() {
     }, [])
     return(
         <Container>
-            <ProgressBar progress={30} />
+            { loadProgress > 10 && <ProgressBar progress={loadProgress} /> }
             <Header isAdmin />
             <main className='content'>
                 <ButtonText to="/" title="Back" />
