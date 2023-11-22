@@ -8,11 +8,12 @@ import { api } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 
 
-export function DishSlider({ category_id, isAdmin }) {
+export function DishSlider({ category_id, onSearch }) {
   const imageUrl = `${api.defaults.baseURL}/files/`
   const [categories, setCategories] = useState([])
   const [dishes, setDishes] = useState([])
   const [favourites, setFavourites] = useState([])
+  const [search, setSearch] = useState(onSearch)
 
   const navigate = useNavigate()
 
@@ -39,26 +40,29 @@ export function DishSlider({ category_id, isAdmin }) {
     }
 
   }
-
+  //fetch dishes
+  //if type search, fetch again based on parameter
   useEffect(() => {
+    setSearch(onSearch)
     async function fetchDishes() {
-      const dishesData = await api.get('/dishes?name&ingredients')
+      const dishesData = await api.get(`/dishes?nameOrIngredient=${search}`)
       setDishes(dishesData.data)
 
     }
     
     fetchDishes()
-  }, [])
+  }, [onSearch])
 
+  //fetch categories
   useEffect(() => {
     async function fetchCategories() {
       const response = await api.get('category')
       setCategories(response.data)
-      // console.log(response.data)
     }
     fetchCategories()
   },[])
 
+  //fetch favourites
   useEffect(() => {
     async function fetchFavourites() {
       const response = await api.get('favourites')
@@ -90,7 +94,7 @@ export function DishSlider({ category_id, isAdmin }) {
     <div>
       <Slider {...settings}>
         {
-          dishes && dishes.map((dish,index) => (
+          dishes.length > 0 && dishes.map((dish,index) => (
             //map only dishes with category_id equal to parameter received
             dish.category_id === category_id ?
             <DishCard
@@ -107,8 +111,8 @@ export function DishSlider({ category_id, isAdmin }) {
             />
             : null
           ))
-
         }
+        { dishes.length == 0 && <p className="no-results">0 results</p> }
       </Slider>
     </div>
   );

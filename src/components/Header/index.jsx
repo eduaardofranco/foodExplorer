@@ -10,8 +10,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 import { useCart } from '../../hooks/cart'
 
-export function Header({ onOpenMenu }) {
+export function Header({ onOpenMenu, onSearch }) {
     const [isMenuOpen, setMenuOpen] = useState(false);
+    const [search, setSearch] = useState('')
 
     const navigate = useNavigate()
 
@@ -37,6 +38,11 @@ export function Header({ onOpenMenu }) {
     function handleNavigateHome() {
         navigate('/')
     }
+
+    function handleHeaderSearch(e) {
+        setSearch(e.target.value);
+        onSearch(e.target.value);
+    }
     
 
     return(
@@ -54,7 +60,7 @@ export function Header({ onOpenMenu }) {
                     </button>}
                 </div>
                 <div className="searchInput">
-                    <SearchBar placeholder="Search by dish or ingredient"  />
+                    <SearchBar placeholder="Search by dish or ingredient" onChange={(e) => handleHeaderSearch(e)} />
                 </div>
                 {isAdmin ? '' : <><a href="" onClick={handleFavourites} >Favourites</a><a href="">My Orders</a></>}
                 

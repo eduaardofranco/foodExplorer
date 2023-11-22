@@ -53,3 +53,8 @@
 .slick-next:hover, .slick-next:focus {
     background: linear-gradient(to left, rgba(0, 10, 15, 1), rgba(0, 0, 0, 0));
 }
+.no-results {
+    text-align: center;
+    font-size: 2.3rem;
+    opacity: .3;
+}

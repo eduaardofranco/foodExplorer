@@ -11,6 +11,7 @@ export function Home() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [dishes, setDishes] = useState([])
   const [categories, setCategories] = useState([])
+  const [search, setSearch] = useState('')
 
   //fetch dishes
   useEffect(() => {
@@ -36,13 +37,17 @@ export function Home() {
   let isAdmin = false
   if(role === 'admin') isAdmin = true
 
+  function handleSearch(searchValue) {
+    setSearch(searchValue)
+  }
+
   return(
     <Container>
       <Menu
         menuIsOpen={menuIsOpen}
         onCloseMenu={() => setMenuIsOpen(false)}
-      />
-      <Header onOpenMenu={() => setMenuIsOpen(true)} />
+        />
+      <Header onOpenMenu={() => setMenuIsOpen(true)} onSearch={handleSearch} />
       <main>
         <div className="content">
           <Banner>
@@ -53,8 +58,8 @@ export function Home() {
             categories && categories.map((category,index) => (
               <div key={String(index)}>
                 <h2 className="subtitle">{category.name}</h2>
-                <div>
-                    <DishSlider category_id={category.id} />
+                <div className='slider-section'>
+                    <DishSlider category_id={category.id} onSearch={search}/>
                 </div>
               </div>
             ))

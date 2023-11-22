@@ -14,7 +14,7 @@ export const Container = styled.div`
                 margin: 1.6rem 0 2rem 0;
             }
         }
-    }    
+    }
 
 .subtitle {
     color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};
