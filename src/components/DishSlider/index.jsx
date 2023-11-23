@@ -10,10 +10,11 @@ import { useNavigate } from 'react-router-dom';
 
 export function DishSlider({ category_id, onSearch }) {
   const imageUrl = `${api.defaults.baseURL}/files/`
+  
   const [categories, setCategories] = useState([])
   const [dishes, setDishes] = useState([])
   const [favourites, setFavourites] = useState([])
-  const [search, setSearch] = useState(onSearch)
+  const [search, setSearch] = useState('')
 
   const navigate = useNavigate()
 
@@ -43,14 +44,13 @@ export function DishSlider({ category_id, onSearch }) {
   //fetch dishes
   //if type search, fetch again based on parameter
   useEffect(() => {
-    setSearch(onSearch)
-    async function fetchDishes() {
-      const dishesData = await api.get(`/dishes?nameOrIngredient=${search}`)
-      setDishes(dishesData.data)
 
+    async function fetchDishes() {
+      const dishesData = await api.get(`/dishes?nameOrIngredient=${onSearch}`)
+      setDishes(dishesData.data)
     }
-    
     fetchDishes()
+
   }, [onSearch])
 
   //fetch categories
@@ -94,7 +94,8 @@ export function DishSlider({ category_id, onSearch }) {
     <div>
       <Slider {...settings}>
         {
-          dishes.length > 0 && dishes.map((dish,index) => (
+            
+          dishes && dishes.map((dish, index) => (
             //map only dishes with category_id equal to parameter received
             dish.category_id === category_id ?
             <DishCard
@@ -111,7 +112,8 @@ export function DishSlider({ category_id, onSearch }) {
             />
             : null
           ))
-        }
+          }
+
         { dishes.length == 0 && <p className="no-results">0 results</p> }
       </Slider>
     </div>

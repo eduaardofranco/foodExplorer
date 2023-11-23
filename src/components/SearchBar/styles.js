@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../../styles/layoutBreakpoints' 
 
 export const Container = styled.div`
     
@@ -28,4 +29,18 @@ export const Container = styled.div`
         font-size: 2.4rem;
     }
 
+    button {
+        background-color: transparent;
+        border: 0;
+        cursor: pointer;
+        margin-right: 1rem;
+        svg {
+            color: ${({ theme }) => theme.COLORS.TXT_GRAY_100};
+        }
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+        button {
+            display: none;
+        }
+    }
 `;

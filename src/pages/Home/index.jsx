@@ -9,19 +9,8 @@ import { useAuth } from '../../hooks/auth'
 
 export function Home() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-  const [dishes, setDishes] = useState([])
   const [categories, setCategories] = useState([])
   const [search, setSearch] = useState('')
-
-  //fetch dishes
-  useEffect(() => {
-    async function fetchDishes() {
-      const dishesData = await api.get('/dishes?name&ingredients')
-      setDishes(dishesData.data)
-    }
-    
-    fetchDishes()
-  }, [])
 
   //fetch categories
   useEffect(() => {
@@ -46,6 +35,7 @@ export function Home() {
       <Menu
         menuIsOpen={menuIsOpen}
         onCloseMenu={() => setMenuIsOpen(false)}
+        onSearch={handleSearch}
         />
       <Header onOpenMenu={() => setMenuIsOpen(true)} onSearch={handleSearch} />
       <main>
@@ -57,9 +47,9 @@ export function Home() {
             // do a map by category
             categories && categories.map((category,index) => (
               <div key={String(index)}>
-                <h2 className="subtitle">{category.name}</h2>
                 <div className='slider-section'>
-                    <DishSlider category_id={category.id} onSearch={search}/>
+                  <h2 className="subtitle">{category.name}</h2>
+                    <DishSlider category_id={category.id} category_name={category.name} onSearch={search}/>
                 </div>
               </div>
             ))

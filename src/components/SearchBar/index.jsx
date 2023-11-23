@@ -1,7 +1,7 @@
 import { Container } from './styles'
 import { AiOutlineSearch } from 'react-icons/ai'
 
-export function SearchBar({ ...rest }) {
+export function SearchBar({ onClick, ...rest }) {
     return(
         <Container>
             <AiOutlineSearch />
@@ -9,6 +9,7 @@ export function SearchBar({ ...rest }) {
             type="search"
             { ...rest}
             />
+            <button onClick={onClick}><AiOutlineSearch /></button>
 
         </Container>
     )

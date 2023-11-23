@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { useAuth } from '../../hooks/auth'
 import { useNavigate } from 'react-router-dom'
 
-export function Menu({ menuIsOpen, onCloseMenu }) {
+export function Menu({ menuIsOpen, onCloseMenu, onSearch }) {
 
     const { signOut, role } = useAuth()
     const navigate = useNavigate()
@@ -19,6 +19,10 @@ export function Menu({ menuIsOpen, onCloseMenu }) {
     function handleNavigate(event, path) {
         event.preventDefault()
         navigate(`/${path}`)
+    }
+
+    function handleHeaderSearch(e) {
+        onSearch(e.target.value);
     }
     
     return(
@@ -33,7 +37,7 @@ export function Menu({ menuIsOpen, onCloseMenu }) {
                     Menu
                 </div>
                 <div className="main">
-                    <SearchBar placeholder="Search by dish or ingredient"  />
+                    <SearchBar placeholder="Search by dish or ingredient" onClick={onCloseMenu} onChange={(e) => handleHeaderSearch(e)}/>
                     <ul>
                         <li>
                             {isAdmin ? <a href="" onClick={(event) => handleNavigate(event, 'favourites')}>New Dish</a> : <a href="" onClick={(event) => handleNavigate(event, 'favourites')}>My Favourites</a>}
