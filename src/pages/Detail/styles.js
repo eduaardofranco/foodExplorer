@@ -20,6 +20,9 @@ export const Container = styled.div`
         margin-top: 2.4rem;
 
     }
+    .add {
+        width: 3rem;
+    }
     @media (min-width: ${DEVICE_BREAKPOINTS.SM}) {
         .content {
             margin-left: auto;
@@ -93,11 +96,18 @@ export const Finalize = styled.div`
     display: flex;
     margin-top: 4.8rem;
     align-items: center;
+    justify-content: center;
     .add {
         height: 3.8rem;
+        width: 200px;
         svg {
             font-size: 2.5rem;
             margin-right: 1rem;
+        }
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.XS}) {
+        .add {
+            width: 100px;
         }
     }
     @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
@@ -107,7 +117,9 @@ export const Finalize = styled.div`
     }
     @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
         margin-left: 0;
+        width: 70%;
         .add {
+            width: 200px;
             height: 4.8rem;
         }
     }

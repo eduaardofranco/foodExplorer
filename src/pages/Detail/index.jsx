@@ -5,7 +5,7 @@ import { ButtonText } from '../../components/ButtonText'
 import { Quantity } from '../../components/Quantity'
 import { Button } from '../../components/Button'
 import { Ingredient } from '../../components/Ingredient'
-import { PiReceipt } from 'react-icons/pi'
+import { IoMdCart } from 'react-icons/io'
 import { Footer } from '../../components/Footer'
 import { Menu } from '../../components/Menu'
 import { useState, useEffect } from 'react'
@@ -17,6 +17,8 @@ export function Detail() {
     const [menuIsOpen, setMenuIsOpen] = useState(false);
     const [data, setData] = useState(null)
     const [quantity, setQuantity] = useState(1)
+    const [resetQuantity, setResetQuantity] = useState(1)
+    const [addItemClicked, setAddItemClicked] = useState(false)
 
     const imageUrl = `${api.defaults.baseURL}/files/`
 
@@ -36,6 +38,18 @@ export function Detail() {
 
     const getQuantity = (quantity) => {
         setQuantity(quantity)   
+    }
+
+    function handleAddToCart(id, quantity) {
+        addToCart(id, quantity)
+
+        setAddItemClicked(true)
+        //remove class after 2.5s
+        setTimeout(() => {
+            //reset quantity component after 2.5s added
+            setAddItemClicked(false)
+            setResetQuantity((prev) => prev + 1)
+        },2500)
     }
 
     useEffect(() => {
@@ -84,9 +98,20 @@ export function Detail() {
                                         ))
                                     }
                                 </ Ingredients>
-                                <Finalize>
-                                    {isAdmin ? '' : <Quantity isbig={true} getQuantity={getQuantity} />}
-                                    {isAdmin ? <Button className="add-edit" title="Edit" onClick={() => handleUpdate(data.id)} /> : <Button className="add" title="Add" icon={PiReceipt} onClick={() => addToCart(data.id, quantity)} />}
+                                <Finalize> 
+                                    {isAdmin ? '' : <Quantity isbig={true} getQuantity={getQuantity} resetQuantity={resetQuantity} />}
+                                    {isAdmin ?
+                                        <Button className="add-edit" title="Edit" onClick={() => handleUpdate(data.id)} />
+                                        :
+                                        <Button
+                                            className={addItemClicked ? 'added-cart add' : 'add'}
+                                            title="Add"
+                                            icon={IoMdCart}
+                                            onClick={() => handleAddToCart(data.id, quantity)}
+                                            disabled={addItemClicked ? 'disabled' : null}
+                                        >
+                                            <span className='added'>{quantity} Added</span>
+                                        </Button>}
                                 </ Finalize>
                             </Infos>
                         </div>

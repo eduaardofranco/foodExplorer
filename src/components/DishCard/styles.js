@@ -47,63 +47,6 @@ export const Container = styled.div`
         cursor: pointer;
 
     }
-    .added {
-        font-weight: 800;
-        opacity: 0;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        white-space: nowrap;
-    }
-    .add {
-        position: relative;
-        overflow: hidden;
-        &.added-cart {
-            svg {
-                animation: cart 1s ease-in-out forwards;
-            }
-            .added {
-                animation: addedText 1s ease-in-out forwards;
-            }
-            span {
-                animation: addText 1s ease-in-out forwards;
-            }
-        }
-        svg {
-            font-size: 2.5rem;
-            position: absolute;
-            left: -25%;
-        }
-
-    }
-    @keyframes cart {
-        0% {
-            left: -10%;
-        }
-        100% {
-            left: 110%;
-        }
-    }
-    @keyframes addedText {
-        0% {
-            opacity: 0;
-        }
-        50% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
-    @keyframes addText {
-        0% {
-            opacity: 1;
-        }
-        100% {
-            opacity: 0;
-        }
-    }
     
     @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
         flex-direction: column;
