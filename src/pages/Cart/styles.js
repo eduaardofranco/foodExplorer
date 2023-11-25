@@ -112,7 +112,7 @@ export const PaymentForm = styled.div`
             text-align: center;
         }
         form {
-            display: none;
+            /* display: none; */
             label {
                 color: ${({ theme }) => theme.COLORS.TXT_GRAY_400};
                 display: block;
