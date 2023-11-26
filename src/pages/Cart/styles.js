@@ -17,17 +17,17 @@ export const Container = styled.div`
             width: 15rem;
         }
     }
-    @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
-        .container {
-            display: flex;
-            gap: 4.8rem;
-            flex-wrap: wrap;
-        }
-    }
     @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
         main {
             margin: 0 auto;
             width: 1000px;
+        }
+        .wraper-contantainer {
+            display: flex;
+            gap: 10rem;
+        }
+        .finalize {
+            display: none;
         }
     }
     @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
@@ -39,30 +39,6 @@ export const Container = styled.div`
     }
 `;
 
-export const ItemOrder = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 1.3rem;
-    margin-bottom: 2rem;
-    img {
-        border-radius: 100%;
-        display: block;
-        width: 8rem;
-    }
-    h3 {
-        color: ${({ theme }) => theme.COLORS.TXT_GRAY_300};
-        font-size: 2rem;
-        font-weight: 500;
-    }
-    button {
-        background-color: transparent;
-        border: none;
-        color: ${({ theme }) => theme.COLORS.BG_RED_400};
-        cursor: pointer;
-        padding: 0;
-        margin-top: .5rem;
-    }
-`;
 export const PaymentSection = styled.div`
     h2 {
         font-size: 3rem;
@@ -72,6 +48,7 @@ export const PaymentSection = styled.div`
 export const PaymentForm = styled.div`
     border: .1rem solid ${({ theme }) => theme.COLORS.TXT_GRAY_500};
     border-radius: .8rem;
+    margin: 0 auto;
     .header {
         font-family: ${({ theme }) => theme.FONTS.ROBOTO};
         display: flex;
@@ -148,5 +125,11 @@ export const PaymentForm = styled.div`
                 margin-bottom: 2rem;
             }
         }
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.SM}) {
+        width: 80%;
+    }
+    @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
+        width: 45rem;
     }
 `;
