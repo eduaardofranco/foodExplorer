@@ -26,7 +26,7 @@ export function Cart() {
     const { productsCart, removeFromCart, getTotalCartAmount } = useCart()
 
     const navigate = useNavigate()
-    let description = ''
+    let orderDescription = []
 
     
     let totalAmount = getTotalCartAmount()
@@ -44,9 +44,10 @@ export function Cart() {
     //when user submit card details for payment
     async function handleSendPayment(e) {
         e.preventDefault()
+        //convert to string
+        const orderDescriptionString = String(orderDescription)
         try{
-
-            await api.post('/orders', {description})
+            await api.post('/orders', {description: orderDescriptionString})
             setPaymentSucess(true)
             //show message when place order
             setModalMessage({ title: 'Order placed', message: 'Your orders is in the kitchen now', navigate: '/' });
@@ -106,7 +107,8 @@ export function Cart() {
                                     const isInCart = productsCart[dish.id] !== undefined;
                                     if(isInCart) {
                                         const quantityInCart = productsCart[dish.id];
-                                        description += `, ${quantityInCart}x ${dish.name} `;
+                                        //insert order description in variable for posting it later
+                                        orderDescription.push(` ${quantityInCart}x ${dish.name}`)
 
                                         return (
                                             <DishList
