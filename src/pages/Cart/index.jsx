@@ -7,6 +7,7 @@ import { DishList } from '../../components/DishList'
 import { useCart } from '../../hooks/cart'
 import { ButtonText } from '../../components/ButtonText'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { FaPix, FaRegClock } from "react-icons/fa6";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { GiKnifeFork } from "react-icons/gi";
@@ -15,12 +16,14 @@ import { api } from '../../services/api'
 
 export function Cart() {
     const [dishes, setDishes] = useState([])
-    const [paymentType, setPaymentType] = useState('card')
+    const [paymentType, setPaymentType] = useState('pix')
     const [paymentSucess, setPaymentSucess] = useState(false)
     const [showPayment, setShowPayment] = useState(false)
     const [showOrder, setShowOrder] = useState(true)
 
     const { productsCart, removeFromCart, getTotalCartAmount } = useCart()
+
+    const navigate = useNavigate()
 
     
     let totalAmount = getTotalCartAmount()
@@ -41,6 +44,11 @@ export function Cart() {
         setShowOrder(false)
     }
 
+    function handleBackk() {
+        console.log('ois')
+        navigate('/favourites')
+    }
+
     //fetch dishes
     useEffect(() => {
         api.get('/dishes?name&ingredients')
@@ -55,10 +63,10 @@ export function Cart() {
         <Container>
             <Header />
             <main>
+            <ButtonText title="Back" />
                 {
                     showOrder &&
                     <div className="my-order">
-                        <ButtonText title="Back" />
                         <Title title="My Order" />
                         {Object.keys(productsCart).length > 0 ?
                         
@@ -99,7 +107,6 @@ export function Cart() {
                 {
                     showPayment &&
                     <PaymentSection>
-                        <ButtonText title="Back" />
                         <h2>Payment</h2>
                         <PaymentForm>
                             <div className="header">
@@ -119,6 +126,7 @@ export function Cart() {
                                 </p>
                             </div>
                             <div className="body">
+                                {/* if payment type is pix, show this section */}
                                 {
                                     paymentType === 'pix' && paymentSucess == false &&
                                     <div className="pix">
@@ -136,6 +144,7 @@ export function Cart() {
                                     </div>
 
                                 }
+                                {/* if payment type is card, show this section */}
                                 {
                                     paymentType === 'card' && paymentSucess == false &&
                                     <div className="card">
@@ -163,6 +172,7 @@ export function Cart() {
                                     </div>
                                 }
                                 {
+                                    // show after place order
                                     paymentSucess == true &&
                                         <div className="status">
                                             <FaRegClock />

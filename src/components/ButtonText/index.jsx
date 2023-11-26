@@ -2,7 +2,7 @@ import { Container } from './styles.js'
 import { IoIosArrowBack } from 'react-icons/io'
 import { useNavigate } from 'react-router-dom'
 
-export function ButtonText({ title, isBig = false, ...rest }) {
+export function ButtonText({ title, isBig = false, onClick, ...rest }) {
     const navigate = useNavigate()
     function handleBack(event) {
         event.preventDefault()
@@ -12,7 +12,7 @@ export function ButtonText({ title, isBig = false, ...rest }) {
         <Container
         $isbig={isBig}
         {...rest}
-        onClick={(event) => handleBack(event)}
+        onClick={onClick ? onClick : (event) => handleBack(event)}
         >
             <IoIosArrowBack />
             {title}
