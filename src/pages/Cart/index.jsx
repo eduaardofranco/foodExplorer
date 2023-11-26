@@ -13,6 +13,7 @@ import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { GiKnifeFork } from "react-icons/gi";
 import { FaRegCreditCard } from "react-icons/fa";
 import { api } from '../../services/api'
+import { ModalMessage } from '../../components/ModalMessage'
 
 export function Cart() {
     const [dishes, setDishes] = useState([])
@@ -20,10 +21,12 @@ export function Cart() {
     const [paymentSucess, setPaymentSucess] = useState(false)
     const [showPayment, setShowPayment] = useState(false)
     const [showOrder, setShowOrder] = useState(true)
+    const [modalMessage, setModalMessage] = useState({ message: '', title: ''})
 
     const { productsCart, removeFromCart, getTotalCartAmount } = useCart()
 
     const navigate = useNavigate()
+    let description = ''
 
     
     let totalAmount = getTotalCartAmount()
@@ -36,6 +39,27 @@ export function Cart() {
                 return setPaymentType('pix');
             case 'card':
                 return setPaymentType('card')
+        }
+    }
+    //when user submit card details for payment
+    async function handleSendPayment(e) {
+        e.preventDefault()
+        try{
+
+            await api.post('/orders', {description})
+            setPaymentSucess(true)
+            //show message when place order
+            setModalMessage({ title: 'Order placed', message: 'Your orders is in the kitchen now', navigate: '/' });
+            //empty cart
+            removeFromCart()
+        } catch(error) {
+            if(error) {
+                setModalMessage({ title: 'Error placing order', message: 'There was an error placing yor order', navigate: '/' });
+                console.log('Error placing order: ',error)
+            }
+            else {
+                console.log('Error placing order')
+            }
         }
     }
 
@@ -51,15 +75,15 @@ export function Cart() {
 
     //fetch dishes
     useEffect(() => {
-        api.get('/dishes?name&ingredients')
+        api.get('/dishes')
         .then(response => {
             setDishes(response.data)
         }).catch(error => {
             console.log('Error fetching diches: ', error)
         })
+
         //check window width and show payment if > 767px
         if(window.innerWidth > '1023') {
-            console.log('o')
             setShowPayment(true)
         }
     },[])
@@ -82,6 +106,7 @@ export function Cart() {
                                     const isInCart = productsCart[dish.id] !== undefined;
                                     if(isInCart) {
                                         const quantityInCart = productsCart[dish.id];
+                                        description += `, ${quantityInCart}x ${dish.name} `;
 
                                         return (
                                             <DishList
@@ -110,8 +135,9 @@ export function Cart() {
                         
                         </div>
                     }
+                    {/* show payment if there is products in cart */}
                     {
-                        showPayment &&
+                        showPayment && Object.keys(productsCart).length > 0 &&
                         <PaymentSection>
                             <h2>Payment</h2>
                             <PaymentForm>
@@ -173,7 +199,7 @@ export function Cart() {
                                                         <input type="number" placeholder="000" />
                                                     </div>
                                                 </div>
-                                                <Button title="Make Payment" onClick={() => setPaymentSucess(true)} />
+                                                <Button title="Make Payment" onClick={(e) => handleSendPayment(e)} />
                                             </form>
                                         </div>
                                     }
@@ -199,7 +225,7 @@ export function Cart() {
                 </div>
             </main>
 
-
+            <ModalMessage title={modalMessage.title} message={modalMessage.message} navigation={modalMessage.navigate} />
             <Footer />
         </Container>
     )

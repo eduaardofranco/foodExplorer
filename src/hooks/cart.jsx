@@ -39,11 +39,12 @@ export function CartProvider({ children }) {
         }))
     }
     const removeFromCart = (id) => {
-        setProductsCart((prev) => {
-            const newCart = {...prev}
-            delete newCart[id]
-            return newCart
-        })
+        // setProductsCart((prev) => {
+        //     const newCart = {...prev}
+        //     delete newCart[id]
+        //     return newCart
+        // })
+        setProductsCart({})
     }
     //update sessionStorage when productCount changes
     useEffect(() => {
