@@ -39,11 +39,13 @@ export function CartProvider({ children }) {
         }))
     }
     const removeFromCart = (id) => {
-        // setProductsCart((prev) => {
-        //     const newCart = {...prev}
-        //     delete newCart[id]
-        //     return newCart
-        // })
+        setProductsCart((prev) => {
+            const newCart = {...prev}
+            delete newCart[id]
+            return newCart
+        })
+    }
+    const emptyCart = () => {
         setProductsCart({})
     }
     //update sessionStorage when productCount changes
@@ -83,6 +85,7 @@ export function CartProvider({ children }) {
             productsCart,
             addToCart,
             removeFromCart,
+            emptyCart,
             getTotalCartAmount }} >
                 { children }
         </CartContext.Provider>

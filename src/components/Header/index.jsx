@@ -62,7 +62,7 @@ export function Header({ onOpenMenu, onSearch }) {
                 <div className="searchInput">
                     <SearchBar placeholder="Search by dish or ingredient" onChange={(e) => handleHeaderSearch(e)} />
                 </div>
-                {isAdmin ? '' : <><a href="" onClick={handleFavourites} >Favourites</a><a href="">My Orders</a></>}
+                {isAdmin ? '' : <><a href="" onClick={handleFavourites} >Favourites</a><a href="" onClick={() => navigate('/orders')}>My Orders</a></>}
                 
                 {isAdmin ?
                 <Link to="/new"><Button className="btnBig" title="New Dish" /></Link>

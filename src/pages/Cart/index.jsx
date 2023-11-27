@@ -23,7 +23,7 @@ export function Cart() {
     const [showOrder, setShowOrder] = useState(true)
     const [modalMessage, setModalMessage] = useState({ message: '', title: ''})
 
-    const { productsCart, removeFromCart, getTotalCartAmount } = useCart()
+    const { productsCart, removeFromCart, getTotalCartAmount, emptyCart } = useCart()
 
     const navigate = useNavigate()
     let orderDescription = []
@@ -52,7 +52,7 @@ export function Cart() {
             //show message when place order
             setModalMessage({ title: 'Order placed', message: 'Your orders is in the kitchen now', navigate: '/' });
             //empty cart
-            removeFromCart()
+            emptyCart()
         } catch(error) {
             if(error) {
                 setModalMessage({ title: 'Error placing order', message: 'There was an error placing yor order', navigate: '/' });
