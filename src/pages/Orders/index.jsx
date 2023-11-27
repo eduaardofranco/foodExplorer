@@ -1,4 +1,4 @@
-import { Container, Table } from './styles'
+import { Container, Table, ItemOrder, StatusIcon } from './styles'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { Title } from '../../components/Title'
@@ -58,8 +58,10 @@ export function Orders() {
                                 <tr key={String(index)}>
                                     <td>
                                         <span>
-                                            <GoDotFill className={order.status} />
-                                            {order.status}
+                                            <StatusIcon className={order.status}>
+                                                <GoDotFill />
+                                                {order.status}
+                                            </StatusIcon>
                                         </span>
                                     </td>
                                     <td>{String(order.id).padStart(4, '0')}</td>
@@ -70,6 +72,24 @@ export function Orders() {
                         }
                     </tbody>
                 </Table>
+                        {
+                            orders && orders.map((order, index) => (
+                                <ItemOrder key={String(index)}>
+                                    <div className="header">
+                                        <p>{String(order.id).padStart(4, '0')}</p>
+                                        <p>
+                                            <StatusIcon className={order.status}>
+                                                <GoDotFill />
+                                                {order.status}
+                                            </StatusIcon>
+                                        </p>
+                                        <p>{getFormatedDate(order.created_at)} at {getFormatedTime(order.created_at)}</p>
+                                    </div>
+                                    <p className="description">{order.description}</p>
+                                </ItemOrder>    
+
+                            ))
+                        }
             </main>
 
 

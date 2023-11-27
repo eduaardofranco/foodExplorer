@@ -38,6 +38,10 @@ export function Header({ onOpenMenu, onSearch }) {
     function handleNavigateHome() {
         navigate('/')
     }
+    function handleNavigateOrders(e) {
+        e.preventDefault()
+        navigate('/orders')
+    }
 
     function handleHeaderSearch(e) {
         setSearch(e.target.value);
@@ -62,7 +66,7 @@ export function Header({ onOpenMenu, onSearch }) {
                 <div className="searchInput">
                     <SearchBar placeholder="Search by dish or ingredient" onChange={(e) => handleHeaderSearch(e)} />
                 </div>
-                {isAdmin ? '' : <><a href="" onClick={handleFavourites} >Favourites</a><a href="" onClick={() => navigate('/orders')}>My Orders</a></>}
+                {isAdmin ? '' : <><a href="" onClick={handleFavourites} >Favourites</a><a href="" onClick={(e) => handleNavigateOrders(e)}>My Orders</a></>}
                 
                 {isAdmin ?
                 <Link to="/new"><Button className="btnBig" title="New Dish" /></Link>
