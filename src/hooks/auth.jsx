@@ -64,6 +64,7 @@ function AuthProvider( { children }) {
                       return true;
                     }  
                     //token is invalid
+                    signOut();
                     return false;
                   } catch (error) {
                     // Handle decoding errors
