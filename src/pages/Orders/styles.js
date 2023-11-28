@@ -36,6 +36,12 @@ export const Table = styled.table`
             text-transform: lowercase;
         }
     }
+    select {
+        background-color: transparent;
+        border-radius: .4rem;
+        color: ${({ theme }) => theme.COLORS.TXT_GRAY_400};
+        padding: .5rem;
+    }
     @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
         display: table;
     }
@@ -80,6 +86,12 @@ export const ItemOrder = styled.div`
     }
     &+ div {
         margin-top: 1.7rem;
+    }
+    select {
+        background-color: transparent;
+        border-radius: .4rem;
+        color: ${({ theme }) => theme.COLORS.TXT_GRAY_400};
+        padding: .5rem;
     }
     @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
         display: none;
