@@ -134,7 +134,8 @@ export function Cart() {
 
                                 })}
 
-                                <h2>Total: €{totalAmount}</h2>
+                                <h2>Total: €{parseFloat(totalAmount).toFixed(2).replace(/\.?0+$/, '')}</h2>
+                                
                                 <div className="finalize">
                                     <Button title="Next" onClick={handleShowPayment} />
                                 </div>

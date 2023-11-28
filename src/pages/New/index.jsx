@@ -45,8 +45,10 @@ export function New() {
     function handlePrice(e) {
         // Ensure the entered value is a valid number before formatting
         const newValue = parseFloat(e.target.value);
-        if (!isNaN(newValue)) {
+        if (!isNaN(newValue) && newValue > 0) {
             setPrice(newValue.toFixed(2)); // Format to two decimal places
+        } else {
+            setPrice('')
         }
     }
 
