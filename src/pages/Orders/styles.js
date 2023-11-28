@@ -56,7 +56,7 @@ export const StatusIcon = styled.span`
             color: #AB222E;
         }
     }
-    &.prepared {
+    &.preparing {
         svg {
             color: #FBA94C;
         }

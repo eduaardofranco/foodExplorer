@@ -13,6 +13,7 @@ import { ValidationMessage } from '../../components/ValidationMessage'
 import { ModalMessage } from '../../components/ModalMessage'
 import { api } from '../../services/api'
 import { ProgressBar } from '../../components/ProgessBar'
+import noImage from '../../assets/no-image.jpg' 
 
 export function New() {
     const [ingredients, setIngredients] = useState([])
@@ -30,6 +31,8 @@ export function New() {
     const [description, setDescription] = useState('')
 
     const [labelName, setLabelName] = useState('Select dish image')
+
+    const imageUrl = `${api.defaults.baseURL}/files/`
 
     function handleAddIngredient() {
         if(newIngredient) {
