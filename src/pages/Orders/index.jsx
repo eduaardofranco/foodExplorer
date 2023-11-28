@@ -59,48 +59,53 @@ export function Orders() {
             <main>
                 <ButtonText title="Back" />
                 <Title title={isAdmin ? "Orders" : "My Orders"} />
-                <Table>
-                    <thead>
-                        <tr>
-                            <td>Status</td>
-                            <td>Code</td>
-                            <td>Description</td>
-                            <td>Time</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            orders && orders.map((order, index) =>(
-                                <tr key={String(index)}>
-                                    <td>
-                                        <span>
-                                            {
-                                                isAdmin
-                                                ?
-                                                <form action="">
-                                                    <select onChange={(e) => handleUpdateOrderStatus(order.id, e.target.value)}>
-                                                        <option>{order.status}</option>
-                                                        {order.status === "pending" ? null : <option>pending</option>}
-                                                        {order.status === "prepared" ? null : <option>prepared</option>}
-                                                        {order.status === "delivered" ? null : <option>delivered</option>}
-                                                    </select>
-                                                </form>
-                                                :
-                                                <StatusIcon className={order.status}>
-                                                    <GoDotFill />
-                                                    {order.status}
-                                                </StatusIcon>
-                                            }
-                                        </span>
-                                    </td>
-                                    <td>{String(order.id).padStart(4, '0')}</td>
-                                    <td>{order.description}</td>
-                                    <td>{getFormatedDate(order.created_at)} at {getFormatedTime(order.created_at)}</td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </Table>
+                {
+                    orders.length > 0 ?
+                    <Table>
+                        <thead>
+                            <tr>
+                                <td>Status</td>
+                                <td>Code</td>
+                                <td>Description</td>
+                                <td>Time</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                orders.map((order, index) =>(
+                                    <tr key={String(index)}>
+                                        <td>
+                                            <span>
+                                                {
+                                                    isAdmin
+                                                    ?
+                                                    <form action="">
+                                                        <select onChange={(e) => handleUpdateOrderStatus(order.id, e.target.value)}>
+                                                            <option>{order.status}</option>
+                                                            {order.status === "pending" ? null : <option>pending</option>}
+                                                            {order.status === "preparing" ? null : <option>preparing</option>}
+                                                            {order.status === "delivered" ? null : <option>delivered</option>}
+                                                        </select>
+                                                    </form>
+                                                    :
+                                                    <StatusIcon className={order.status}>
+                                                        <GoDotFill />
+                                                        {order.status}
+                                                    </StatusIcon>
+                                                }
+                                            </span>
+                                        </td>
+                                        <td>{String(order.id).padStart(4, '0')}</td>
+                                        <td>{order.description}</td>
+                                        <td>{getFormatedDate(order.created_at)} at {getFormatedTime(order.created_at)}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </Table>
+                    :
+                    <h2>You have no orders yet</h2>
+                }
                         {
                             orders && orders.map((order, index) => (
                                 <ItemOrder key={String(index)}>

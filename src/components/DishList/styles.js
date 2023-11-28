@@ -13,8 +13,8 @@ export const Container = styled.div`
     figure {
         border-radius: 100%;
         overflow: hidden;
-        height: 8rem;
-        width: 8rem;
+        height: 80px;
+        width: 80px;
 
         display: flex;
         align-items: center;
@@ -23,12 +23,14 @@ export const Container = styled.div`
     img {
         display: block;
         width: 8rem;
+        transform: scale(1.2);
     }
     h3 {
         color: ${({ theme }) => theme.COLORS.TXT_GRAY_00};
         font-size: 2rem;
         max-height: 4rem;
         overflow: hidden;
+        width: 30.7rem;
         span {
             color: ${({ theme }) => theme.COLORS.TXT_GRAY_400};
             font-weight: normal;
