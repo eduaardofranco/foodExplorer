@@ -42,7 +42,7 @@ export function Menu({ menuIsOpen, onCloseMenu, onSearch }) {
                         <li>
                             {isAdmin ? <a href="" onClick={(event) => handleNavigate(event, 'favourites')}>New Dish</a> : <a href="" onClick={(event) => handleNavigate(event, 'favourites')}>My Favourites</a>}
                         </li>
-                        {!isAdmin ? <li><a href="" onClick={(event) => handleNavigate(event, 'orders')}>Orders</a></li> : null}
+                        <li><a href="" onClick={(event) => handleNavigate(event, 'orders')}>Orders</a></li>
                         <li>
                             <a href="" onClick={signOut}>Logout <HiOutlineLogout /></a>
                         </li>
