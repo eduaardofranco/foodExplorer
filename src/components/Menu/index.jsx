@@ -9,12 +9,9 @@ import { useNavigate } from 'react-router-dom'
 
 export function Menu({ menuIsOpen, onCloseMenu, onSearch }) {
 
-    const { signOut, role } = useAuth()
+    const { signOut, isAdmin } = useAuth()
     const navigate = useNavigate()
 
-    //check if is admin
-    let isAdmin = false
-    if(role === 'admin') isAdmin = true
 
     function handleNavigate(event, path) {
         event.preventDefault()
@@ -40,7 +37,11 @@ export function Menu({ menuIsOpen, onCloseMenu, onSearch }) {
                     <SearchBar placeholder="Search by dish or ingredient" onClick={onCloseMenu} onChange={(e) => handleHeaderSearch(e)}/>
                     <ul>
                         <li>
-                            {isAdmin ? <a href="" onClick={(event) => handleNavigate(event, 'favourites')}>New Dish</a> : <a href="" onClick={(event) => handleNavigate(event, 'favourites')}>My Favourites</a>}
+                            {
+                                isAdmin ?
+                                <a href="" onClick={(event) => handleNavigate(event, 'new')}>New Dish</a>
+                                :
+                                <a href="" onClick={(event) => handleNavigate(event, 'favourites')}>My Favourites</a>}
                         </li>
                         <li><a href="" onClick={(event) => handleNavigate(event, 'orders')}>Orders</a></li>
                         <li>

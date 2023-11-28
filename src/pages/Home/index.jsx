@@ -22,9 +22,7 @@ export function Home() {
   },[])
 
   //check if is admin or user
-  const { role = 'user' } = useAuth()
-  let isAdmin = false
-  if(role === 'admin') isAdmin = true
+  const { isAdmin } = useAuth()
 
   function handleSearch(searchValue) {
     setSearch(searchValue)

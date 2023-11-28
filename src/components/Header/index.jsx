@@ -31,9 +31,7 @@ export function Header({ onOpenMenu, onSearch }) {
         navigate('/favourites')
     }
     
-    const { role } = useAuth()
-    let isAdmin = false
-    if(role === 'admin') isAdmin = true
+    const { isAdmin } = useAuth()
 
     function handleNavigateHome() {
         navigate('/')

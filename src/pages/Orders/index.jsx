@@ -17,9 +17,7 @@ export function Orders() {
     const [modalMessage, setModalMessage] = useState({ message: '', title: '', confirmType: false, fncConfirm: '' })
 
     //verify is is admin, default comes false
-    const { role = 'user' } = useAuth()
-    let isAdmin = false
-    if(role === 'admin') isAdmin = true
+    const { role, isAdmin } = useAuth()
 
     function getFormatedDate(date) {
         const month = new Date(date).getMonth() + 1; // Months are zero-based, so we add 1

@@ -28,9 +28,7 @@ export function Detail() {
     const navigate = useNavigate()
 
     //verify is is admin, default comes false
-    const { role = 'user' } = useAuth()
-    let isAdmin = false
-    if(role === 'admin') isAdmin = true
+    const { isAdmin } = useAuth()
 
     function handleUpdate(id) {
         navigate(`/update/${id}`)

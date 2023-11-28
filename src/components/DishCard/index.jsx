@@ -17,9 +17,7 @@ export function DishCard({ id, img, name, description, price, isFavourite, onCli
     const [addItemClicked, setAddItemClicked] = useState(false)
     const { addToCart, removeFromCart } = useCart()
 
-    const { role = 'user' } = useAuth()
-    let isAdmin = false
-    if(role === 'admin') isAdmin = true
+    const { isAdmin } = useAuth()
 
     //get quantity number from Quantity component
     const getQuantity = (quantity) => {

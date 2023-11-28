@@ -95,7 +95,7 @@ function AuthProvider( { children }) {
             signIn,
             signOut,
             user: data.user,
-            role: data.user?.role || 'user', // Include the user's role or set to user
+            isAdmin: data.user?.role == 'admin' ? true: false
         }}>
             {children}
         </AuthContext.Provider>
