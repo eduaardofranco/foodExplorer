@@ -11,7 +11,6 @@ import { useAuth } from '../../hooks/auth'
 import { useCart } from '../../hooks/cart'
 
 export function DishCard({ id, img, name, description, price, isFavourite, onClick, onClickFavourite }) {
-    const [totalPrice, setTotalPrice] = useState(price);
     const [quantity, setQuantity] = useState(1)
     const [resetQuantity, setResetQuantity] = useState(1)
     const [addItemClicked, setAddItemClicked] = useState(false)
@@ -51,7 +50,7 @@ export function DishCard({ id, img, name, description, price, isFavourite, onCli
                 <Description>
                     {description}
                 </Description>
-                <Price>€{totalPrice.toFixed(2)}</Price>
+                <Price>€{price.toFixed(2)}</Price>
 
             </a>
             <Finalize>

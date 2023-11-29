@@ -48,6 +48,7 @@ export function DishSlider({ category_id, onSearch }) {
     async function fetchDishes() {
       const dishesData = await api.get(`/dishes?nameOrIngredient=${onSearch}`)
       setDishes(dishesData.data)
+      console.log(dishesData.data)
     }
     fetchDishes()
 
