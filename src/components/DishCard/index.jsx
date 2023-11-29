@@ -10,7 +10,7 @@ import { useState } from 'react'
 import { useAuth } from '../../hooks/auth'
 import { useCart } from '../../hooks/cart'
 
-export function DishCard({ id, img, name, description, price, isFavourite, onClick, onClickFavourite }) {
+export function DishCard({ id, img, name, description, price, isFavourite, onClick, onClickEdit, onClickFavourite }) {
     const [totalPrice, setTotalPrice] = useState(price);
     const [quantity, setQuantity] = useState(1)
     const [resetQuantity, setResetQuantity] = useState(1)
@@ -40,7 +40,7 @@ export function DishCard({ id, img, name, description, price, isFavourite, onCli
     return( 
         <Container>
             <Favourite>
-                {isAdmin ? <PiPencilSimpleBold /> : (isFavourite ? <AiFillHeart onClick={onClickFavourite} /> : <BsHeart onClick={onClickFavourite} />)}
+                {isAdmin ? <PiPencilSimpleBold onClick={onClickEdit} /> : (isFavourite ? <AiFillHeart onClick={onClickFavourite} /> : <BsHeart onClick={onClickFavourite} />)}
             </Favourite>
             <a href="#" onClick={onClick}>
                 <Img>
