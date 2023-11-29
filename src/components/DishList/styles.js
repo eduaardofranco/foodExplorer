@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../../styles/layoutBreakpoints' 
+
 
 export const Container = styled.div`
     margin-bottom: 2rem;
@@ -25,17 +27,20 @@ export const Container = styled.div`
         width: 8rem;
         transform: scale(1.2);
     }
+    .inf {
+        width: 63%;
+    }
     h3 {
         color: ${({ theme }) => theme.COLORS.TXT_GRAY_00};
         font-size: 2rem;
-        max-height: 4rem;
-        overflow: hidden;
-        width: 30.7rem;
         span {
             color: ${({ theme }) => theme.COLORS.TXT_GRAY_400};
             font-weight: normal;
             font-size: 1.2rem;
             font-family: ${({ theme }) => theme.FONTS.ROBOTO};
+        }
+        @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
+
         }
     }
     button {
