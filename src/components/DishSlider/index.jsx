@@ -106,7 +106,6 @@ export function DishSlider({ category_id, onSearch }) {
               price={dish.price}
               description={dish.description}
               onClick={(event) => handleDetail(event, dish.id)}
-              onClickEdit={(event) => handleDetail(event,dish.id)}
               //check if it is favourited
               isFavourite={favourites.some((favorite) => favorite.dish_id === dish.id)}
               onClickFavourite={(event) => handleToggleFavourite(event, dish.id)}
