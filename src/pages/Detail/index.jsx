@@ -86,7 +86,7 @@ export function Detail() {
                             </Img>
                             <Infos>
                                 <h1>{data.name}</h1>
-                                <h3>€{data.price}</h3>
+                                <h3>€{data.price.toFixed(2)}</h3>
                                 <Description>{data.description}</Description>
                                 <Ingredients>
                                     {
@@ -96,7 +96,7 @@ export function Detail() {
                                         ))
                                     }
                                 </ Ingredients>
-                                <Finalize> 
+                                <Finalize className={isAdmin ? 'edit' : ''}> 
                                     {isAdmin ? '' : <Quantity isbig={true} getQuantity={getQuantity} resetQuantity={resetQuantity} />}
                                     {isAdmin ?
                                         <Button className="add-edit" title="Edit" onClick={() => handleUpdate(data.id)} />

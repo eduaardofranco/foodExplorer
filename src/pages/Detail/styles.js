@@ -105,6 +105,9 @@ export const Finalize = styled.div`
             margin-right: 1rem;
         }
     }
+    &.edit {
+        justify-content: start;
+    }
     @media (min-width: ${DEVICE_BREAKPOINTS.XS}) {
         .add {
             width: 100px;
