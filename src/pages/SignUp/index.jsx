@@ -10,6 +10,7 @@ import { Logo } from '../../components/Logo'
 import { ModalMessage } from '../../components/ModalMessage'
 import { ValidationMessage } from '../../components/ValidationMessage'
 import { api } from '../../services/api'
+import { ProgressBar } from '../../components/ProgessBar'
 
 export function SignUp() {
 
@@ -19,6 +20,8 @@ export function SignUp() {
     const [repeatPassword, setRepeatPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState('');
     const [modalMessage, setModalMessage] = useState({ message: '', title: ''})
+    const [sendingData, setSendingData] = useState(false)
+    const [loadProgress, setLoadProgress] = useState(0)
 
     const navigate = useNavigate()
     
@@ -26,6 +29,19 @@ export function SignUp() {
     
     function handleSignUp(e) {
         e.preventDefault()
+
+        setSendingData(true)
+
+        //set and show progressbar
+        const intervalProgressBar = setInterval(() => {
+           setLoadProgress((prev) => {
+               const nextProgress = prev + 10;
+               if (nextProgress === 110) {
+                   return 10;
+               }
+               return nextProgress;
+           })
+        }, 500);
         
         if(!name) {
             return setErrorMessage('Name is Required!');
@@ -46,13 +62,13 @@ export function SignUp() {
         //if validation pass, clear error message
         setErrorMessage('');
 
-        //clear the message before caling it again
-        setModalMessage({ title: 'Processing', message: 'Creating user...' });
-
 
         api.post('/users', { name, email, password })
         .then(() => {
+            clearInterval(intervalProgressBar)
+            setLoadProgress(0)
             setModalMessage({ title: 'Sucess', message: 'User Created Sucessfully!', navigate: '/'})
+            setSendingData(false)
         })
         .catch(error => {
             if(error.response) {
@@ -68,6 +84,7 @@ export function SignUp() {
 
     return(
         <Container>
+            { loadProgress > 5 && <ProgressBar progress={loadProgress} /> }
             <div className="logo">
                 <Logo />
             </div>
@@ -108,6 +125,7 @@ export function SignUp() {
                 <Button
                     title="Create"
                     onClick={handleSignUp}
+                    disabled={sendingData ? 'disabled' : ''}
                 />
                 <span className='loginOrNew'>
                     <Link to="/">Login</Link>

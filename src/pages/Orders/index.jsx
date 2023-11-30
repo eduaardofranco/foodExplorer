@@ -10,11 +10,13 @@ import { api } from '../../services/api'
 import { GoDotFill } from "react-icons/go";
 import { useAuth } from '../../hooks/auth'
 import { ModalMessage } from '../../components/ModalMessage'
+import { ProgressBar } from '../../components/ProgessBar'
 
 export function Orders() {
     const [menuIsOpen, setMenuIsOpen] = useState(false);
     const [orders, setOrders] = useState([])
     const [modalMessage, setModalMessage] = useState({ message: '', title: '', confirmType: false, fncConfirm: '' })
+    const [loadProgress, setLoadProgress] = useState(0)
 
     //verify is is admin, default comes false
     const { role, isAdmin } = useAuth()
@@ -33,10 +35,21 @@ export function Orders() {
     }
     //update order status by admin
     async function handleUpdateOrderStatus(id, status) {
+         //set and show progressbar
+         const intervalProgressBar = setInterval(() => {
+            setLoadProgress((prev) => {
+                const nextProgress = prev + 10;
+                if (nextProgress === 110) {
+                    return 10;
+                }
+                return nextProgress;
+            })
+        }, 500);
         api.patch(`/orders/${id}`, { status })
         .then(response => {
+            clearInterval(intervalProgressBar)
+            setLoadProgress(0)
             setModalMessage({ title: 'Sucess!', message: `Order ${id} updated to "${status}"`, navigate: '/orders'})
-            console.log('Order updated')
         }).catch(error => {
             console.log('Error updating order: ', error)
         })
@@ -51,6 +64,7 @@ export function Orders() {
     },[])
     return(
         <Container>
+            { loadProgress > 5 && <ProgressBar progress={loadProgress} /> }
             <Menu
                 menuIsOpen={menuIsOpen}
                 onCloseMenu={() => setMenuIsOpen(false)}
@@ -104,7 +118,7 @@ export function Orders() {
                         </tbody>
                     </Table>
                     :
-                    <h2>You have no orders yet</h2>
+                    isAdmin ? <h2>There is no orders</h2> : <h2>You have no orders yet</h2>
                 }
                         {
                             orders && orders.map((order, index) => (
