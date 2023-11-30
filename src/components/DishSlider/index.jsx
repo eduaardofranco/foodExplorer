@@ -44,31 +44,27 @@ export function DishSlider({ category_id, onSearch }) {
   //fetch dishes
   //if type search, fetch again based on parameter
   useEffect(() => {
-
-    async function fetchDishes() {
-      const dishesData = await api.get(`/dishes?nameOrIngredient=${onSearch}`)
-      setDishes(dishesData.data)
-    }
-    fetchDishes()
+      api.get(`/dishes?nameOrIngredient=${onSearch}`)
+      .then(dishesData => {
+        setDishes(dishesData.data)
+      })
 
   }, [onSearch])
 
   //fetch categories
   useEffect(() => {
-    async function fetchCategories() {
-      const response = await api.get('category')
-      setCategories(response.data)
-    }
-    fetchCategories()
+      api.get('category')
+      .then(response => {
+        setCategories(response.data)
+      })
   },[])
 
   //fetch favourites
   useEffect(() => {
-    async function fetchFavourites() {
-      const response = await api.get('favourites')
-      setFavourites(response.data)
-    }
-    fetchFavourites()
+      api.get('favourites')
+      .then(response => {
+        setFavourites(response.data)
+      })
   },[])
 
   const settings = {
