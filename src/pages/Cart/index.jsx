@@ -126,7 +126,7 @@ export function Cart() {
                                                 btnTitle="Remove"
                                                 img={imageUrl + dish.image}
                                                 quantity={quantityInCart}
-                                                price={dish.price}
+                                                price={dish.price.toFixed(2)}
                                                 onClick={() => removeFromCart(dish.id)}
                                             />
                                         )
