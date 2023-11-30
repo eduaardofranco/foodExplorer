@@ -69,7 +69,6 @@ export function Update() {
             }
         }
         fetchDish()
-
     },[])
 
     //handle img, change label name when new image
@@ -200,9 +199,11 @@ export function Update() {
     async function handleDelete(e) {
         e.preventDefault()
         
-        const handleConfirm = async () => {
-            await api.delete(`/dishes/${params.id}`)
-            navigate('/')
+        const handleConfirm = () => {
+            api.delete(`/dishes/${params.id}`)
+            .then(() => {
+                setModalMessage({ title: 'Sucess', message: 'Dish deleted sucessfully!', navigate: '/'})
+            })
         }
         setModalMessage({
             title: 'Delete Dish',

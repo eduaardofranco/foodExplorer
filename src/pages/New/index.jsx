@@ -84,7 +84,7 @@ export function New() {
             return
         }
         if(ingredients.length == 0) {
-            setErrorMessage('Add ate least one ingredient');
+            setErrorMessage('Add at least one ingredient');
             return
         }
         if(!price) {
@@ -119,13 +119,14 @@ export function New() {
                 }
                 return nextProgress;
             })
-        }, 1000);
+        }, 500);
 
         // Send the POST request to the server
         await api.post('/dishes', formData)
         .then(() => {
             setModalMessage({ title: 'Success', message: 'Dish created!', navigate: '/' });
             clearInterval(intervalProgressBar)
+            setSendingData(false)
         })
         .catch((error) => {
             if (error.response) {
@@ -148,7 +149,7 @@ export function New() {
     }, [])
     return(
         <Container>
-            { loadProgress > 10 && <ProgressBar progress={loadProgress} /> }
+            { loadProgress > 0 && <ProgressBar progress={loadProgress} /> }
             <Header isAdmin />
             <main className='content'>
                 <ButtonText to="/" title="Back" />
@@ -234,7 +235,7 @@ export function New() {
                         type="submit"
                         title="Save"
                         onClick={handleNewDish}
-                        disabled={loadProgress !=0 ? 'disabled' : ''} 
+                        disabled={sendingdata ? 'disabled' : ''} 
                     />
                 </Form>
             </main>
