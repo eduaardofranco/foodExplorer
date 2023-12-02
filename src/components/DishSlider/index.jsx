@@ -6,6 +6,7 @@ import { DishCard } from '../DishCard';
 import './styles.css'
 import { api } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
+import { DishCardSkeleton } from '../Skeletons/DishCardSkeleton';
 
 
 export function DishSlider({ category_id, onSearch }) {
@@ -46,7 +47,9 @@ export function DishSlider({ category_id, onSearch }) {
   useEffect(() => {
       api.get(`/dishes?nameOrIngredient=${onSearch}`)
       .then(dishesData => {
-        setDishes(dishesData.data)
+        setTimeout(() => {
+          setDishes(dishesData.data)
+        },5000)
       })
 
   }, [onSearch])
@@ -109,8 +112,12 @@ export function DishSlider({ category_id, onSearch }) {
             : null
           ))
           }
-
-        { dishes.length == 0 && <p className="no-results">0 results</p> }
+          {/* show skeleton while fetch dishes */}
+        { [1,2,3].map(skeleton => (
+          <>
+            <DishCardSkeleton key={skeleton} />
+          </>
+        ))}
       </Slider>
     </div>
   );

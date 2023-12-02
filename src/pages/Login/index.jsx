@@ -8,11 +8,14 @@ import { Button } from '../../components/Button'
 import { Title } from '../../components/Title'
 import { Logo } from '../../components/Logo'
 import { ValidationMessage } from '../../components/ValidationMessage'
+import { ProgressBar } from '../../components/ProgessBar'
 
 export function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState('');
+    const [sendingData, setSendingData] = useState(false)
+    const [loadProgress, setLoadProgress] = useState(0)
 
     const { signIn } = useAuth()
 
@@ -20,6 +23,19 @@ export function Login() {
     
     function handleSignIn(e) {
         e.preventDefault()
+
+        setSendingData(true)
+
+        //set and show progressbar
+        const intervalProgressBar = setInterval(() => {
+           setLoadProgress((prev) => {
+               const nextProgress = prev + 10;
+               if (nextProgress === 110) {
+                   return 10;
+               }
+               return nextProgress;
+           })
+        }, 500);
         
         if(!email || !emailRegex.test(email)) {
             setErrorMessage('Inform a valid E-mail!');
@@ -32,10 +48,16 @@ export function Login() {
         
         setErrorMessage('')
         signIn({ email, password, setErrorMessage })
+        .then(() => {
+            clearInterval(intervalProgressBar)
+            setLoadProgress(0)
+            setSendingData(false)
+        })
     }
 
     return(
         <Container>
+            { loadProgress > 5 && <ProgressBar progress={loadProgress} /> }
             <div className="logo">
                 <Logo />
             </div>
@@ -61,7 +83,12 @@ export function Login() {
                     <ValidationMessage message={errorMessage} />
                 )}
 
-                <Button title="Enter" onClick={handleSignIn} />
+                <Button
+                    title="Enter"
+                    onClick={handleSignIn}
+                    disabled={sendingData ? 'disabled' : ''}
+                />
+
                 <span className='loginOrNew'>
                     <Link to="/register">Create Account</Link>
                 </span>

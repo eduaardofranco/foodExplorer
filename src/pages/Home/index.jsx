@@ -14,11 +14,10 @@ export function Home() {
 
   //fetch categories
   useEffect(() => {
-    async function fetchCategories() {
-      const response = await api.get('category')
-      setCategories(response.data)
-    }
-    fetchCategories()
+      api.get('category')
+      .then(response => {
+        setCategories(response.data)
+      })
   },[])
 
   //check if is admin or user
