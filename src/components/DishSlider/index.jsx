@@ -12,6 +12,7 @@ import { DishCardSkeleton } from '../Skeletons/DishCardSkeleton';
 export function DishSlider({ category_id, onSearch }) {
   const imageUrl = `${api.defaults.baseURL}/files/`
   
+  const [categories, setCategories] = useState([])
   const [dishes, setDishes] = useState([])
   const [favourites, setFavourites] = useState([])
   const [search, setSearch] = useState('')
@@ -115,9 +116,9 @@ export function DishSlider({ category_id, onSearch }) {
           }
           {/* show skeleton while fetching dishes */}
         { showSkeletonCard
-        ?[1,2,3].map(skeleton => (
+        ?[1,2,3].map(index => (
           <>
-            <DishCardSkeleton key={skeleton} />
+            <DishCardSkeleton key={index} />
           </>
         ))
         : null
