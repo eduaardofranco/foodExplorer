@@ -7,7 +7,7 @@ export const Container = styled.div`
         background-color: ${({ theme }) => theme.COLORS.BG_DARK_700};
     }
     .text {
-        width: 100%;
+        width: 20rem;
         height: .6rem;
     }
     .avatar {
@@ -27,6 +27,11 @@ export const Container = styled.div`
     .title {
         margin: 1rem 0;
         height: 1.4rem;
-        width: 100%;
+        width: 20rem;
+    }
+    .avatar {
+        border-radius: 100%;
+        height: 8rem;
+        width: 8rem;
     }
 `;

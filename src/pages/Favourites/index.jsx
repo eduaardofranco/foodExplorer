@@ -8,11 +8,13 @@ import { useEffect, useState } from 'react'
 import { ButtonText } from '../../components/ButtonText'
 import { api } from '../../services/api'
 import { useNavigate } from 'react-router-dom'
+import { DishListSkeleton } from '../../components/Skeletons/DishListSkeleton'
 
 export function Favourites() {
     const [menuIsOpen, setMenuIsOpen] = useState(false);
     const [favourites, setFavourites] = useState([])
     const [dishes, setDishes] = useState([])
+    const [showSkeleton, setShowSkeleton] = useState(true)
 
     const imageUrl = `${api.defaults.baseURL}/files/`
     const navigate = useNavigate()
@@ -41,28 +43,28 @@ export function Favourites() {
 
     //fetch favourites
     useEffect(() => {
-        async function fetchFavourites() {
             try {
-                const result = await api.get('favourites')
-                setFavourites(result.data)
-                // console.log(result.data)
+                api.get('favourites')
+                .then(result => {
+                    setFavourites(result.data)
+
+                })
             } catch (error) {
                 console.log('Error fetching favourites', error)
             }
-        }
-        fetchFavourites()
     },[favourites])
     //fetch dishes
     useEffect(() => {
-        async function fetchDishes() {
             try {
-                const result = await api.get('/dishes?name&ingredients')
-                setDishes(result.data)
+                setShowSkeleton(true)
+                api.get('/dishes?name&ingredients')
+                .then(result => {
+                    setDishes(result.data)
+                    setShowSkeleton(false)
+                })
             } catch (error) {
                 console.log('Error fetching Dishes', error)
             }
-        }
-        fetchDishes()
     },[])
 
     return(
@@ -77,8 +79,7 @@ export function Favourites() {
 
                 <Title title="My Favourites" />
                 <div className="container">
-                    {allFilteredFavourites.length > 0 ? 
-                        allFilteredFavourites.map((favourite, index) => (
+                        {allFilteredFavourites.map((favourite, index) => (
                             <DishList
                                 key={String(index)}
                                 id={favourite.id}
@@ -89,8 +90,19 @@ export function Favourites() {
                                 onClick={((event) => handleRemoveFavourite(event, favourite.id))}
                             />
                         ))
-                    : 
-                    <h2>No Favourites yet</h2>
+                    }
+                    {
+                        // show when no favourites, checks array size and if showSkeleton is false that means fetch finished
+                        allFilteredFavourites.length <= 0 && !showSkeleton && (
+                            <h2>No Favourites yet</h2>
+
+                        ) 
+                    }
+                    
+                    {
+                        showSkeleton && [1,2,3,].map(index => (
+                            <DishListSkeleton key={index}/>
+                        ))
                     }
 
                 </div>

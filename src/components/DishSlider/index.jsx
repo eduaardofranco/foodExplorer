@@ -48,11 +48,9 @@ export function DishSlider({ category_id, onSearch }) {
     setShowSkeletonCard(true)
       api.get(`/dishes?nameOrIngredient=${onSearch}`)
       .then(dishesData => {
-        setTimeout(() => {
-          setDishes(dishesData.data)
-          setShowSkeletonCard(false)
+        setDishes(dishesData.data)
+        setShowSkeletonCard(false)
 
-        }, 10000)
       })
 
   }, [onSearch])

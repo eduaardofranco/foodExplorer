@@ -21,10 +21,6 @@ export const Container = styled.div`
     }
     .text {
         margin-top: .5rem;
-        width: 20rem!important;
-    }
-    .title {
-        width: 20rem!important;
     }
     .btn {
         margin-top: 2rem;
