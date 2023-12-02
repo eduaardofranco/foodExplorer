@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { DEVICE_BREAKPOINTS } from '../../../styles/layoutBreakpoints' 
 
 export const Container = styled.div`
     overflow: hidden;
@@ -10,11 +11,22 @@ export const Container = styled.div`
         justify-content: center;
         flex-direction: column;
         padding: 3rem 0;
+        height: 28.7rem;
         width: 100%;
+        @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+            height: 44.4rem;
+            margin-bottom: 0;
+        }
         
     }
     .text {
-        margin-bottom: 1rem;
+        margin-top: .5rem;
         width: 20rem!important;
+    }
+    .title {
+        width: 20rem!important;
+    }
+    .btn {
+        margin-top: 2rem;
     }
 `;

@@ -12,10 +12,10 @@ import { DishCardSkeleton } from '../Skeletons/DishCardSkeleton';
 export function DishSlider({ category_id, onSearch }) {
   const imageUrl = `${api.defaults.baseURL}/files/`
   
-  const [categories, setCategories] = useState([])
   const [dishes, setDishes] = useState([])
   const [favourites, setFavourites] = useState([])
   const [search, setSearch] = useState('')
+  const [showSkeletonCard, setShowSkeletonCard] = useState(true)
 
   const navigate = useNavigate()
 
@@ -45,11 +45,14 @@ export function DishSlider({ category_id, onSearch }) {
   //fetch dishes
   //if type search, fetch again based on parameter
   useEffect(() => {
+    setShowSkeletonCard(true)
       api.get(`/dishes?nameOrIngredient=${onSearch}`)
       .then(dishesData => {
         setTimeout(() => {
           setDishes(dishesData.data)
-        },5000)
+          setShowSkeletonCard(false)
+
+        }, 10000)
       })
 
   }, [onSearch])
@@ -112,12 +115,15 @@ export function DishSlider({ category_id, onSearch }) {
             : null
           ))
           }
-          {/* show skeleton while fetch dishes */}
-        { [1,2,3].map(skeleton => (
+          {/* show skeleton while fetching dishes */}
+        { showSkeletonCard
+        ?[1,2,3].map(skeleton => (
           <>
             <DishCardSkeleton key={skeleton} />
           </>
-        ))}
+        ))
+        : null
+      }
       </Slider>
     </div>
   );

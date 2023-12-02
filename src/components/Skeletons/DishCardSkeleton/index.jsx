@@ -7,6 +7,9 @@ export function DishCardSkeleton() {
         <Container>
             <div className='skeleton-dishCard'>
                 <Element type="img" />
+                <Element type="title" />
+                <Element type="text" />
+                <Element type="text" />
                 <Element type="text" />
                 <Element type="btn" />
             </div>
