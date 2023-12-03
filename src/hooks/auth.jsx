@@ -1,15 +1,17 @@
 import { createContext, useContext } from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 import { api } from "../services/api";
 import { ModalMessage } from '../components/ModalMessage'
 
+
 export const AuthContext = createContext({ user: null, role: null })
 
 function AuthProvider( { children }) {
     const [data, setData] = useState('')
-    
+
     async function signIn( { email, password, setErrorMessage }) {
 
         try {
@@ -48,6 +50,7 @@ function AuthProvider( { children }) {
 
     useEffect(() => {
 
+        
         const token = localStorage.getItem('@foodexplorer:token')
         const user = localStorage.getItem('@foodexplorer:user')
         
@@ -65,6 +68,7 @@ function AuthProvider( { children }) {
                     }  
                     //token is invalid
                     signOut();
+                    
                     return false;
                   } catch (error) {
                     // Handle decoding errors

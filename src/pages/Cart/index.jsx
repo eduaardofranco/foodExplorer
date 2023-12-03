@@ -14,6 +14,7 @@ import { GiKnifeFork } from "react-icons/gi";
 import { FaRegCreditCard } from "react-icons/fa";
 import { api } from '../../services/api'
 import { ModalMessage } from '../../components/ModalMessage'
+import { DishListSkeleton } from '../../components/Skeletons/DishListSkeleton'
 
 export function Cart() {
     const [dishes, setDishes] = useState([])
@@ -22,6 +23,7 @@ export function Cart() {
     const [showPayment, setShowPayment] = useState(false)
     const [showOrder, setShowOrder] = useState(true)
     const [modalMessage, setModalMessage] = useState({ message: '', title: ''})
+    const [showSkeleton, setShowSkeleton] = useState(false)
 
     const { productsCart, removeFromCart, getTotalCartAmount, emptyCart } = useCart()
 
@@ -86,9 +88,11 @@ export function Cart() {
 
     //fetch dishes
     useEffect(() => {
+        setShowSkeleton(true)
         api.get('/dishes')
         .then(response => {
             setDishes(response.data)
+            setShowSkeleton(false)
         }).catch(error => {
             console.log('Error fetching diches: ', error)
         })
@@ -133,8 +137,15 @@ export function Cart() {
                                     }
 
                                 })}
+                                {
+                                    showSkeleton && [1,2,3].map(index => (
+                                        <DishListSkeleton />
+                                    ))
+                                }
+                                {
+                                    !showSkeleton && <h2>Total: €{totalAmount.toFixed(2)}</h2>
+                                }
 
-                                <h2>Total: €{totalAmount.toFixed(2)}</h2>
                                 
                                 <div className="finalize">
                                     <Button title="Next" onClick={handleShowPayment} />

@@ -17,6 +17,9 @@ export const Container = styled.div`
             width: 15rem;
         }
     }
+    .my-order {
+        width: 95%;
+    }
     @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
         main {
             margin: 0 auto;
@@ -28,6 +31,9 @@ export const Container = styled.div`
         }
         .finalize {
             display: none;
+        }
+        .my-order {
+            width: 40rem;
         }
     }
     @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
