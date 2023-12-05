@@ -81,11 +81,6 @@ export function Cart() {
         setShowOrder(false)
     }
 
-    function handleBackk() {
-        console.log('ois')
-        navigate('/favourites')
-    }
-
     //fetch dishes
     useEffect(() => {
         setShowSkeleton(true)
