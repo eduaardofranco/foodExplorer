@@ -12,6 +12,7 @@ import { useState, useEffect } from 'react'
 import { api } from '../../services/api.js'
 import { useAuth } from '../../hooks/auth.jsx'
 import { useCart } from '../../hooks/cart.jsx'
+import { DishDetailSkeleton } from '../../components/Skeletons/DishDetailSkeleton/index.jsx'
  
 export function Detail() {
     const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -19,6 +20,7 @@ export function Detail() {
     const [quantity, setQuantity] = useState(1)
     const [resetQuantity, setResetQuantity] = useState(1)
     const [addItemClicked, setAddItemClicked] = useState(false)
+    const [showSkeleton, setShowSkeleton] = useState(false)
 
     const imageUrl = `${api.defaults.baseURL}/files/`
 
@@ -51,21 +53,22 @@ export function Detail() {
     }
 
     useEffect(() => {
-        async function fetchDish() {
-            try {
-                const response = await api.get(`/dishes/${params.id}`)
+        try {
+            setShowSkeleton(true)
+            api.get(`/dishes/${params.id}`)
+            .then(response => {
                 setData(response.data)
-            } catch(error) {
-                if(error){
-                    navigate('/404')
-                    console.log(error.message)
-                } else {
-                    navigate('/404')
-                    console.log('Fail to fetch')
-                }
+                setShowSkeleton(false)
+            })
+        } catch(error) {
+            if(error){
+                navigate('/404')
+                console.log(error.message)
+            } else {
+                navigate('/404')
+                console.log('Fail to fetch')
             }
         }
-        fetchDish()
     },[])
 
     return(
@@ -75,12 +78,12 @@ export function Detail() {
                 onCloseMenu={() => setMenuIsOpen(false)}
             />
             <Header onOpenMenu={() => setMenuIsOpen(true)} />
-            {
-                data && 
-                <main>
-                    <div className="content">
+                <div className="content">
+                    <main>
                         <ButtonText title="Back" isBig />
                         <div className="center">
+                        { data && 
+                        <>
                             <Img>
                                 <img src={`${imageUrl}/${data.image}`} alt={data.name} />
                             </Img>
@@ -112,10 +115,12 @@ export function Detail() {
                                         </Button>}
                                 </ Finalize>
                             </Infos>
+                        </>
+                        }
+                        { showSkeleton && <DishDetailSkeleton /> }
                         </div>
-                    </div>
-                </main>
-            }
+                    </main>
+                </div>
             <Footer />
         </Container>
     )
