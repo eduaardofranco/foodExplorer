@@ -143,7 +143,7 @@ export function Cart() {
                                     ))
                                 }
                                 {
-                                    !showSkeleton && <h2>Total: €{totalAmount.toFixed(2)}</h2>
+                                    totalAmount && <h2>Total: €{totalAmount.toFixed(2)}</h2>
                                 }
 
                                 
