@@ -24,7 +24,7 @@ export function Menu({ menuIsOpen, onCloseMenu, onSearch }) {
     function handleSignOut(e) {
         e.preventDefault()
         signOut()
-        navigate('/login')
+        navigate('/')
     }
     
     return(
