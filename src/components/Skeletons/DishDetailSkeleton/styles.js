@@ -13,8 +13,8 @@ export const Container = styled.div`
         flex-direction: column;
     }
     .img {
-        height: 39rem;
-        width: 39rem;
+        height: 25rem;
+        width: 25rem;
     }
     .text {
         margin-top: .5rem;
@@ -30,6 +30,10 @@ export const Container = styled.div`
         .skeleton-DishDetail {
             flex-direction: row;
         }
+        .img {
+        height: 39rem;
+        width: 39rem;
+    }
     }
 `;
 export const Left = styled.div``;
