@@ -21,6 +21,10 @@ export function Menu({ menuIsOpen, onCloseMenu, onSearch }) {
     function handleHeaderSearch(e) {
         onSearch(e.target.value);
     }
+    function handleSignOut(e) {
+        e.preventDefault()
+        signOut()
+    }
     
     return(
         <Container data-menu-is-open={menuIsOpen}>
@@ -45,7 +49,7 @@ export function Menu({ menuIsOpen, onCloseMenu, onSearch }) {
                         </li>
                         <li><a href="" onClick={(event) => handleNavigate(event, 'orders')}>Orders</a></li>
                         <li>
-                            <a href="" onClick={signOut}>Logout <HiOutlineLogout /></a>
+                            <a href="" onClick={(e) => handleSignOut(e)}>Logout <HiOutlineLogout /></a>
                         </li>
                     </ul>
                 </div>
