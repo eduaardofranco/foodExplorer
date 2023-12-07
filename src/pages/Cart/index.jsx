@@ -15,8 +15,10 @@ import { FaRegCreditCard } from "react-icons/fa";
 import { api } from '../../services/api'
 import { ModalMessage } from '../../components/ModalMessage'
 import { DishListSkeleton } from '../../components/Skeletons/DishListSkeleton'
+import { Menu } from '../../components/Menu'
 
 export function Cart() {
+    const [menuIsOpen, setMenuIsOpen] = useState(false);
     const [dishes, setDishes] = useState([])
     const [paymentType, setPaymentType] = useState('pix')
     const [paymentSucess, setPaymentSucess] = useState(false)
@@ -100,7 +102,11 @@ export function Cart() {
 
     return(
         <Container>
-            <Header />
+            <Menu
+                menuIsOpen={menuIsOpen}
+                onCloseMenu={() => setMenuIsOpen(false)}
+            />
+            <Header onOpenMenu={() => setMenuIsOpen(true)} />
             <main>
                 <ButtonText title="Back" />
                 <div className="wraper-contantainer">
