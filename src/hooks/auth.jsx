@@ -18,6 +18,8 @@ function AuthProvider( { children }) {
             const response = await api.post('/sessions', { email, password })
             const { user, token } = response.data
 
+            delete user.password
+
 
             localStorage.setItem('@foodexplorer:user', JSON.stringify(user))
             localStorage.setItem('@foodexplorer:token', token)
