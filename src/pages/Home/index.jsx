@@ -1,5 +1,5 @@
 import { Header } from '../../components/Header'
-import { Container, Banner } from './styles'
+import { Container, Banner, Text } from './styles'
 import { Footer } from '../../components/Footer'
 import { DishSlider } from '../../components/DishSlider'
 import { Menu } from '../../components/Menu'
@@ -38,7 +38,11 @@ export function Home() {
       <main>
         <div className="content">
           <Banner>
-            <img src="https://placehold.co/1920x300" alt="Banner" />
+            <img src="/src/assets/banner.png" alt="Banner" />
+            <Text>
+              <h1>Unmatched flavors</h1>
+              <p>Feel the care of the selected ingredients</p>
+            </Text>
           </Banner>
           {
             // do a map by category
