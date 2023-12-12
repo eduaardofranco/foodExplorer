@@ -1,9 +1,8 @@
-Certamente! Aqui está o código completo em um único bloco para que você possa copiá-lo facilmente:
-
-```markdown
 # Food Explorer - CRUD Restaurant App
 
-Welcome to **Food Explorer**, a CRUD application that allows users to manage information about restaurant dishes. The project is divided into two main components: a backend API developed with Node.js, Express, and SQLite, and a frontend built with React.js and Styled Components.
+This is the Final Project of the Explorer Module - RocketSeat Programming School
+
+Welcome to **Food Explorer**, a CRUD application of a restaurant menu that allows users to view, navigate and place orders. The project is divided into two main components: a backend API developed with Node.js, Express, and SQLite, and a frontend built with React.js and Styled Components.
 
 ## Table of Contents
 
@@ -18,7 +17,7 @@ Welcome to **Food Explorer**, a CRUD application that allows users to manage inf
 
 ## Introduction
 
-The **Food Explorer** project is a simple CRUD application that allows users to manage information about restaurant dishes. The backend provides an API to perform CRUD operations on dish information, while the frontend enables users to interact with the data in a user-friendly interface.
+Welcome to **Food Explorer**, your go-to online platform for exploring and managing a restaurant's menu. This application provides a seamless experience for both regular users and administrators, allowing common users to browse and navigate through a variety of dishes, add items to their orders, and complete transactions. Administrators, on the other hand, have the power to create new dishes, delete existing ones, and efficiently manage the menu.
 
 ## Features
 
@@ -35,28 +34,38 @@ The **Food Explorer** project is a simple CRUD application that allows users to 
 - **Frontend**:
   - React.js: JavaScript library for building user interfaces.
   - Styled Components: CSS-in-JS library for component styling.
+ 
+## Deploy
+https://thefoodexplorer.netlify.app
+
+This application is hosted on a free service, and as a result, it may experience occasional slowness. We appreciate your understanding and patience.
 
 ## Setup Instructions
  
-1. **Clone the Repository**:
+1. **Clone the FrontEnd Repository**:
    ```bash
    git clone https://github.com/eduaardofranco/foodExplorer.git
    cd foodExplorer
    ```
-
-2. **Install Backend**:
+2. **Clone the BackEnd Repository**:
    ```bash
-   cd backend
+   git clone https://github.com/eduaardofranco/foodExplorerApi.git
+   cd foodExplorerApi
+   ```
+
+3. **Install Backend**:
+   ```bash
+   cd foodExplorerApi
    npm install
    ```
 
-3. **Install Frontend**:
+4. **Install Frontend**:
    ```bash
    cd frontend
    npm install
    ```
 
-4. **Run the Application**:
+5. **Run the Application**:
    ```bash
    # Start the backend server (from the backend directory)
    npm run dev
@@ -65,33 +74,42 @@ The **Food Explorer** project is a simple CRUD application that allows users to 
    npm run dev
    ```
 
-5. **Access the Application**:
+6. **Access the Application**:
    - The backend server will be available at `http://localhost:3333`
    - The frontend development server will be available at `http://localhost:3000`
 
 ## Usage
 
-User: admin@admin.com<br>
-Password: 123</br>
+### User
+   - Create new account with email and password
+   - login with credentials on login's page
+
+### Admin
+   - User Admin: admin@admin.com<br>
+   - Password: UserAdminExplorer</br>
 
 1. Access the frontend application in your web browser.
 2. Use the interface to perform CRUD operations on restaurant dish information.
 
 ## Screenshots
 
-Include screenshots of the application to provide a visual representation of the features and interface.
-
-### Home Page
-
-![Home Page](frontend/src/assets/screenshots/home.png)
+![Home Page](src/assets/screenshots/home.png)
 
 ### Dish Details Page
 
-![Dish Details Page](frontend/src/assets/screenshots/detail.png)
+![Dish Details Page](src/assets/screenshots/detail.png)
 
 ### Add New Dish Page
 
-![Add New Dish Page](frontend/src/assets/screenshots/new.png)
+![Add New Dish Page](src/assets/screenshots/new-dish.png)
+
+### Cart Page
+
+![Add New Dish Page](src/assets/screenshots/cart.png)
+
+### Orders Page
+
+![Add New Dish Page](src/assets/screenshots/my-orders.png)
 
 ## License
 
@@ -100,6 +118,3 @@ This project is licensed under the [MIT License](LICENSE).
 ## API Repository
 
 The source code for the API can be found at [Food Explorer API](https://github.com/eduaardofranco/foodExplorerApi).
-```
-
-Sinta-se à vontade para copiar e colar este código no seu README no GitHub.
