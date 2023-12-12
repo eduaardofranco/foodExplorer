@@ -25,6 +25,7 @@ export function Update() {
     
     const [modalMessage, setModalMessage] = useState({ message: '', title: '', confirmType: false, fncConfirm: '' })
     const [loadProgress, setLoadProgress] = useState(0)
+    const [sendingData, setSendingData] = useState(false)
     
 
     const [inputValues, setInputValues] = useState({
@@ -161,6 +162,7 @@ export function Update() {
         if(Object.keys(updatedDish).length > 0) {
 
             try{
+                setSendingData(true)
                 //set and show progressbar
                 const intervalProgressBar = setInterval(() => {
                     setLoadProgress((prev) => {
@@ -170,19 +172,24 @@ export function Update() {
                         }
                         return nextProgress;
                     })
-                }, 1000);
+                }, 500);
                 //patch data
-                const response = await api.patch(`dishes/update/${dish_id}` ,formData)    
+
+                await api.patch(`dishes/update/${dish_id}` ,formData)
+                .then(response => {
+
+                    // Check if the update was successful based on the response status
+                    if (response.status === 200) {
+                            console.log('Dish updated successfully');
+                            setModalMessage({ title: 'Sucess!', message: 'Dish Updated!', navigate: '/'})
+                            clearInterval(intervalProgressBar)
+
+                    } else {
+                        console.log('Error: Failed to update -', response.data.message);
+                        setModalMessage({ title: 'Failed to update!', message: response.data.message})
+                    }
+                })
                 
-                // Check if the update was successful based on the response status
-                if (response.status === 200) {
-                    console.log('Dish updated successfully');
-                    setModalMessage({ title: 'Sucess!', message: 'Dish Updated!', navigate: '/'})
-                    clearInterval(intervalProgressBar)
-                } else {
-                    console.log('Error: Failed to update -', response.data.message);
-                    setModalMessage({ title: 'Failed to update!', message: response.data.message})
-                }
             } catch (error) {
                 console.error('Error updating dish:', error.message);
                 setModalMessage({ title: 'Error updating dish', message: error.message})
@@ -228,7 +235,7 @@ export function Update() {
 
     return(
         <Container>
-            { loadProgress > 10 && <ProgressBar progress={loadProgress} /> }
+            { loadProgress > 0 && <ProgressBar progress={loadProgress} /> }
             <Header />
             {
                 data &&
@@ -337,7 +344,7 @@ export function Update() {
                             <Button
                                 title="Save"
                                 onClick={handleUpdate}
-                                disabled={loadProgress !=0 ? 'disabled' : ''}
+                                disabled={sendingData ? 'disabled' : ''}
                             />
 
                         </div>
