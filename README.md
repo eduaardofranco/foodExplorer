@@ -1,8 +1,8 @@
-# Food Explorer - CRUD Restaurant App
+# Food Explorer - Online Restaurant Menu
 
 This is the Final Project of the Explorer Module - RocketSeat Programming School
 
-Welcome to **Food Explorer**, a CRUD application of a restaurant menu that allows users to view, navigate and place orders. The project is divided into two main components: a backend API developed with Node.js, Express, and SQLite, and a frontend built with React.js and Styled Components.
+Welcome to **Food Explorer**, a CRUD application of a restaurant menu that allows users to view, navigate and place orders. The project is divided into two main components: a backend API developed with Node.js, Express, and SQLite, and a frontend built with React.js and Styled Components. This project has been crafted with a "mobile-first" approach to ensure that the user experience is optimized for mobile devices, creating a seamless and responsive interface.
 
 ## Table of Contents
 
