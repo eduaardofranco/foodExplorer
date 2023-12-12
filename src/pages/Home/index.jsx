@@ -38,7 +38,7 @@ export function Home() {
       <main>
         <div className="content">
           <Banner>
-            <img src="/src/assets/banner.png" alt="Banner" />
+            <img src="/assets/banner.png" alt="Banner" />
             <Text>
               <h1>Unmatched flavors</h1>
               <p>Feel the care of the selected ingredients</p>
