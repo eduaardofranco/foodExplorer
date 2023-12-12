@@ -93,22 +93,23 @@ This application is hosted on a free service, and as a result, it may experience
 
 ## Screenshots
 
-<img src="src/assets/screenshots/home.png" alt="Home Page" width="300" />
+### Home
+<img src="src/assets/screenshots/home.png" alt="Home Page" width="500" />
 
 ### Dish Details Pag
-<img src="src/assets/screenshots/detail.png" alt="Detail" width="300" />
+<img src="src/assets/screenshots/detail.png" alt="Detail" width="500" />
 
 ### Add New Dish Page
 
-<img src="src/assets/screenshots/new-dish.png" alt="New Dish" width="300" />
+<img src="src/assets/screenshots/new-dish.png" alt="New Dish" width="500" />
 
 ### Cart Page
 
-<img src="src/assets/screenshots/cart.png" alt="Cart" width="300" />
+<img src="src/assets/screenshots/cart.png" alt="Cart" width="500" />
 
 ### Orders Page
 
-<img src="src/assets/screenshots/my-orders.png" alt="Orders" width="300" />
+<img src="src/assets/screenshots/my-orders.png" alt="Orders" width="500" />
 
 ## License
 
