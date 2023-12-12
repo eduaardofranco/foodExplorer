@@ -15,7 +15,7 @@ export const Container = styled.button`
     width: 100%;
     &:disabled {
         background-color: ${({ theme }) => theme.COLORS.BG_RED_400};
-        cursor: auto;
+        cursor: not-allowed;
     }
     &.add {
         position: relative;
