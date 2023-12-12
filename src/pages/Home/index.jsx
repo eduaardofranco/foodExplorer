@@ -6,6 +6,7 @@ import { Menu } from '../../components/Menu'
 import { useState, useEffect } from 'react'
 import { api } from '../../services/api'
 import { useAuth } from '../../hooks/auth'
+import imgBanner from '../../assets/banner.png'
 
 export function Home() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -38,7 +39,7 @@ export function Home() {
       <main>
         <div className="content">
           <Banner>
-            <img src="/assets/banner.png" alt="Banner" />
+            <img src={imgBanner} alt="Banner" />
             <Text>
               <h1>Unmatched flavors</h1>
               <p>Feel the care of the selected ingredients</p>
