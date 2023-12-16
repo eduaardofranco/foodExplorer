@@ -39,10 +39,14 @@ export function Login() {
         
         if(!email || !emailRegex.test(email)) {
             setErrorMessage('Inform a valid E-mail!');
+            clearInterval(intervalProgressBar)
+            setSendingData(false)
             return
         }
         if(!password) {
             setErrorMessage('Password is Required!');
+            clearInterval(intervalProgressBar)
+            setSendingData(false)
             return
         }
         
